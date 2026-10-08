@@ -1,0 +1,23 @@
+{
+  "harness": "commandcode",
+  "scenario": "plain",
+  "args": [
+    "-p",
+    "--output-format",
+    "json",
+    "--skip-onboarding",
+    "--trust",
+    "--model",
+    "poolside/laguna-s-2.1-free",
+    "--permission-mode",
+    "standard"
+  ],
+  "model": "poolside/laguna-s-2.1-free",
+  "permissionMode": "default",
+  "prompt": "Reply with exactly the word: pong. Nothing else.",
+  "capturedAt": "2026-09-21T16:13:44.848Z",
+  "outcome": "ok",
+  "note": "",
+  "frames": 16,
+  "durationMs": 4461
+}

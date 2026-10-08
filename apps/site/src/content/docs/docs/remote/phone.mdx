@@ -1,0 +1,116 @@
+---
+title: Phone over Tailscale
+description: Use Sedano from an iPhone or another device over your private Tailscale network, with one-time pairing codes and revocable devices.
+sidebar:
+  order: 2
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+import Shot from '../../../../components/Shot.astro';
+
+Sedano keeps running on the Mac: CLIs, SSH hosts and sessions stay there. A
+phone is a remote screen for it, reached over [Tailscale](https://tailscale.com):
+HTTPS, private to your tailnet, never on the public internet.
+
+<Shot
+  src="/shots/phone-light.webp"
+  darkSrc="/shots/phone-dark.webp"
+  alt="Sedano on an iPhone: a Claude Code session waiting on a question card about which tests to write first, with the composer above the limits bar."
+  width={864}
+  height={1792}
+  maxWidth="300px"
+/>
+
+The Mac can stay on a work tailnet in Tailscale.app. Sedano can run a second,
+separate Tailscale instance logged in to your personal account, and is only
+visible there.
+
+<Aside>
+Remote access belongs to the installed app (port 7788, `~/.sedano`). A
+development copy can show the status but refuses every change.
+</Aside>
+
+## One-time setup
+
+<Steps>
+
+1. **Tailnet.** In the [Tailscale admin console](https://login.tailscale.com),
+   turn on **MagicDNS** and **HTTPS Certificates** under *DNS*.
+
+2. **Phone.** Install Tailscale from the App Store and sign in to the same
+   account.
+
+3. **Mac.** Tailscale.app does not ship the `tailscaled` daemon a second
+   instance needs; Homebrew does:
+
+   ```bash
+   brew install tailscale
+   ```
+
+   Do not run `brew services start tailscale` or `sudo tailscaled`. Sedano runs
+   its own daemon as a user launchd agent (`dev.sedano.tailscaled`), in
+   userspace networking mode, with its state in `~/.sedano/tailscale`. It does
+   not touch Tailscale.app or your routes.
+
+</Steps>
+
+## Turn it on
+
+In **Settings > Remote access**:
+
+<Steps>
+
+1. Choose the Tailscale instance: **Tailscale app** (the one already on this
+   Mac) or **Dedicated** (a second daemon for a personal tailnet). Optionally
+   fill **Only this Tailscale login**.
+
+2. For **Dedicated**: click **Install daemon**, then **Log in…** and sign in
+   with your personal account.
+
+3. Turn **Remote mode** on and click **Serve**. Sedano runs `tailscale serve` (never
+   `funnel`) and shows the URL, for example
+   `https://sedano.<your-tailnet>.ts.net/`. The first request can take a few
+   seconds while Tailscale issues the certificate.
+
+</Steps>
+
+## Pair a device
+
+<Steps>
+
+1. In **Settings > Remote access**, click **Pair a device**. You get a
+   code like `K7QM-3XPA`, which is valid for 5 minutes and works once. A QR code carries the
+   same link.
+
+2. On the phone, open the link in Safari (or open the base URL and type the
+   code) and tap **Pair**.
+
+3. Optional: Safari > Share > **Add to Home Screen**. A home-screen app has its
+   own cookies, so pair once more inside it with a new code.
+
+</Steps>
+
+If the phone ever opens Sedano without asking to pair first, turn remote mode
+off and report it as a security issue.
+
+## Revoke and turn off
+
+The device list in **Settings > Remote access** shows each device's login and
+when it was last seen. Revoking one closes its open connections at once. To turn
+everything off, click **Stop publishing**, turn remote mode off and, for the dedicated
+instance, click **Uninstall daemon**. Uninstalling keeps the login in
+`~/.sedano/tailscale`; delete that folder and remove the machine in the admin
+console to forget it completely.
+
+A paired phone cannot pair other devices or change remote settings: the
+Remote access section is not shown there.
+
+## Keep the Mac reachable
+
+The phone works only while the Mac is awake and online. Plugged in, turn on
+**Prevent automatic sleeping when the display is off** and **Wake for network
+access** in System Settings > Battery (or Energy) > Options, or run
+`caffeinate -is` while you need it. A closed MacBook lid sleeps unless an
+external display is attached.
+
+See [Security notes](/docs/remote/security/) for what a paired device can do.

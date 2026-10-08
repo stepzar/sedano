@@ -1,0 +1,134 @@
+{
+  "stream:assistant": {
+    "handled": "claude/session.ts: model, usage, main-loop wake-up (text comes from the transcript)"
+  },
+  "stream:user": {
+    "ignored": "the stream echo of a message; the transcript carries user records and tool results"
+  },
+  "stream:stream_event": {
+    "handled": "claude/session.ts: text and thinking deltas"
+  },
+  "stream:rate_limit_event": {
+    "handled": "claude/session.ts: handleRateLimit \u2192 live limits"
+  },
+  "stream:result/success": {
+    "handled": "claude/session.ts: result \u2192 turn boundary, reply, usage, cost"
+  },
+  "stream:result/error_during_execution": {
+    "handled": "claude/session.ts: result (outcome via resultOutcomeFor)",
+    "generic": "every result subtype takes the same path; the outcome is mapped from is_error and the subtype"
+  },
+  "stream:result/error_max_turns": {
+    "handled": "claude/session.ts: result (outcome via resultOutcomeFor)",
+    "generic": "every result subtype takes the same path; the outcome is mapped from is_error and the subtype"
+  },
+  "stream:result/error_max_budget_usd": {
+    "handled": "claude/session.ts: result (outcome via resultOutcomeFor)",
+    "generic": "every result subtype takes the same path; the outcome is mapped from is_error and the subtype"
+  },
+  "stream:result/error_max_structured_output_retries": {
+    "handled": "claude/session.ts: result (outcome via resultOutcomeFor)",
+    "generic": "every result subtype takes the same path; the outcome is mapped from is_error and the subtype"
+  },
+  "stream:system/init": {
+    "handled": "claude/session.ts: model adoption and the init line"
+  },
+  "stream:system/status": {
+    "ignored": "transient CLI status (e.g. \"requesting\"); turn state comes from frames that carry facts"
+  },
+  "stream:system/api_retry": {
+    "handled": "claude/session.ts: system/api_retry event with attempt, delay and status"
+  },
+  "stream:system/compact_boundary": {
+    "handled": "claude/transcripts.ts: the transcript record of the same compaction (describeSystem, with token details)"
+  },
+  "stream:system/thinking_tokens": {
+    "handled": "claude/session.ts: token-rate feed"
+  },
+  "stream:system/task_started": {
+    "handled": "claude/session.ts: subagent card (live), background-task guard for recycling; a resumed agent (SendMessage to a stopped one) arrives as task_started under the SendMessage call and becomes a new run card of the turn that sent it"
+  },
+  "stream:system/task_progress": {
+    "handled": "claude/session.ts: provisional subagent metrics, keyed by the run's call (tool_use_id), so a resumed run reports on its own card"
+  },
+  "stream:system/task_notification": {
+    "handled": "claude/transcripts.ts: taskNotification (the <task-notification> record)",
+    "generic": "the transcript record of the same notice is what is parsed (the tag is <task-notification>)"
+  },
+  "stream:system/task_updated": {
+    "ignored": "progress bookkeeping; ends arrive as task notifications and results"
+  },
+  "stream:system/background_tasks_changed": {
+    "ignored": "a count of background tasks; each task is tracked from task_started to its notification"
+  },
+  "stream:system/hook_started": {
+    "ignored": "hook progress; the transcript stop_hook_summary carries what changed the turn"
+  },
+  "stream:system/hook_progress": {
+    "ignored": "hook progress; see hook_started"
+  },
+  "stream:system/hook_response": {
+    "ignored": "hook progress; see hook_started"
+  },
+  "stream:system/local_command_output": {
+    "handled": "claude/transcripts.ts: handleLocalCommand",
+    "generic": "the transcript local_command record carries the same output"
+  },
+  "stream:system/session_state_changed": {
+    "ignored": "the CLI announcing its own state; the ledger derives turn state from results and actors"
+  },
+  "stream:system/commands_changed": {
+    "ignored": "slash-command catalog is read from disk (harnesses/skills.ts)"
+  },
+  "stream:system/control_request_progress": {
+    "ignored": "progress of a control request the driver already answered"
+  },
+  "stream:system/elicitation_complete": {
+    "ignored": "elicitations are answered as control requests"
+  },
+  "stream:system/files_persisted": {
+    "ignored": "file checkpointing bookkeeping; edits are shown from tool results"
+  },
+  "stream:system/informational": {
+    "ignored": "CLI chatter with no turn or timeline meaning (yet); recorded if seen with a new shape"
+  },
+  "stream:system/memory_recall": {
+    "ignored": "memory retrieval notice; no timeline counterpart yet"
+  },
+  "stream:system/mirror_error": {
+    "ignored": "session-mirroring error internal to the CLI"
+  },
+  "stream:system/model_refusal_fallback": {
+    "ignored": "the model the CLI fell back to is adopted from the next assistant frame"
+  },
+  "stream:system/model_refusal_no_fallback": {
+    "ignored": "the refusal ends the turn with a failed result, which is handled"
+  },
+  "stream:system/notification": {
+    "ignored": "desktop-notification text for the TUI"
+  },
+  "stream:system/permission_denied": {
+    "ignored": "permissions are decided by the driver (control_request can_use_tool)"
+  },
+  "stream:system/plugin_install": {
+    "ignored": "plugin installation progress"
+  },
+  "stream:system/worker_shutting_down": {
+    "ignored": "process exit is detected by the liveness check (processExited)"
+  },
+  "stream:tool_progress": {
+    "ignored": "elapsed-time ticks for a running tool"
+  },
+  "stream:tool_use_summary": {
+    "ignored": "a model-written summary of tool calls the transcript already shows"
+  },
+  "stream:auth_status": {
+    "ignored": "login state; a signed-out CLI fails its turn with a readable error"
+  },
+  "stream:prompt_suggestion": {
+    "ignored": "next-prompt suggestions for the TUI"
+  },
+  "stream:conversation_reset": {
+    "ignored": "a /clear inside the CLI; sedano starts a new session instead"
+  }
+}

@@ -1,0 +1,363 @@
+---
+import Base from '../layouts/Base.astro';
+import Circle from '../components/doodles/Circle.astro';
+import Squiggle from '../components/doodles/Squiggle.astro';
+import Arrow from '../components/doodles/Arrow.astro';
+import Note from '../components/doodles/Note.astro';
+import Highlighter from '../components/doodles/Highlighter.astro';
+import DemoStage from '../components/DemoStage.astro';
+import PhoneStage from '../components/PhoneStage.astro';
+import Sticker from '../components/Sticker.astro';
+import { harnesses } from '../data/harnesses';
+
+const repo = 'https://github.com/stepzar/sedano';
+const tagline =
+  'Claude Code, Codex, Gemini, Grok, opencode and Command Code, on this Mac or on any server you own. One transcript, one queue. Open source.';
+
+const features = [
+  {
+    title: 'Live subagents',
+    body: 'Claude Code runs a subagent for minutes and its stream says nothing until the end. Sedano reads the subagent’s own transcript from disk and shows it working, live.',
+    aside: '// Claude Code only: no other harness publishes that signal, so none is invented.',
+  },
+  {
+    title: 'Questions and permissions become a card',
+    body: 'A permission request, Claude’s AskUserQuestion, an ACP elicitation: each one becomes the same card, answered in place. A restart expires pending cards instead of leaving dead buttons.',
+    aside: '// Command Code cannot ask in headless mode, and the transcript says so.',
+  },
+  {
+    title: 'A prompt is never lost',
+    body: 'Type while a turn is running and the prompt is queued on disk, then sent when the next turn starts. Stop clears the queue. A command the server refuses hands your text back.',
+    aside: '// the composer shows how many are waiting.',
+  },
+  {
+    title: 'Live limits and cost',
+    body: 'Claude Code reports its rate limits every turn, so the bars move with the session. Codex, Command Code and opencode have readers. Gemini and Grok have no usage API, and the panel says that.',
+    aside: '// unknown is not zero: no reported cost means no price, not $0.0000.',
+  },
+];
+
+const faq = [
+  {
+    q: 'Is it free?',
+    a: 'Yes. Sedano is open source under Apache-2.0. The agents bill you the way they already do: your subscriptions, your API keys.',
+  },
+  {
+    q: 'Does Sedano send my code anywhere?',
+    a: 'Sedano itself does not. Its server listens on 127.0.0.1 and keeps everything in one SQLite file in ~/.sedano. The agent CLIs talk to their own providers, exactly as they do in your terminal. Remote access is off until you turn it on, and then it only works inside your tailnet.',
+  },
+  {
+    q: 'Which agents does it support?',
+    a: 'Claude Code, Codex, Gemini CLI, Grok, opencode and Command Code. Freebuff opens as a terminal tab, because a terminal is all it offers. Any shell runs in a terminal tab.',
+  },
+  {
+    q: 'Do I need the CLIs installed?',
+    a: 'Yes. Nothing is bundled. Install and log in to the agents you want; one that is missing says so in the picker instead of failing at launch.',
+  },
+  {
+    q: 'Windows or Linux?',
+    a: 'Not yet. Sedano runs on macOS 13 or later, on Apple Silicon. Watch the repository if you are waiting for another platform.',
+  },
+  {
+    q: 'Why does macOS warn me when I open it?',
+    a: 'The build is not signed or notarized yet, so Gatekeeper blocks the first launch. Open it once, then go to System Settings › Privacy & Security and click Open Anyway. The download page has a one-line terminal alternative.',
+  },
+  {
+    q: 'How do updates work?',
+    a: 'The app has a built-in updater that offers each new signed release and installs it when you click; it is available from the first public release. Until then, download the new build from Releases and replace the app. Built from source, run bun run install:app again; the previous build is kept for a rollback. The agent CLIs are checked for new versions daily, and installing one is always an explicit click.',
+  },
+  {
+    q: 'How is it different from other agent UIs?',
+    a: 'It does not replace the agents. It drives the CLIs you already use, through their own protocols, on your Mac or on your SSH hosts, and shows every one of them in the same shape. Each session can still be resumed in its own CLI. What a harness cannot do is left out, not faked.',
+  },
+];
+---
+
+<Base title="Sedano: one app to rule all your coding agents" description={tagline}>
+  <!-- Hero -->
+  <section class="hero wrap" aria-labelledby="hero-title">
+    <h1 id="hero-title">One app to rule all your <Circle class="wide">coding agents</Circle>.</h1>
+    <p class="lead sub">{tagline}</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="/download/">
+        Download for macOS
+      </a>
+      <a class="btn btn-secondary" href={repo}>View on GitHub</a>
+      <span class="hero-note" aria-hidden="true">
+        <Arrow class="hero-arrow" />
+        <Note>free, local, no account</Note>
+      </span>
+    </div>
+    <p class="sr-only">Free, local, no account.</p>
+  </section>
+
+  <!-- The product: the interactive demo -->
+  <DemoStage />
+
+  <!-- Works with -->
+  <section class="section wrap" aria-labelledby="works-title">
+    <h2 class="section-title" id="works-title">Works with<Squiggle /></h2>
+    <ul class="stickers">
+      {harnesses.map((h) => <Sticker harness={h.id} label={h.label} />)}
+    </ul>
+    <p class="aside footnote">
+      // Product names and logos belong to their owners; Sedano is not affiliated with them.
+    </p>
+  </section>
+
+  <!-- Features -->
+  <section class="section wrap" aria-labelledby="features-title">
+    <h2 class="section-title" id="features-title">What one app buys you<Squiggle /></h2>
+    <ol class="features">
+      {
+        features.map((f, i) => (
+          <li class="feature">
+            <span class="num" aria-hidden="true">
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <div>
+              <h3>{f.title}</h3>
+              <p>{f.body}</p>
+              <p class="aside">{f.aside}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <!-- Terminal + SSH -->
+  <section class="section wrap" aria-labelledby="term-title">
+    <h2 class="section-title" id="term-title">Terminal tabs and SSH hosts<Squiggle /></h2>
+    <div class="prose">
+      <p>
+        A terminal tab is a real <code>tmux</code> session, on this Mac or on a host you enabled. Close the app and it keeps
+        running; reopen the tab and the current screen comes back.
+      </p>
+      <p>
+        Agents run on those hosts too: the CLI is resolved there and the process runs there, over <code>ssh</code>.
+      </p>
+      <p>
+        Hosts come from the <code>Host</code> aliases in <code>~/.ssh/config</code>. Only the ones you tick in Settings are ever
+        used, and that list is checked on every request.
+      </p>
+    </div>
+    <pre aria-label="Example ~/.ssh/config"><code><span class="c"># ~/.ssh/config</span>
+Host devbox    <span class="c">// ticked: usable</span>
+Host staging   <span class="c">// not ticked: never used</span>
+Host *         <span class="c">// a pattern, not a host</span></code></pre>
+  </section>
+
+  <!-- Phone: the real demo in its phone layout -->
+  <PhoneStage>
+    <p>
+      The Mac keeps doing the work; your phone becomes a remote screen for it. Sedano publishes itself on your private <a
+        href="https://tailscale.com">Tailscale</a
+      > tailnet, over HTTPS, and <Highlighter>never on the public internet</Highlighter>.
+    </p>
+    <p>
+      Pair the phone with a one-time code, add it to the home screen, revoke it from the Mac in a second. It runs its own
+      Tailscale instance, so a work tailnet on the same Mac stays untouched.
+    </p>
+    <p class="aside">// remote access is off until you turn it on in Settings › Remote access.</p>
+  </PhoneStage>
+
+  <!-- Philosophy -->
+  <section class="section wrap" aria-labelledby="why-title">
+    <h2 class="section-title" id="why-title">How it is built<Squiggle /></h2>
+    <dl class="beliefs">
+      <div>
+        <dt>Honest.</dt>
+        <dd>A capability a harness does not have is absent, not faked.</dd>
+      </div>
+      <div>
+        <dt>Local-first.</dt>
+        <dd>Your sessions live in one SQLite file on your Mac.</dd>
+      </div>
+      <div>
+        <dt>Yours.</dt>
+        <dd>Open source, no account, nothing to sign up for.</dd>
+      </div>
+    </dl>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section wrap" id="faq" aria-labelledby="faq-title">
+    <h2 class="section-title" id="faq-title">Questions<Squiggle /></h2>
+    <div class="faq">
+      {
+        faq.map((item) => (
+          <details>
+            <summary>{item.q}</summary>
+            <p>{item.a}</p>
+          </details>
+        ))
+      }
+    </div>
+    <p class="more">
+      More in the <a href="/docs/">docs</a>, or <a href={`${repo}/issues`}>open an issue</a>.
+    </p>
+  </section>
+</Base>
+
+<style>
+  /* Doubled class: must beat the global .wrap padding whatever order the CSS
+     chunks load in. */
+  .hero.wrap {
+    padding-top: var(--s-12);
+  }
+  h1 {
+    font-size: clamp(2.25rem, 1.4rem + 4.2vw, 3.75rem);
+    letter-spacing: -0.035em;
+    line-height: 1.14;
+  }
+  .sub {
+    margin-top: var(--s-6);
+    max-width: 36em;
+  }
+  .cta-row {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--s-3);
+    margin-top: var(--s-8);
+  }
+  .hero-note {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: var(--s-1);
+    margin-left: var(--s-2);
+  }
+  .hero-note :global(.note) {
+    margin-top: 24px;
+  }
+  @media (max-width: 560px) {
+    .hero-note {
+      margin-left: 0;
+    }
+    .hero-note :global(.arrow) {
+      display: none;
+    }
+    .hero-note :global(.note) {
+      margin-top: var(--s-1);
+    }
+  }
+
+  .stickers {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: var(--s-6) var(--s-4);
+    margin: var(--s-4) 0 0;
+    padding: 0;
+  }
+  @media (max-width: 640px) {
+    .stickers {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  .footnote {
+    margin-top: var(--s-8);
+  }
+
+  .features {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: var(--s-8);
+  }
+  .feature {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: var(--s-4);
+  }
+  .num {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: var(--pen);
+    padding-top: 4px;
+  }
+  .feature h3 {
+    font-size: 1.1875rem;
+    margin-bottom: var(--s-2);
+  }
+  .feature p + p {
+    margin-top: var(--s-2);
+  }
+  .feature p:not(.aside) {
+    color: var(--ink-2);
+  }
+
+  .prose {
+    display: grid;
+    gap: var(--s-4);
+    color: var(--ink-2);
+  }
+  pre {
+    margin-top: var(--s-6);
+  }
+  pre .c {
+    color: var(--ink-mute);
+  }
+
+  .beliefs {
+    margin: 0;
+    display: grid;
+    gap: var(--s-4);
+  }
+  .beliefs div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 var(--s-2);
+    font-size: 1.1875rem;
+  }
+  .beliefs dt {
+    font-weight: 700;
+  }
+  .beliefs dd {
+    margin: 0;
+    color: var(--ink-2);
+  }
+
+  .faq {
+    border-top: 1px solid var(--hair-strong);
+  }
+  details {
+    border-bottom: 1px solid var(--hair-strong);
+  }
+  summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--s-4);
+    min-height: 56px;
+    padding: var(--s-3) 0;
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none;
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  summary::after {
+    content: '+';
+    flex: none;
+    font-family: var(--font-mono);
+    font-weight: 400;
+    color: var(--pen);
+    font-size: 1.25rem;
+  }
+  details[open] summary::after {
+    content: '−';
+  }
+  details p {
+    padding: 0 0 var(--s-4);
+    color: var(--ink-2);
+    max-width: 38em;
+  }
+  .more {
+    margin-top: var(--s-6);
+    color: var(--ink-2);
+  }
+</style>

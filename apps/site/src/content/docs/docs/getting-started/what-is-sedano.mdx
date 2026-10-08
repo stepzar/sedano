@@ -1,0 +1,48 @@
+---
+title: What is Sedano
+description: One app over several coding-agent CLIs, on this Mac and on SSH hosts, with one event model for all of them.
+sidebar:
+  order: 1
+---
+
+import Shot from '../../../../components/Shot.astro';
+
+Sedano is a desktop app for macOS that starts and drives coding-agent CLIs you
+already have installed. Claude Code, Command Code and the ACP agents (Codex,
+Gemini CLI, Grok, opencode) each run as their own process, with their own
+protocol and their own idea of what a session is. Sedano translates all of them
+into one set of events, so a message, a tool call, a question and the end of a
+turn look the same whichever CLI produced them.
+
+<Shot
+  src="/shots/hero-light.webp"
+  alt="The Sedano window: a sidebar of sessions grouped by workspace, a Claude Code conversation with a failed test run, a question card waiting for an answer, and the composer with model, effort and approval chips."
+  width={3200}
+  height={2000}
+/>
+
+What it does:
+
+- **Tabs for agents and terminals.** An agent tab talks to a CLI over its
+  machine-readable protocol. A terminal tab is a real `tmux` session, so it
+  survives closing the app.
+- **Several machines.** Any `Host` alias in `~/.ssh/config` that you enable in
+  Settings can run agent sessions and terminal tabs. The CLI runs on that host.
+- **Questions and approvals as cards.** When a harness asks for permission or
+  asks a question, you get a card with the options it offered.
+- **Live subagents, for Claude Code only.** It is the only CLI that publishes
+  what its subagents are doing while they work.
+- **Usage limits** for the harnesses that expose them (Claude Code, Codex,
+  Command Code, opencode).
+- **A phone as a second screen**, over your own Tailscale network.
+
+What it does not do:
+
+- It bundles no CLI and no model. You install and log in to each harness
+  yourself; a missing one is marked as missing in the picker.
+- It does not fake a capability. If a harness cannot report something (cost,
+  context window, subagents, questions), Sedano shows nothing or "unknown",
+  never a made-up value. See [Concepts](/docs/getting-started/concepts/#unknown-is-not-zero).
+- It runs on macOS only, on Apple Silicon. There is no Windows or Linux build.
+
+Next: [Install](/docs/getting-started/install/).

@@ -1,0 +1,254 @@
+{"dir":"client","ms":3,"line":"/cost"}
+{"dir":"agent","ms":589,"line":"{\"type\":\"event\",\"event\":{\"type\":\"run_start\",\"sessionId\":\"42034fae-39e9-4c4d-ab9a-8ed8cf82cce1\"}}"}
+{"dir":"agent","ms":628,"line":"{\"type\":\"event\",\"event\":{\"type\":\"turn_start\",\"turnNumber\":1}}"}
+{"dir":"agent","ms":645,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_start\"}}"}
+{"dir":"agent","ms":645,"line":"{\"type\":\"event\",\"event\":{\"type\":\"model_request_start\",\"model\":\"poolside/laguna-s-2.1-free\"}}"}
+{"dir":"agent","ms":658,"line":"{\"type\":\"event\",\"event\":{\"type\":\"model_trace\",\"traceId\":\"8bcae5e483c3d234b46ebb784ae892fa\"}}"}
+{"dir":"agent","ms":2616,"line":"{\"type\":\"event\",\"event\":{\"type\":\"thinking_start\"}}"}
+{"dir":"agent","ms":2616,"line":"{\"type\":\"event\",\"event\":{\"type\":\"thinking_delta\",\"delta\":\"The\"}}"}
+{"dir":"agent","ms":2616,"line":"{\"type\":\"event\",\"event\":{\"type\":\"thinking_delta\",\"delta\":\" user\"}}"}
+{"dir":"agent","ms":2617,"line":"{\"type\":\"event\",\"event\":{\"type\":\"thinking_delta\",\"delta\":\" typed\"}}"}
+{"dir":"agent","ms":2617,"line":"{\"type\":\"event\",\"event\":{\"type\":\"thinking_delta\",\"delta\":\" `/\"}}"}
+{"dir":"agent","ms":2617,"line":"{\"type\":\"event\",\"event\":{\"type\":\"thinking_delta\",\"delta\":\"cost\"}}"}
+{"dir":"agent","ms":2617,"line":"{\"type\":\"event\",\"event\":{\"type\":\"thinking_delta\",\"delta\":\"`\"}}"}
+{"dir":"agent","ms":3138,"line":"{\"type\":\"event\",\"event\":{\"type\":\"thinking_delta\",\"delta\":\" which\"}}"}
+{"dir":"agent","ms":3300,"line":"{\"type\":\"event\",\"event\":{\"type\":\"thinking_delta\",\"delta\":\" matches\"}}"}
+{"dir":"agent","ms":3326,"line":"{\"type\":\"event\",\"event\":{\"type\":\"thinking_delta\",\"delta\":\" the\"}}"}
+{"dir":"agent","ms":3339,"line":"{\"type\":\"event\",\"event\":{\"type\":\"thinking_delta\",\"delta\":\" `\"}}"}
+{"dir":"agent","ms":3349,"line":"{\"type\":\"event\",\"event\":{\"type\":\"thinking_delta\",\"delta\":\"cost\"}}"}
+{"dir":"agent","ms":3358,"line":"{\"type\":\"event\",\"event\":{\"type\":\"thinking_delta\",\"delta\":\"i\"}}"}
+{"dir":"agent","ms":3461,"line":"{\"type\":\"event\",\"event\":{\"type\":\"thinking_delta\",\"delta\":\"`\"}}"}
+{"dir":"agent","ms":3461,"line":"{\"type\":\"event\",\"event\":{\"type\":\"thinking_delta\",\"delta\":\" skill\"}}"}
+{"dir":"agent","ms":3461,"line":"{\"type\":\"event\",\"event\":{\"type\":\"thinking_delta\",\"delta\":\".\"}}"}
+{"dir":"agent","ms":3461,"line":"{\"type\":\"event\",\"event\":{\"type\":\"thinking_delta\",\"delta\":\" Let\"}}"}
+{"dir":"agent","ms":3461,"line":"{\"type\":\"event\",\"event\":{\"type\":\"thinking_delta\",\"delta\":\" me\"}}"}
+{"dir":"agent","ms":3461,"line":"{\"type\":\"event\",\"event\":{\"type\":\"thinking_delta\",\"delta\":\" activate\"}}"}
+{"dir":"agent","ms":3462,"line":"{\"type\":\"event\",\"event\":{\"type\":\"thinking_delta\",\"delta\":\" it\"}}"}
+{"dir":"agent","ms":3481,"line":"{\"type\":\"event\",\"event\":{\"type\":\"thinking_delta\",\"delta\":\".\"}}"}
+{"dir":"agent","ms":3664,"line":"{\"type\":\"event\",\"event\":{\"type\":\"thinking_end\",\"text\":\"The user typed `/cost` which matches the `costi` skill. Let me activate it.\"}}"}
+{"dir":"agent","ms":4188,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"thinking\",\"thinking\":\"The user typed `/cost` which matches the `costi` skill. Let me activate it.\",\"signature\":\"\"},{\"type\":\"tool_use\",\"id\":\"chatcmpl-tool-0c8780e849984c6298ab7325a1897aa8\",\"name\":\"activate_skill\",\"input\":{\"name\":\"costi\",\"arguments\":\"\"}}]}}"}
+{"dir":"agent","ms":4189,"line":"{\"type\":\"event\",\"event\":{\"type\":\"model_request_end\",\"model\":\"poolside/laguna-s-2.1-free\",\"usage\":{\"inputTokens\":17726,\"outputTokens\":56,\"cacheReadTokens\":9728,\"cacheWriteTokens\":0},\"stopReason\":\"tool_calls\"}}"}
+{"dir":"agent","ms":4189,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_end\",\"content\":[{\"type\":\"thinking\",\"thinking\":\"The user typed `/cost` which matches the `costi` skill. Let me activate it.\",\"signature\":\"\"},{\"type\":\"tool_use\",\"id\":\"chatcmpl-tool-0c8780e849984c6298ab7325a1897aa8\",\"name\":\"activate_skill\",\"input\":{\"name\":\"costi\",\"arguments\":\"\"}}]}}"}
+{"dir":"agent","ms":4190,"line":"{\"type\":\"event\",\"event\":{\"type\":\"tool_queued\",\"toolCallId\":\"chatcmpl-tool-0c8780e849984c6298ab7325a1897aa8\",\"toolName\":\"activate_skill\",\"input\":{\"name\":\"costi\",\"arguments\":\"\"}}}"}
+{"dir":"agent","ms":4192,"line":"{\"type\":\"event\",\"event\":{\"type\":\"tool_running\",\"toolCallId\":\"chatcmpl-tool-0c8780e849984c6298ab7325a1897aa8\",\"toolName\":\"activate_skill\",\"description\":null}}"}
+{"dir":"agent","ms":4198,"line":"{\"type\":\"event\",\"event\":{\"type\":\"tool_completed\",\"toolCallId\":\"chatcmpl-tool-0c8780e849984c6298ab7325a1897aa8\",\"toolName\":\"activate_skill\",\"result\":[{\"type\":\"text\",\"text\":\"<command-name>costi</command-name>\\n\\nBase directory for this skill: /Users/user/.agents/skills/costi\\n\\nThe content of SKILL.md is:\\n<redacted: 2082 characters of a skill outside the capture directory>\"}],\"deferred\":false}}"}
+{"dir":"agent","ms":4198,"line":"{\"type\":\"event\",\"event\":{\"type\":\"turn_end\",\"turnNumber\":1,\"hadToolCalls\":true,\"usage\":{\"inputTokens\":17726,\"outputTokens\":56,\"cacheReadTokens\":9728,\"cacheWriteTokens\":0}}}"}
+{"dir":"agent","ms":4202,"line":"{\"type\":\"event\",\"event\":{\"type\":\"turn_start\",\"turnNumber\":2}}"}
+{"dir":"agent","ms":4206,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_start\"}}"}
+{"dir":"agent","ms":4206,"line":"{\"type\":\"event\",\"event\":{\"type\":\"model_request_start\",\"model\":\"poolside/laguna-s-2.1-free\"}}"}
+{"dir":"agent","ms":4206,"line":"{\"type\":\"event\",\"event\":{\"type\":\"model_trace\",\"traceId\":\"46faa905c37ea48b66f47fc6cd608ad1\"}}"}
+{"dir":"agent","ms":6061,"line":"{\"type\":\"event\",\"event\":{\"type\":\"model_trace\",\"traceId\":\"46faa905c37ea48b66f47fc6cd608ad1\"}}"}
+{"dir":"agent","ms":7907,"line":"{\"type\":\"event\",\"event\":{\"type\":\"model_trace\",\"traceId\":\"46faa905c37ea48b66f47fc6cd608ad1\"}}"}
+{"dir":"agent","ms":8769,"line":"{\"type\":\"event\",\"event\":{\"type\":\"api_retry\",\"attempt\":3,\"error\":\"The request limited providers for this model and they are currently at capacity. Add more providers or remove restrictions for automatic fallback. Providers considered: poolside.\",\"delayMs\":1000}}"}
+{"dir":"agent","ms":9772,"line":"{\"type\":\"event\",\"event\":{\"type\":\"model_trace\",\"traceId\":\"46faa905c37ea48b66f47fc6cd608ad1\"}}"}
+{"dir":"agent","ms":10527,"line":"{\"type\":\"event\",\"event\":{\"type\":\"api_retry\",\"attempt\":4,\"error\":\"The request limited providers for this model and they are currently at capacity. Add more providers or remove restrictions for automatic fallback. Providers considered: poolside.\",\"delayMs\":1000}}"}
+{"dir":"agent","ms":11528,"line":"{\"type\":\"event\",\"event\":{\"type\":\"model_trace\",\"traceId\":\"46faa905c37ea48b66f47fc6cd608ad1\"}}"}
+{"dir":"agent","ms":12578,"line":"{\"type\":\"event\",\"event\":{\"type\":\"api_retry\",\"attempt\":5,\"error\":\"The request limited providers for this model and they are currently at capacity. Add more providers or remove restrictions for automatic fallback. Providers considered: poolside.\",\"delayMs\":1600}}"}
+{"dir":"agent","ms":14180,"line":"{\"type\":\"event\",\"event\":{\"type\":\"model_trace\",\"traceId\":\"46faa905c37ea48b66f47fc6cd608ad1\"}}"}
+{"dir":"agent","ms":15625,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"Usage\"}}"}
+{"dir":"agent","ms":15626,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage\"}]}}"}
+{"dir":"agent","ms":15626,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\":\"}}"}
+{"dir":"agent","ms":15626,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\"}]}}"}
+{"dir":"agent","ms":15626,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"\\n\"}}"}
+{"dir":"agent","ms":15626,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n\"}]}}"}
+{"dir":"agent","ms":15626,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"-\"}}"}
+{"dir":"agent","ms":15626,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n-\"}]}}"}
+{"dir":"agent","ms":15627,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" `/\"}}"}
+{"dir":"agent","ms":15627,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/\"}]}}"}
+{"dir":"agent","ms":15627,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"cost\"}}"}
+{"dir":"agent","ms":15627,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/cost\"}]}}"}
+{"dir":"agent","ms":15627,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"i\"}}"}
+{"dir":"agent","ms":15627,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi\"}]}}"}
+{"dir":"agent","ms":15627,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" \"}}"}
+{"dir":"agent","ms":15627,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi \"}]}}"}
+{"dir":"agent","ms":15794,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"<ordin\"}}"}
+{"dir":"agent","ms":15794,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordin\"}]}}"}
+{"dir":"agent","ms":15794,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"i\"}}"}
+{"dir":"agent","ms":15794,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini\"}]}}"}
+{"dir":"agent","ms":15794,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\">\"}}"}
+{"dir":"agent","ms":15794,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini>\"}]}}"}
+{"dir":"agent","ms":15816,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" [\"}}"}
+{"dir":"agent","ms":15816,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [\"}]}}"}
+{"dir":"agent","ms":15824,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"<doc\"}}"}
+{"dir":"agent","ms":15824,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc\"}]}}"}
+{"dir":"agent","ms":15877,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"_per\"}}"}
+{"dir":"agent","ms":15878,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per\"}]}}"}
+{"dir":"agent","ms":15883,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"_fl\"}}"}
+{"dir":"agent","ms":15883,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_fl\"}]}}"}
+{"dir":"agent","ms":15883,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"us\"}}"}
+{"dir":"agent","ms":15883,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flus\"}]}}"}
+{"dir":"agent","ms":15894,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"so\"}}"}
+{"dir":"agent","ms":15894,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso\"}]}}"}
+{"dir":"agent","ms":15946,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"=\"}}"}
+{"dir":"agent","ms":15946,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=\"}]}}"}
+{"dir":"agent","ms":15956,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"2\"}}"}
+{"dir":"agent","ms":15956,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2\"}]}}"}
+{"dir":"agent","ms":15956,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\">\"}}"}
+{"dir":"agent","ms":15956,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>\"}]}}"}
+{"dir":"agent","ms":15956,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"]`\"}}"}
+{"dir":"agent","ms":15956,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]`\"}]}}"}
+{"dir":"agent","ms":15967,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" —\"}}"}
+{"dir":"agent","ms":15967,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` —\"}]}}"}
+{"dir":"agent","ms":15991,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" fl\"}}"}
+{"dir":"agent","ms":15991,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — fl\"}]}}"}
+{"dir":"agent","ms":16001,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"us\"}}"}
+{"dir":"agent","ms":16001,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flus\"}]}}"}
+{"dir":"agent","ms":16001,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"so\"}}"}
+{"dir":"agent","ms":16001,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso\"}]}}"}
+{"dir":"agent","ms":16036,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" uniform\"}}"}
+{"dir":"agent","ms":16036,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniform\"}]}}"}
+{"dir":"agent","ms":16043,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"e\"}}"}
+{"dir":"agent","ms":16043,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme\"}]}}"}
+{"dir":"agent","ms":16043,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" (\"}}"}
+{"dir":"agent","ms":16043,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (\"}]}}"}
+{"dir":"agent","ms":16139,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"es\"}}"}
+{"dir":"agent","ms":16139,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es\"}]}}"}
+{"dir":"agent","ms":16152,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\".\"}}"}
+{"dir":"agent","ms":16152,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es.\"}]}}"}
+{"dir":"agent","ms":16152,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" `/\"}}"}
+{"dir":"agent","ms":16152,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/\"}]}}"}
+{"dir":"agent","ms":16152,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"cost\"}}"}
+{"dir":"agent","ms":16152,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/cost\"}]}}"}
+{"dir":"agent","ms":16152,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"i\"}}"}
+{"dir":"agent","ms":16152,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi\"}]}}"}
+{"dir":"agent","ms":16152,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" \"}}"}
+{"dir":"agent","ms":16152,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi \"}]}}"}
+{"dir":"agent","ms":16152,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"3\"}}"}
+{"dir":"agent","ms":16152,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 3\"}]}}"}
+{"dir":"agent","ms":16152,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"9\"}}"}
+{"dir":"agent","ms":16152,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 39\"}]}}"}
+{"dir":"agent","ms":16246,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"3\"}}"}
+{"dir":"agent","ms":16246,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393\"}]}}"}
+{"dir":"agent","ms":16246,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"`\"}}"}
+{"dir":"agent","ms":16246,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393`\"}]}}"}
+{"dir":"agent","ms":16246,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" →\"}}"}
+{"dir":"agent","ms":16246,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` →\"}]}}"}
+{"dir":"agent","ms":16246,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" CT\"}}"}
+{"dir":"agent","ms":16246,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT\"}]}}"}
+{"dir":"agent","ms":16247,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"-like\"}}"}
+{"dir":"agent","ms":16247,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like\"}]}}"}
+{"dir":"agent","ms":16247,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\")\"}}"}
+{"dir":"agent","ms":16247,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\"}]}}"}
+{"dir":"agent","ms":16256,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"\\n\"}}"}
+{"dir":"agent","ms":16256,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n\"}]}}"}
+{"dir":"agent","ms":16264,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"-\"}}"}
+{"dir":"agent","ms":16264,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n-\"}]}}"}
+{"dir":"agent","ms":16274,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" `/\"}}"}
+{"dir":"agent","ms":16274,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/\"}]}}"}
+{"dir":"agent","ms":16282,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"cost\"}}"}
+{"dir":"agent","ms":16282,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/cost\"}]}}"}
+{"dir":"agent","ms":16294,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"i\"}}"}
+{"dir":"agent","ms":16294,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi\"}]}}"}
+{"dir":"agent","ms":16351,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" --\"}}"}
+{"dir":"agent","ms":16351,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --\"}]}}"}
+{"dir":"agent","ms":16351,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"doc\"}}"}
+{"dir":"agent","ms":16351,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc\"}]}}"}
+{"dir":"agent","ms":16351,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" \"}}"}
+{"dir":"agent","ms":16351,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc \"}]}}"}
+{"dir":"agent","ms":16353,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"<tot\"}}"}
+{"dir":"agent","ms":16353,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc <tot\"}]}}"}
+{"dir":"agent","ms":16371,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"ale\"}}"}
+{"dir":"agent","ms":16371,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc <totale\"}]}}"}
+{"dir":"agent","ms":16381,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"_doc\"}}"}
+{"dir":"agent","ms":16381,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc <totale_doc\"}]}}"}
+{"dir":"agent","ms":16406,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\">`\"}}"}
+{"dir":"agent","ms":16406,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc <totale_doc>`\"}]}}"}
+{"dir":"agent","ms":16410,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" —\"}}"}
+{"dir":"agent","ms":16410,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc <totale_doc>` —\"}]}}"}
+{"dir":"agent","ms":16424,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" to\"}}"}
+{"dir":"agent","ms":16424,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc <totale_doc>` — to\"}]}}"}
+{"dir":"agent","ms":16439,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"tale\"}}"}
+{"dir":"agent","ms":16439,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc <totale_doc>` — totale\"}]}}"}
+{"dir":"agent","ms":16453,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" doc\"}}"}
+{"dir":"agent","ms":16453,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc <totale_doc>` — totale doc\"}]}}"}
+{"dir":"agent","ms":16481,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" dire\"}}"}
+{"dir":"agent","ms":16481,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc <totale_doc>` — totale doc dire\"}]}}"}
+{"dir":"agent","ms":16494,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"tto\"}}"}
+{"dir":"agent","ms":16494,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc <totale_doc>` — totale doc diretto\"}]}}"}
+{"dir":"agent","ms":16504,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" (\"}}"}
+{"dir":"agent","ms":16504,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc <totale_doc>` — totale doc diretto (\"}]}}"}
+{"dir":"agent","ms":16528,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"es\"}}"}
+{"dir":"agent","ms":16528,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc <totale_doc>` — totale doc diretto (es\"}]}}"}
+{"dir":"agent","ms":16543,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\".\"}}"}
+{"dir":"agent","ms":16543,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc <totale_doc>` — totale doc diretto (es.\"}]}}"}
+{"dir":"agent","ms":16544,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" `/\"}}"}
+{"dir":"agent","ms":16544,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc <totale_doc>` — totale doc diretto (es. `/\"}]}}"}
+{"dir":"agent","ms":16561,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"cost\"}}"}
+{"dir":"agent","ms":16561,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc <totale_doc>` — totale doc diretto (es. `/cost\"}]}}"}
+{"dir":"agent","ms":16574,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"i\"}}"}
+{"dir":"agent","ms":16574,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc <totale_doc>` — totale doc diretto (es. `/costi\"}]}}"}
+{"dir":"agent","ms":16597,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" --\"}}"}
+{"dir":"agent","ms":16597,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc <totale_doc>` — totale doc diretto (es. `/costi --\"}]}}"}
+{"dir":"agent","ms":16614,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"doc\"}}"}
+{"dir":"agent","ms":16614,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc <totale_doc>` — totale doc diretto (es. `/costi --doc\"}]}}"}
+{"dir":"agent","ms":16638,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" \"}}"}
+{"dir":"agent","ms":16638,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc <totale_doc>` — totale doc diretto (es. `/costi --doc \"}]}}"}
+{"dir":"agent","ms":16638,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"1\"}}"}
+{"dir":"agent","ms":16638,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc <totale_doc>` — totale doc diretto (es. `/costi --doc 1\"}]}}"}
+{"dir":"agent","ms":16863,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"5\"}}"}
+{"dir":"agent","ms":16863,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc <totale_doc>` — totale doc diretto (es. `/costi --doc 15\"}]}}"}
+{"dir":"agent","ms":16875,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"0\"}}"}
+{"dir":"agent","ms":16875,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc <totale_doc>` — totale doc diretto (es. `/costi --doc 150\"}]}}"}
+{"dir":"agent","ms":16875,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"0\"}}"}
+{"dir":"agent","ms":16875,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc <totale_doc>` — totale doc diretto (es. `/costi --doc 1500\"}]}}"}
+{"dir":"agent","ms":16875,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"`)\"}}"}
+{"dir":"agent","ms":16875,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc <totale_doc>` — totale doc diretto (es. `/costi --doc 1500`)\"}]}}"}
+{"dir":"agent","ms":16875,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"\\n\\n\"}}"}
+{"dir":"agent","ms":16875,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc <totale_doc>` — totale doc diretto (es. `/costi --doc 1500`)\\n\\n\"}]}}"}
+{"dir":"agent","ms":16875,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"In\"}}"}
+{"dir":"agent","ms":16875,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc <totale_doc>` — totale doc diretto (es. `/costi --doc 1500`)\\n\\nIn\"}]}}"}
+{"dir":"agent","ms":16875,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"ser\"}}"}
+{"dir":"agent","ms":16875,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc <totale_doc>` — totale doc diretto (es. `/costi --doc 1500`)\\n\\nInser\"}]}}"}
+{"dir":"agent","ms":16875,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"isc\"}}"}
+{"dir":"agent","ms":16875,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc <totale_doc>` — totale doc diretto (es. `/costi --doc 1500`)\\n\\nInserisc\"}]}}"}
+{"dir":"agent","ms":16875,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"i\"}}"}
+{"dir":"agent","ms":16875,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc <totale_doc>` — totale doc diretto (es. `/costi --doc 1500`)\\n\\nInserisci\"}]}}"}
+{"dir":"agent","ms":16875,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" i\"}}"}
+{"dir":"agent","ms":16875,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc <totale_doc>` — totale doc diretto (es. `/costi --doc 1500`)\\n\\nInserisci i\"}]}}"}
+{"dir":"agent","ms":16875,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" paramet\"}}"}
+{"dir":"agent","ms":16875,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc <totale_doc>` — totale doc diretto (es. `/costi --doc 1500`)\\n\\nInserisci i paramet\"}]}}"}
+{"dir":"agent","ms":16875,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"ri\"}}"}
+{"dir":"agent","ms":16875,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc <totale_doc>` — totale doc diretto (es. `/costi --doc 1500`)\\n\\nInserisci i parametri\"}]}}"}
+{"dir":"agent","ms":16875,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" o\"}}"}
+{"dir":"agent","ms":16875,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc <totale_doc>` — totale doc diretto (es. `/costi --doc 1500`)\\n\\nInserisci i parametri o\"}]}}"}
+{"dir":"agent","ms":16875,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" dim\"}}"}
+{"dir":"agent","ms":16875,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc <totale_doc>` — totale doc diretto (es. `/costi --doc 1500`)\\n\\nInserisci i parametri o dim\"}]}}"}
+{"dir":"agent","ms":16875,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"mi\"}}"}
+{"dir":"agent","ms":16875,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc <totale_doc>` — totale doc diretto (es. `/costi --doc 1500`)\\n\\nInserisci i parametri o dimmi\"}]}}"}
+{"dir":"agent","ms":16875,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" quant\"}}"}
+{"dir":"agent","ms":16875,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc <totale_doc>` — totale doc diretto (es. `/costi --doc 1500`)\\n\\nInserisci i parametri o dimmi quant\"}]}}"}
+{"dir":"agent","ms":16875,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"i\"}}"}
+{"dir":"agent","ms":16875,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc <totale_doc>` — totale doc diretto (es. `/costi --doc 1500`)\\n\\nInserisci i parametri o dimmi quanti\"}]}}"}
+{"dir":"agent","ms":16904,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" ord\"}}"}
+{"dir":"agent","ms":16904,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc <totale_doc>` — totale doc diretto (es. `/costi --doc 1500`)\\n\\nInserisci i parametri o dimmi quanti ord\"}]}}"}
+{"dir":"agent","ms":16913,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"ini\"}}"}
+{"dir":"agent","ms":16913,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc <totale_doc>` — totale doc diretto (es. `/costi --doc 1500`)\\n\\nInserisci i parametri o dimmi quanti ordini\"}]}}"}
+{"dir":"agent","ms":16914,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"/g\"}}"}
+{"dir":"agent","ms":16914,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc <totale_doc>` — totale doc diretto (es. `/costi --doc 1500`)\\n\\nInserisci i parametri o dimmi quanti ordini/g\"}]}}"}
+{"dir":"agent","ms":16923,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"ior\"}}"}
+{"dir":"agent","ms":16923,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc <totale_doc>` — totale doc diretto (es. `/costi --doc 1500`)\\n\\nInserisci i parametri o dimmi quanti ordini/gior\"}]}}"}
+{"dir":"agent","ms":16933,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"no\"}}"}
+{"dir":"agent","ms":16933,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc <totale_doc>` — totale doc diretto (es. `/costi --doc 1500`)\\n\\nInserisci i parametri o dimmi quanti ordini/giorno\"}]}}"}
+{"dir":"agent","ms":17062,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" o\"}}"}
+{"dir":"agent","ms":17062,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc <totale_doc>` — totale doc diretto (es. `/costi --doc 1500`)\\n\\nInserisci i parametri o dimmi quanti ordini/giorno o\"}]}}"}
+{"dir":"agent","ms":17077,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" to\"}}"}
+{"dir":"agent","ms":17077,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc <totale_doc>` — totale doc diretto (es. `/costi --doc 1500`)\\n\\nInserisci i parametri o dimmi quanti ordini/giorno o to\"}]}}"}
+{"dir":"agent","ms":17077,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"tale\"}}"}
+{"dir":"agent","ms":17077,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc <totale_doc>` — totale doc diretto (es. `/costi --doc 1500`)\\n\\nInserisci i parametri o dimmi quanti ordini/giorno o totale\"}]}}"}
+{"dir":"agent","ms":17077,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" mens\"}}"}
+{"dir":"agent","ms":17077,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc <totale_doc>` — totale doc diretto (es. `/costi --doc 1500`)\\n\\nInserisci i parametri o dimmi quanti ordini/giorno o totale mens\"}]}}"}
+{"dir":"agent","ms":17077,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"ile\"}}"}
+{"dir":"agent","ms":17077,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc <totale_doc>` — totale doc diretto (es. `/costi --doc 1500`)\\n\\nInserisci i parametri o dimmi quanti ordini/giorno o totale mensile\"}]}}"}
+{"dir":"agent","ms":17077,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" document\"}}"}
+{"dir":"agent","ms":17077,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc <totale_doc>` — totale doc diretto (es. `/costi --doc 1500`)\\n\\nInserisci i parametri o dimmi quanti ordini/giorno o totale mensile document\"}]}}"}
+{"dir":"agent","ms":17077,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"i\"}}"}
+{"dir":"agent","ms":17077,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc <totale_doc>` — totale doc diretto (es. `/costi --doc 1500`)\\n\\nInserisci i parametri o dimmi quanti ordini/giorno o totale mensile documenti\"}]}}"}
+{"dir":"agent","ms":17077,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" hai\"}}"}
+{"dir":"agent","ms":17077,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc <totale_doc>` — totale doc diretto (es. `/costi --doc 1500`)\\n\\nInserisci i parametri o dimmi quanti ordini/giorno o totale mensile documenti hai\"}]}}"}
+{"dir":"agent","ms":17146,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\".\"}}"}
+{"dir":"agent","ms":17146,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc <totale_doc>` — totale doc diretto (es. `/costi --doc 1500`)\\n\\nInserisci i parametri o dimmi quanti ordini/giorno o totale mensile documenti hai.\"}]}}"}
+{"dir":"agent","ms":17296,"line":"{\"type\":\"event\",\"event\":{\"type\":\"model_request_end\",\"model\":\"poolside/laguna-s-2.1-free\",\"usage\":{\"inputTokens\":18625,\"outputTokens\":102,\"cacheReadTokens\":17760,\"cacheWriteTokens\":0},\"stopReason\":\"stop\"}}"}
+{"dir":"agent","ms":17296,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_end\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc <totale_doc>` — totale doc diretto (es. `/costi --doc 1500`)\\n\\nInserisci i parametri o dimmi quanti ordini/giorno o totale mensile documenti hai.\"}]}}"}
+{"dir":"agent","ms":17296,"line":"{\"type\":\"event\",\"event\":{\"type\":\"turn_end\",\"turnNumber\":2,\"hadToolCalls\":false,\"usage\":{\"inputTokens\":18625,\"outputTokens\":102,\"cacheReadTokens\":17760,\"cacheWriteTokens\":0}}}"}
+{"dir":"agent","ms":17300,"line":"{\"type\":\"event\",\"event\":{\"type\":\"run_end\",\"result\":{\"finalText\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc <totale_doc>` — totale doc diretto (es. `/costi --doc 1500`)\\n\\nInserisci i parametri o dimmi quanti ordini/giorno o totale mensile documenti hai.\",\"stopReason\":\"end_turn\",\"turnCount\":2,\"usage\":{\"inputTokens\":36351,\"outputTokens\":158,\"cacheReadTokens\":27488,\"cacheWriteTokens\":0},\"systemPromptTokens\":null,\"nextState\":{\"sessionId\":\"42034fae-39e9-4c4d-ab9a-8ed8cf82cce1\",\"messages\":[{\"role\":\"user\",\"content\":[{\"type\":\"text\",\"text\":\"/cost\"}],\"meta\":{\"source\":\"user\",\"createdAt\":1790007310054,\"messageId\":\"f316e6ba-a1cf-46a0-a81d-1f1ba0407dae\"}},{\"role\":\"assistant\",\"content\":[{\"type\":\"thinking\",\"thinking\":\"The user typed `/cost` which matches the `costi` skill. Let me activate it.\",\"signature\":\"\"},{\"type\":\"tool_use\",\"id\":\"chatcmpl-tool-0c8780e849984c6298ab7325a1897aa8\",\"name\":\"activate_skill\",\"input\":{\"name\":\"costi\",\"arguments\":\"\"}}],\"meta\":{\"source\":\"model\",\"createdAt\":1790007313655,\"messageId\":\"1e086393-41be-46ec-8c6b-41fa36cf74b0\"}},{\"role\":\"user\",\"content\":[{\"type\":\"tool_result\",\"tool_use_id\":\"chatcmpl-tool-0c8780e849984c6298ab7325a1897aa8\",\"content\":[{\"type\":\"text\",\"text\":\"<command-name>costi</command-name>\\n\\nBase directory for this skill: /Users/user/.agents/skills/costi\\n\\nThe content of SKILL.md is:\\n<redacted: 2082 characters of a skill outside the capture directory>\"}]}],\"meta\":{\"source\":\"tool\",\"messageId\":\"6faeb4ad-3976-4bb9-9bb2-2a16b327366b\"}},{\"role\":\"assistant\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc <totale_doc>` — totale doc diretto (es. `/costi --doc 1500`)\\n\\nInserisci i parametri o dimmi quanti ordini/giorno o totale mensile documenti hai.\"}],\"meta\":{\"source\":\"model\",\"createdAt\":1790007326762,\"messageId\":\"cf6990b0-12cc-4e2b-81e3-4bff0b093b1c\"}}],\"interrupted\":false,\"modState\":{\"workspace\":{\"cwd\":\"/private/tmp/sedano-capture\",\"platform\":\"darwin\",\"branch\":null,\"gitStatus\":null,\"recentCommits\":[],\"additionalDirectories\":[]},\"compaction\":{\"tokens\":18696,\"basis\":{\"role\":\"assistant\",\"content\":[{\"type\":\"text\",\"text\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc <totale_doc>` — totale doc diretto (es. `/costi --doc 1500`)\\n\\nInserisci i parametri o dimmi quanti ordini/giorno o totale mensile documenti hai.\"}],\"meta\":{\"source\":\"model\",\"createdAt\":1790007326762,\"messageId\":\"cf6990b0-12cc-4e2b-81e3-4bff0b093b1c\"}}}}}}}}"}
+{"dir":"agent","ms":17301,"line":"{\"type\":\"result\",\"subtype\":\"success\",\"sessionId\":\"42034fae-39e9-4c4d-ab9a-8ed8cf82cce1\",\"stopReason\":\"end_turn\",\"usage\":{\"inputTokens\":36351,\"outputTokens\":158,\"cacheReadTokens\":27488,\"cacheWriteTokens\":0},\"durationMs\":16766,\"finalText\":\"Usage:\\n- `/costi <ordini> [<doc_per_flusso=2>]` — flusso uniforme (es. `/costi 393` → CT-like)\\n- `/costi --doc <totale_doc>` — totale doc diretto (es. `/costi --doc 1500`)\\n\\nInserisci i parametri o dimmi quanti ordini/giorno o totale mensile documenti hai.\"}"}

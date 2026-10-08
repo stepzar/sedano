@@ -1,0 +1,23 @@
+{
+  "harness": "commandcode",
+  "scenario": "slash-cost",
+  "args": [
+    "-p",
+    "--output-format",
+    "json",
+    "--skip-onboarding",
+    "--trust",
+    "--model",
+    "poolside/laguna-s-2.1-free",
+    "--permission-mode",
+    "standard"
+  ],
+  "model": "poolside/laguna-s-2.1-free",
+  "permissionMode": "default",
+  "prompt": "/cost",
+  "capturedAt": "2026-09-21T16:15:26.779Z",
+  "outcome": "ok",
+  "note": "",
+  "frames": 254,
+  "durationMs": 17301
+}

@@ -1,0 +1,71 @@
+---
+import Celery from './doodles/Celery.astro';
+const repo = 'https://github.com/stepzar/sedano';
+---
+
+<footer class="footer">
+  <div class="wrap inner">
+    <a class="brand" href="/" aria-label="Sedano home"><Celery size={26} /></a>
+    <nav aria-label="Footer">
+      <ul>
+        <li><a href="/docs/">Docs</a></li>
+        <li><a href={repo}>GitHub</a></li>
+        <li><a href={`${repo}/releases`}>Releases</a></li>
+        <li><a href={`${repo}/blob/master/CHANGELOG.md`}>Changelog</a></li>
+        <li><a href={`${repo}/blob/master/LICENSE`}>License (Apache-2.0)</a></li>
+      </ul>
+    </nav>
+    <p class="aside">// made by <a class="credit" href="https://stefanozarro.com" rel="noopener">Stefano Zarro</a></p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    margin-top: var(--s-24);
+    border-top: 1px solid var(--hair);
+    padding: var(--s-8) 0 var(--s-12);
+  }
+  .inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--s-4) var(--s-6);
+  }
+  .brand {
+    color: var(--ink);
+  }
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-1) var(--s-4);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  ul a {
+    color: var(--ink-2);
+    font-size: 0.9375rem;
+    text-decoration: none;
+  }
+  ul a:hover {
+    color: var(--ink);
+    text-decoration: underline;
+  }
+  .aside {
+    margin-left: auto;
+  }
+  .credit {
+    color: var(--ink-2);
+    text-decoration: none;
+  }
+  .credit:hover {
+    color: var(--ink);
+    text-decoration: underline;
+  }
+  @media (max-width: 600px) {
+    .aside {
+      margin-left: 0;
+      width: 100%;
+    }
+  }
+</style>

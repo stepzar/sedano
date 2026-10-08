@@ -1,0 +1,202 @@
+/**
+ * The title bar's layout: machine menu on the left, the location pill in the
+ * exact centre, the window's own actions on the right.
+ *
+ * Loaded after `styles.css` (see `App.tsx`). The two sides are equal columns,
+ * so the pill sits in the middle of the window whatever is beside it.
+ */
+
+.bar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  column-gap: 12px;
+}
+
+.bar-side {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  height: 100%;
+}
+
+.bar-right {
+  justify-content: flex-end;
+}
+
+/* The location pill ---------------------------------------------------- */
+
+.location-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: clamp(300px, 40vw, 580px);
+  max-width: 100%;
+  height: 32px;
+  padding: 0 5px 0 4px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill, 999px);
+  background: var(--surface-2);
+  box-shadow: none;
+  color: var(--fg);
+  font-size: 0.98em;
+  font-weight: 500;
+  transition:
+    background var(--dur) var(--ease),
+    border-color var(--dur) var(--ease);
+}
+
+.location-pill:hover:not(:disabled) {
+  background: var(--hover);
+  border-color: var(--line-strong);
+  color: var(--fg);
+}
+
+.location-pill:focus-visible {
+  outline: 2px solid var(--line-strong);
+  outline-offset: 1px;
+}
+
+.location-pill .pill-search {
+  flex: none;
+  color: var(--fg-faint);
+}
+
+/* The project folder's own name, the one thing you read here. */
+.location-pill .project-name {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: center;
+  color: var(--fg);
+  font-weight: 600;
+}
+
+/* Left of the name: the machine the tab runs on, tinted with its colour (the
+   same `--machine` the tabs carry), so the pill and the strip agree. */
+.env-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 42%;
+  height: 24px;
+  padding: 0 9px 0 8px;
+  border-radius: var(--r-pill, 999px);
+  background: color-mix(in srgb, var(--machine, var(--machine-slate)) 16%, var(--surface));
+  color: var(--fg-2);
+  font-size: 0.88em;
+  font-weight: 600;
+}
+
+.env-dot {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--machine, var(--machine-slate));
+}
+
+.env-name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Right of the name: the branch, as before. */
+.location-pill .git-chip {
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 38%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border-radius: var(--r-pill, 999px);
+}
+
+/* The composer's phone-only summary of its pickers (shown by mobile.css). */
+.composer-options-toggle {
+  display: none;
+}
+
+/* Search overlay -------------------------------------------------------- */
+
+/* The search field needs no box of its own: the whole head is the field, and
+   focus shows as a quiet change of its background rather than a ring. */
+.palette-head input,
+.palette-head input:focus,
+.palette-head input:focus-visible {
+  border: 0;
+  outline: none;
+  box-shadow: none;
+  border-radius: 0;
+  background: transparent;
+}
+
+.palette-head {
+  transition: background var(--dur) var(--ease);
+}
+
+.palette-head:focus-within {
+  background: var(--surface-2);
+}
+
+/* What matched what was typed. */
+.palette-match {
+  padding: 0;
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+  color: inherit;
+  font-weight: 650;
+}
+
+/* Rows you press and hold (the phone's right-click) must not start a text
+   selection or the iOS callout. The transcript keeps its selection. */
+.session-item,
+.rail-title.workspace,
+.tab,
+.tab-current,
+.switcher-card {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* Sidebar ---------------------------------------------------------------- */
+
+/* A little tighter than before, with the same two lines: title, then status,
+   harness, model and age. */
+.session-item {
+  gap: 1px;
+  padding: 6px 10px 7px;
+}
+
+.session-item .right {
+  top: 5px;
+}
+
+/* "Show N more" under a workspace's newest sessions. */
+.rail-more {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 28px;
+  padding: 0 11px;
+  border: 0;
+  border-radius: var(--r-md);
+  background: transparent;
+  box-shadow: none;
+  color: var(--fg-faint);
+  font-size: 0.9em;
+  text-align: left;
+}
+
+.rail-more:hover:not(:disabled) {
+  background: var(--hover);
+  color: var(--fg-2);
+}

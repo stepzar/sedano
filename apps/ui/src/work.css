@@ -1,0 +1,736 @@
+/* ==================================================================
+   The work area — everything between a prompt and its reply.
+   ------------------------------------------------------------------
+   Ghost rows, not cards. Every kind of work (a tool, a run of tools, a
+   subagent, reasoning, a plan, updates, the harness' bookkeeping) is one quiet
+   line with the same anatomy:
+
+     [caret][icon] Label · detail — preview ··········· status · meta
+
+   Kinds are told apart by their icon and the weight of their label; depth by
+   indentation and one thin guide line. Nothing here draws a border or a box:
+   the only filled surfaces are code (a tool's input and output) and the hover.
+   ================================================================== */
+
+/* ------------------------------------------------------------------ The row */
+.wr {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  min-width: 0;
+  min-height: 30px;
+  height: auto;
+  padding: 3px 8px 3px 2px;
+  border: 0;
+  border-radius: var(--r-sm);
+  background: var(--wr-bg, transparent);
+  box-shadow: none;
+  color: var(--fg-mute);
+  font: inherit;
+  font-size: var(--ui-font-size);
+  font-weight: 400;
+  line-height: 1.35;
+  text-align: left;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+/* Buttons elsewhere lift on hover; a ghost row only warms. The hover is an
+   image over the row's own colour, so a pinned row (opaque) stays opaque. */
+button.wr:hover:not(:disabled) {
+  background-color: var(--wr-bg, transparent);
+  background-image: linear-gradient(var(--hover), var(--hover));
+  border-color: transparent;
+  color: var(--fg-2);
+}
+
+button.wr:focus-visible {
+  outline: 2px solid var(--live);
+  outline-offset: -2px;
+}
+
+.wr.static {
+  cursor: default;
+}
+
+.wr .chevron,
+.wr-slot {
+  flex: none;
+  width: 24px;
+  height: 24px;
+}
+
+.wr .chevron {
+  color: var(--fg-faint);
+}
+
+.wr:hover .chevron {
+  color: var(--fg);
+  background: var(--active);
+}
+
+.wr-icon {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  color: var(--fg-faint);
+}
+
+.wr-label {
+  flex: none;
+  color: var(--fg-2);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* The detail keeps its room first; the preview takes what is left and is the
+   first thing to give way. Both cut with an ellipsis, never mid-glyph. */
+.wr-detail {
+  flex: 0 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--fg-mute);
+}
+
+.wr-detail.mono {
+  font-size: 0.9em;
+}
+
+.wr-preview {
+  flex: 1 1 0;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--fg-faint);
+}
+
+.wr-preview::before {
+  content: '— ';
+}
+
+.wr-label + .wr-preview::before {
+  content: '';
+}
+
+.wr-fill {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.wr-status,
+.wr-meta {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--fg-faint);
+  font-size: 0.86em;
+  white-space: nowrap;
+}
+
+.wr-status.live {
+  color: var(--live);
+}
+
+.wr-status.failed {
+  color: var(--err);
+  font-weight: 500;
+}
+
+/* Expanded content: indented under the row's icon, with one thin guide line
+   down from its caret so the eye can follow where a section ends. */
+.wr-nest {
+  display: flex;
+  flex-direction: column;
+  margin-left: 13px;
+  padding: 1px 0 4px 8px;
+  border-left: 1px solid var(--line);
+}
+
+/* Prose under a row (reasoning, a plan, an update): at the label's column. */
+.wr-body {
+  margin: 0 0 4px 54px;
+  padding: 0;
+}
+
+/* ------------------------------------------------------------------ Kinds */
+/* Tools: the name at mid weight, what it ran in mono. A run of many kinds has
+   a long name ("5 tools · edit_file ×2, grep ×1, …"), which may give way too. */
+.tool .wr-label {
+  color: var(--fg-2);
+}
+
+.tool-run > .wr .wr-label {
+  flex: 0 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* …but only once the list of what the calls did has given way first. */
+.tool-run > .wr .wr-detail {
+  flex-shrink: 100;
+}
+
+.tool-io {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 2px 0 6px 32px;
+}
+
+.tool-body {
+  padding: 7px 10px;
+  border-radius: var(--r-sm);
+  background: var(--surface-2);
+  color: var(--fg-2);
+  font-family: var(--font-mono);
+  font-size: var(--mono-font-size);
+  line-height: 1.55;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.tool-body.error {
+  color: var(--err);
+  background: var(--err-soft);
+}
+
+.tool-run-more {
+  align-self: flex-start;
+  margin-left: 32px;
+  padding: 2px 6px;
+  border: 0;
+  border-radius: var(--r-xs);
+  background: transparent;
+  color: var(--fg-mute);
+  font: inherit;
+  font-size: calc(var(--ui-font-size) * 0.9);
+  cursor: pointer;
+}
+
+.tool-run-more:hover {
+  background: var(--hover);
+  color: var(--fg-2);
+}
+
+/* Subagents: the strongest label in the work area — an agent is a unit of
+   work of its own, a tool call is a step of one. */
+.subagent .subagent-type {
+  color: var(--fg);
+  font-weight: 600;
+}
+
+.subagent-desc {
+  color: var(--fg-mute);
+}
+
+.subagent[data-state='failed'] .wr-icon {
+  color: var(--err);
+}
+
+.subagent[data-state='running'] .wr-icon {
+  color: var(--live);
+}
+
+/* The moment an agent comes back, its line says so once: one sweep, not a
+   badge that sits there forever. */
+.subagent[data-state='done'] > .wr,
+.subagent[data-state='failed'] > .wr {
+  animation: wr-settle 520ms var(--ease);
+}
+
+@keyframes wr-settle {
+  from {
+    background-color: var(--live-soft);
+  }
+
+  to {
+    background-color: var(--wr-bg, transparent);
+  }
+}
+
+.subagent-detail {
+  display: grid;
+  /* One column no wider than the card: an implicit grid column sizes to its
+     content, and a row that never wraps would push it off the edge. */
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 200ms var(--ease);
+}
+
+.subagent-detail.open {
+  grid-template-rows: 1fr;
+}
+
+/* `clip`, not `hidden`: a hidden box is a scroll container, and a header
+   pinned inside one would stick to it instead of to the transcript. */
+.subagent-detail > .subagent-detail-inner {
+  min-height: 0;
+  overflow: clip;
+}
+
+.subagent-body {
+  gap: 2px;
+}
+
+.subagent-section {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 4px 0 2px;
+}
+
+.subagent-label {
+  padding-left: 8px;
+  color: var(--fg-faint);
+  font-size: calc(var(--ui-font-size) * 0.8);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.subagent-prompt {
+  padding: 0 8px;
+  color: var(--fg-mute);
+  font-size: calc(var(--ui-font-size) * 0.95);
+  line-height: 1.5;
+  white-space: pre-wrap;
+  font-family: var(--font-ui);
+}
+
+.subagent-answer {
+  padding: 0 8px;
+  color: var(--fg-2);
+  font-size: 0.95em;
+  line-height: 1.55;
+}
+
+.subagent-answer.dim {
+  color: var(--fg-mute);
+}
+
+.subagent-meta {
+  padding: 2px 8px 0;
+  color: var(--fg-faint);
+  font-size: calc(var(--ui-font-size) * 0.84);
+}
+
+/* Reasoning: a bulb and a quiet label; the thought itself is muted prose. */
+.think .wr-label {
+  color: var(--fg-mute);
+}
+
+.think .wr-preview {
+  font-style: italic;
+}
+
+.msg-thinking {
+  color: var(--fg-mute);
+  font-size: 0.95em;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+
+/* Notes — prose on the way, and live progress — are italic and muted, at the
+   icon column, with no row of their own: never a tool, never the reply. */
+.activity-note {
+  padding: 3px 8px 5px 32px;
+  color: var(--fg-mute);
+  font-size: 0.95em;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+
+.work-update.activity-note .msg-body {
+  font-style: italic;
+}
+
+.think.activity-note {
+  padding: 0;
+  font-size: inherit;
+}
+
+.activity-note .msg-thinking,
+.activity-note .msg-body {
+  color: inherit;
+  line-height: inherit;
+  white-space: pre-wrap;
+}
+
+.activity-note :is(strong, h1, h2, h3, h4, h5, h6),
+.msg-thinking :is(strong, h1, h2, h3, h4, h5, h6) {
+  color: inherit;
+  font-size: inherit;
+  font-weight: 400;
+  letter-spacing: normal;
+}
+
+.activity-note :is(h1, h2, h3, h4, h5, h6) {
+  margin: 0;
+}
+
+.activity-note :is(.msg-thinking, .msg-body) > :first-child {
+  margin-top: 0;
+}
+
+.activity-note :is(.msg-thinking, .msg-body) > :last-child {
+  margin-bottom: 0;
+}
+
+/* Plans: "Plan · 2/4 done — what is being done now", the list one click away. */
+.plan-list {
+  margin-top: 0;
+  list-style: none;
+}
+
+.plan-item {
+  display: flex;
+  gap: 8px;
+  color: var(--fg-2);
+  font-size: var(--ui-font-size);
+  line-height: 1.6;
+}
+
+.plan-item.done {
+  color: var(--fg-mute);
+  text-decoration: line-through;
+}
+
+.plan-item.active {
+  color: var(--fg);
+  font-weight: 500;
+}
+
+.plan-mark {
+  flex: none;
+  width: 1em;
+  color: var(--fg-mute);
+  text-align: center;
+}
+
+.plan-block.proposed .msg-body {
+  color: var(--fg-2);
+}
+
+/* Bookkeeping — the harness notices — is the quietest line of all. */
+.turn-notes-head,
+.turn-notes-head .wr-label {
+  color: var(--fg-faint);
+  font-weight: 400;
+}
+
+.turn-notes-body {
+  gap: 0;
+  animation: wr-open 160ms var(--ease);
+}
+
+.turn-notes-body .line-result {
+  padding: 3px 8px 3px 32px;
+  font-size: calc(var(--ui-font-size) * 0.95);
+}
+
+/* A harness line in the work: its icon, its tag, the words — wrapped, not cut,
+   because stderr is the one line whose every word may matter. */
+.line-system {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 3px 8px 3px 2px;
+  color: var(--fg-faint);
+  font-size: var(--ui-font-size);
+  line-height: 1.45;
+}
+
+.line-system .wr-slot {
+  height: 1px;
+}
+
+.line-system .wr-icon {
+  height: calc(var(--ui-font-size) * 1.45);
+}
+
+.line-system-text {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.system-tag {
+  margin-right: 7px;
+  color: var(--fg-faint);
+}
+
+/* Files: the group is a row like any other; each file is a quieter row in it. */
+.file-group-head .wr-detail {
+  color: var(--fg-faint);
+}
+
+.file-group-body {
+  gap: 0;
+}
+
+.file-card {
+  border-radius: var(--r-sm);
+}
+
+.file-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 30px;
+  padding: 3px 8px 3px 2px;
+  border-radius: var(--r-sm);
+  font-size: var(--ui-font-size);
+}
+
+.file-head:hover {
+  background: var(--hover);
+}
+
+.file-head:hover .chevron {
+  color: var(--fg);
+  background: var(--active);
+}
+
+.file-body {
+  margin: 2px 0 6px 32px;
+}
+
+/* ------------------------------------------------------------------ The turn */
+.turn-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding-left: 10px;
+}
+
+/* `clip`, for the same reason as the subagent fold: the rows inside must pin
+   against the transcript, not against this box. */
+.turn-fold {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.turn-fold-inner {
+  min-height: 0;
+  overflow: clip;
+}
+
+/* A row appearing mid-turn slides in rather than popping. */
+.turn-body > .wi {
+  animation: wr-open 180ms var(--ease);
+}
+
+@keyframes wr-open {
+  from {
+    opacity: 0;
+    transform: translateY(-3px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ------------------------------------------------------------------ Pinned headers */
+/* A section taller than the view keeps its header at the top while you read
+   inside it, so it can be folded in one click from wherever you are. Two
+   levels at most: the turn's own header, then the open row directly in its
+   work (a subagent, a run, the notices) right under it. Deeper rows scroll
+   away with their parent — a stack of four headers would be a page of its
+   own. The height of the first level is fixed so the second knows where to
+   stop. */
+.turn-work {
+  --turn-head-h: max(30px, calc(var(--ui-font-size) * 1.35 + 10px));
+  --pin-2: var(--turn-head-h);
+}
+
+.turn-work > .turn-head {
+  min-height: var(--turn-head-h);
+}
+
+.turn-work > .turn-head > .turn-toggle {
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+
+.turn-work.open > .turn-head {
+  position: sticky;
+  top: 0;
+  z-index: 6;
+  isolation: isolate;
+  background: var(--surface);
+}
+
+/* An opaque band the width of the view behind the pinned header, so work
+   scrolled under it never shows beside it. A shadow clipped to the header's
+   own height rather than a pseudo-element: a shadow is paint, not layout, so
+   it widens nothing. */
+.turn-work.open > .turn-head {
+  box-shadow: 0 0 0 100vmax var(--surface);
+  clip-path: inset(0 -100vmax);
+}
+
+.turn-body > .wi.open > .wr {
+  --wr-bg: var(--surface);
+  position: sticky;
+  top: var(--pin-2);
+  z-index: 4;
+}
+
+/* ------------------------------------------------------------------ Inline code */
+/* `main`, `~/.ssh/config`: a quiet neutral pill, a little smaller so it sits on
+   the x-height of the prose around it. Cloned across a line break so a long
+   path that wraps is two pills, not one torn in half. Fenced blocks are `pre`
+   and untouched. */
+.md-code {
+  padding: 0.1em 0.36em;
+  border-radius: var(--r-code);
+  background: var(--surface-3);
+  color: var(--fg);
+  font-family: var(--font-mono);
+  font-size: 0.86em;
+  overflow-wrap: anywhere;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+pre .md-code {
+  padding: 0;
+  background: none;
+  font-size: inherit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .turn-body > .wi,
+  .turn-notes-body,
+  .subagent[data-state='done'] > .wr,
+  .subagent[data-state='failed'] > .wr {
+    animation: none;
+  }
+
+  .subagent-detail {
+    transition: none;
+  }
+}
+
+/* ------------------------------------------------------------------ The prompt and the reply */
+/* "Show more" points down, "Show less" points up — and it is a ghost control,
+   not a raised pill. */
+.msg-expand {
+  box-shadow: none;
+}
+
+.msg-expand:hover:not(:disabled) {
+  background: var(--hover);
+  border-color: transparent;
+}
+
+.msg-expand .chevron svg {
+  transform: none;
+}
+
+.msg-expand .chevron.open svg {
+  transform: rotate(180deg);
+}
+
+/* A thumbnail is a tile you can see, not a white box: a neutral a step
+   darker than any surface it sits on, no outline, in both themes. */
+.attach {
+  border: 0;
+  background: color-mix(in srgb, var(--fg) 14%, var(--surface));
+}
+
+/* ------------------------------------------------------------------ What the turn said */
+/* Every message of the turn to the user, in order, under the work: each one
+   after the first is marked with when it arrived — a small time and a
+   hairline — so three messages read as three moments, not one wall. */
+.turn-output {
+  display: flex;
+  flex-direction: column;
+}
+
+.output-sep {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 14px 0 8px;
+  color: var(--fg-faint);
+  font-size: calc(var(--ui-font-size) * 0.82);
+}
+
+.output-sep::after {
+  content: '';
+  flex: 1 1 auto;
+  border-top: 1px solid var(--line-soft);
+}
+
+/* The one moving thing of a running turn, after the latest thing it said. */
+.turn-live {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 30px;
+  padding: 2px 0;
+  font-size: var(--ui-font-size);
+  animation: wr-open 180ms var(--ease);
+}
+
+/* ------------------------------------------------------------------ Long text, clamped */
+/* A few lines and a fade, then "Show more" — the same control as a long prompt,
+   instead of a box with a scrollbar of its own. Clipped vertically only, so a
+   wide line still wraps rather than hides. */
+.clamp.clamped {
+  max-height: calc(var(--clamp-lines, 4) * 1lh);
+  overflow-x: visible;
+  overflow-y: clip;
+}
+
+.clamp-wrap.is-cut > .clamp {
+  -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 1.6lh), transparent);
+  mask-image: linear-gradient(to bottom, #000 calc(100% - 1.6lh), transparent);
+}
+
+/* A padded box (a tool's output) keeps its padding under the clamp. */
+.tool-body.clamp.clamped {
+  max-height: calc(var(--clamp-lines, 8) * 1lh + 14px);
+}
+
+.clamp-toggle {
+  margin: 2px 0 0 2px;
+}
+
+/* ------------------------------------------------------------ File links */
+/* A path that opens its file: quiet until pointed at, then underlined the way
+   a link is. It keeps the colour of the text it sits in. */
+.file-link {
+  cursor: pointer;
+  border-radius: 3px;
+  text-decoration: underline dotted transparent;
+  text-underline-offset: 3px;
+}
+
+.file-link:hover,
+.file-link:focus-visible {
+  color: var(--fg);
+  text-decoration-color: currentColor;
+}
+
+.file-link:focus-visible {
+  outline: 2px solid var(--live);
+  outline-offset: 1px;
+}
+
+.file-link .md-code {
+  cursor: pointer;
+}
+
+.file-link:hover .md-code {
+  text-decoration: underline dotted;
+  text-underline-offset: 3px;
+}

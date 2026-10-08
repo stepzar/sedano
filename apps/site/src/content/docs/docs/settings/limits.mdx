@@ -1,0 +1,58 @@
+---
+title: Limits and usage
+description: Where each harness's usage limits come from, which readers use your stored credentials, and what the limits panel shows.
+sidebar:
+  order: 3
+---
+
+import Shot from '../../../../components/Shot.astro';
+
+The **Limits** bar at the bottom of the window shows the usage windows of each
+harness that has them. Click it to open the panel.
+
+<Shot
+  src="/shots/limits.webp"
+  alt="The limits panel open above the status bar: plan names and 5-hour and 7-day bars with reset times for Claude Code, Command Code and Codex."
+  width={946}
+  height={856}
+  maxWidth="420px"
+/>
+
+## Where the numbers come from
+
+| Harness | Source | Uses your credentials |
+|---|---|---|
+| Claude Code | rate-limit events in the running session; otherwise, if you turn its reader on, Anthropic's OAuth usage endpoint | only with the reader on: it reads Claude Code's OAuth token from the macOS keychain (or `~/.claude/.credentials.json`) |
+| Codex | the newest rollout files in `~/.codex/sessions` | no, local files only |
+| Command Code | Command Code's account API, if you turn its reader on | only with the reader on: the API key in `~/.commandcode/auth.json` |
+| opencode | `opencode stats` (local spend, not a quota) | no |
+| Gemini CLI, Grok, Freebuff | none | the panel says **No Usage API** |
+
+A harness that reports its own limits while it runs always wins over a reader,
+because that reading needs no credentials. Readers cache their results and back
+off when an endpoint throttles them. A good reading is kept for a while with its
+age shown ("Read 2m ago"), rather than replaced by an empty bar.
+
+The credentials are only sent to the vendor that issued them. Sedano does not
+copy or store them.
+
+## Turning the credential readers on
+
+The two readers that use a stored credential (Claude Code and Command Code) are
+**off by default**. Turn each one on in **Settings > Advanced > Account usage
+readers**; every switch names the credential it reads and the endpoint it sends
+it to, and the choice survives a restart. Until a reader is on, Sedano does not
+read that credential at all, and the panel marks that harness's usage as off,
+not as zero. Turning a reader off again drops the numbers it read.
+
+## Refreshing
+
+**Refresh now** in the panel, or **Settings > Advanced > Usage limits >
+Refresh now**, asks again immediately (still respecting a short minimum
+interval so repeated clicks do not get the account throttled).
+
+## Unknown is not zero
+
+A harness that publishes no cost shows no price, and a context ring with no
+reported window is marked unknown. See
+[Concepts](/docs/getting-started/concepts/#unknown-is-not-zero).

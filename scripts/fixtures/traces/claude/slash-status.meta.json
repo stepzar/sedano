@@ -1,0 +1,30 @@
+{
+  "harness": "claude",
+  "scenario": "slash-status",
+  "args": [
+    "--permission-prompt-tool",
+    "stdio",
+    "--print",
+    "--input-format",
+    "stream-json",
+    "--output-format",
+    "stream-json",
+    "--include-partial-messages",
+    "--verbose",
+    "--session-id",
+    "ee121457-94f8-435f-8892-1c99f9022560",
+    "--model",
+    "claude-haiku-4-5-20251001",
+    "--permission-mode",
+    "default"
+  ],
+  "model": "claude-haiku-4-5-20251001",
+  "permissionMode": "default",
+  "prompt": "/status",
+  "capturedAt": "2026-09-22T08:10:41.371Z",
+  "outcome": "ok",
+  "note": "",
+  "frames": 16,
+  "durationMs": 2131,
+  "transcript": "slash-status.transcript.jsonl"
+}

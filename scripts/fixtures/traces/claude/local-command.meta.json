@@ -1,0 +1,56 @@
+{
+  "harness": "claude",
+  "scenario": "local-command",
+  "outcome": "ok",
+  "source": "records lifted verbatim out of real transcripts under ~/.claude/projects on the machine this was assembled on, not synthesised and not produced by capture-traces.ts (which has never captured claude). Only the fields that identify a person's conversation were rewritten: cwd, sessionId, timestamp, and the sidechain/request ids. Every `content` string is byte-for-byte what the CLI wrote, escape sequences included.",
+  "why": "the two defects a person hit: a slash command rendered as the words \"Local command\", twice, and `\"model\": \"<synthetic>\"` adopted as the session's model. Both are shapes no hand-written fixture in this repo had ever seen.",
+  "records": [
+    {
+      "id": "untagged-call",
+      "version": "2.1.261",
+      "entrypoint": "sdk-cli",
+      "shape": "system/local_command, content is the raw text the person typed (\"/status\") with no tags at all",
+      "note": "this is the exact record sedano itself produced when the user reported the bug — entrypoint sdk-cli is this app"
+    },
+    {
+      "id": "untagged-out",
+      "version": "2.1.261",
+      "entrypoint": "sdk-cli",
+      "shape": "system/local_command, content is <local-command-stdout>…</local-command-stdout>",
+      "note": "the second half of the same pair: together these two records are the two \"Local command\" lines"
+    },
+    {
+      "id": "tagged-call",
+      "version": "2.1.237",
+      "entrypoint": "cli",
+      "shape": "system/local_command, content is <command-name>/<command-message>/<command-args>, indented by the CLI's own template"
+    },
+    {
+      "id": "ansi-out",
+      "version": "2.1.237",
+      "entrypoint": "cli",
+      "shape": "system/local_command stdout carrying real terminal escapes (ESC[1m … ESC[22m)",
+      "note": "proves stripAnsi is answering real bytes rather than a hypothesis"
+    },
+    {
+      "id": "legacy-user",
+      "version": "2.1.257",
+      "entrypoint": "sdk-ts",
+      "shape": "type user, message.content a plain string carrying the same command tags",
+      "note": "still emitted by current CLIs; the `user` branch reads message.content as an array, so this shape rendered as nothing at all"
+    },
+    {
+      "id": "legacy-empty",
+      "version": "2.1.128",
+      "entrypoint": "claude-desktop",
+      "shape": "the same user shape with <command-args></command-args> empty"
+    },
+    {
+      "id": "synthetic",
+      "version": "2.1.257",
+      "entrypoint": "sdk-ts",
+      "shape": "type assistant whose message.model is the literal string <synthetic>, stop_reason stop_sequence, an all-zero usage block, and isApiErrorMessage/apiErrorStatus/quotaLimits alongside",
+      "note": "the text is a rate-limit notice the CLI wrote itself. The all-zero usage is what normalizeUsage must keep refusing: no model ran, so no tokens were spent and none may be claimed."
+    }
+  ]
+}

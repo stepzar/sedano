@@ -1,0 +1,225 @@
+{
+  "event:api_retry": {
+    "handled": "commandcode/session.ts: handleEvent \u2192 api_retry"
+  },
+  "event:auth_required": {
+    "ignored": "an interactive-TUI action or setup step of the CLI, not an NDJSON AgentEvent (the extractor is a deliberate superset)"
+  },
+  "event:branch_summary": {
+    "ignored": "an interactive-TUI action or setup step of the CLI, not an NDJSON AgentEvent (the extractor is a deliberate superset)"
+  },
+  "event:compaction_done": {
+    "ignored": "no timeline counterpart yet; recorded at runtime if it appears in a real run"
+  },
+  "event:compaction_outcome": {
+    "ignored": "no timeline counterpart yet; recorded at runtime if it appears in a real run"
+  },
+  "event:compaction_start": {
+    "ignored": "no timeline counterpart yet; recorded at runtime if it appears in a real run"
+  },
+  "event:complete_tools": {
+    "ignored": "an interactive-TUI action or setup step of the CLI, not an NDJSON AgentEvent (the extractor is a deliberate superset)"
+  },
+  "event:config_setting_changed": {
+    "ignored": "no timeline counterpart yet; recorded at runtime if it appears in a real run"
+  },
+  "event:continuation_recovery": {
+    "ignored": "no timeline counterpart yet; recorded at runtime if it appears in a real run"
+  },
+  "event:custom_message": {
+    "ignored": "an interactive-TUI action or setup step of the CLI, not an NDJSON AgentEvent (the extractor is a deliberate superset)"
+  },
+  "event:effort_change": {
+    "ignored": "an interactive-TUI action or setup step of the CLI, not an NDJSON AgentEvent (the extractor is a deliberate superset)"
+  },
+  "event:interaction_requested": {
+    "ignored": "no timeline counterpart yet; recorded at runtime if it appears in a real run"
+  },
+  "event:interaction_resolved": {
+    "ignored": "no timeline counterpart yet; recorded at runtime if it appears in a real run"
+  },
+  "event:message_end": {
+    "handled": "commandcode/session.ts: handleEvent \u2192 message_end"
+  },
+  "event:message_start": {
+    "ignored": "streaming bookkeeping; text arrives as text_delta and is committed at message_end"
+  },
+  "event:message_update": {
+    "ignored": "streaming bookkeeping; text arrives as text_delta and is committed at message_end"
+  },
+  "event:mod_error": {
+    "ignored": "no timeline counterpart yet; recorded at runtime if it appears in a real run"
+  },
+  "event:model_change": {
+    "ignored": "an interactive-TUI action or setup step of the CLI, not an NDJSON AgentEvent (the extractor is a deliberate superset)"
+  },
+  "event:model_request_end": {
+    "handled": "commandcode/session.ts: handleEvent \u2192 model_request_end"
+  },
+  "event:model_request_start": {
+    "handled": "commandcode/session.ts: handleEvent \u2192 model_request_start"
+  },
+  "event:model_trace": {
+    "ignored": "no timeline counterpart yet; recorded at runtime if it appears in a real run"
+  },
+  "event:permission_mode_changed": {
+    "ignored": "no timeline counterpart yet; recorded at runtime if it appears in a real run"
+  },
+  "event:replayed_setup": {
+    "ignored": "an interactive-TUI action or setup step of the CLI, not an NDJSON AgentEvent (the extractor is a deliberate superset)"
+  },
+  "event:run_end": {
+    "handled": "commandcode/session.ts: handleEvent \u2192 run_end"
+  },
+  "event:run_error": {
+    "handled": "commandcode/session.ts: handleEvent \u2192 run_error"
+  },
+  "event:run_start": {
+    "handled": "commandcode/session.ts: handleEvent \u2192 run_start"
+  },
+  "event:select_effort": {
+    "ignored": "an interactive-TUI action or setup step of the CLI, not an NDJSON AgentEvent (the extractor is a deliberate superset)"
+  },
+  "event:select_location": {
+    "ignored": "an interactive-TUI action or setup step of the CLI, not an NDJSON AgentEvent (the extractor is a deliberate superset)"
+  },
+  "event:select_method": {
+    "ignored": "an interactive-TUI action or setup step of the CLI, not an NDJSON AgentEvent (the extractor is a deliberate superset)"
+  },
+  "event:select_model": {
+    "ignored": "an interactive-TUI action or setup step of the CLI, not an NDJSON AgentEvent (the extractor is a deliberate superset)"
+  },
+  "event:server_tool_result": {
+    "ignored": "no timeline counterpart yet; recorded at runtime if it appears in a real run"
+  },
+  "event:session_info": {
+    "ignored": "an interactive-TUI action or setup step of the CLI, not an NDJSON AgentEvent (the extractor is a deliberate superset)"
+  },
+  "event:session_shutdown": {
+    "ignored": "an interactive-TUI action or setup step of the CLI, not an NDJSON AgentEvent (the extractor is a deliberate superset)"
+  },
+  "event:session_start": {
+    "ignored": "an interactive-TUI action or setup step of the CLI, not an NDJSON AgentEvent (the extractor is a deliberate superset)"
+  },
+  "event:session_titled": {
+    "ignored": "no timeline counterpart yet; recorded at runtime if it appears in a real run"
+  },
+  "event:set_agent_type": {
+    "ignored": "an interactive-TUI action or setup step of the CLI, not an NDJSON AgentEvent (the extractor is a deliberate superset)"
+  },
+  "event:set_cc_tool_definition": {
+    "ignored": "an interactive-TUI action or setup step of the CLI, not an NDJSON AgentEvent (the extractor is a deliberate superset)"
+  },
+  "event:set_sys_prompt": {
+    "ignored": "an interactive-TUI action or setup step of the CLI, not an NDJSON AgentEvent (the extractor is a deliberate superset)"
+  },
+  "event:setup_step": {
+    "ignored": "an interactive-TUI action or setup step of the CLI, not an NDJSON AgentEvent (the extractor is a deliberate superset)"
+  },
+  "event:skill_loaded": {
+    "ignored": "no timeline counterpart yet; recorded at runtime if it appears in a real run"
+  },
+  "event:step_start": {
+    "ignored": "an interactive-TUI action or setup step of the CLI, not an NDJSON AgentEvent (the extractor is a deliberate superset)"
+  },
+  "event:stream_restart": {
+    "ignored": "no timeline counterpart yet; recorded at runtime if it appears in a real run"
+  },
+  "event:subagent_progress": {
+    "ignored": "headless runs have no subagent protocol yet; recorded at runtime if one appears"
+  },
+  "event:subagent_start": {
+    "ignored": "headless runs have no subagent protocol yet; recorded at runtime if one appears"
+  },
+  "event:subagent_stop": {
+    "ignored": "headless runs have no subagent protocol yet; recorded at runtime if one appears"
+  },
+  "event:submit_agent_type": {
+    "ignored": "an interactive-TUI action or setup step of the CLI, not an NDJSON AgentEvent (the extractor is a deliberate superset)"
+  },
+  "event:submit_cc_tool_definition": {
+    "ignored": "an interactive-TUI action or setup step of the CLI, not an NDJSON AgentEvent (the extractor is a deliberate superset)"
+  },
+  "event:submit_sys_prompt": {
+    "ignored": "an interactive-TUI action or setup step of the CLI, not an NDJSON AgentEvent (the extractor is a deliberate superset)"
+  },
+  "event:text_delta": {
+    "handled": "commandcode/session.ts: handleEvent \u2192 text_delta"
+  },
+  "event:thinking_delta": {
+    "handled": "commandcode/session.ts: handleEvent \u2192 thinking_delta"
+  },
+  "event:thinking_end": {
+    "handled": "commandcode/session.ts: handleEvent \u2192 thinking_end"
+  },
+  "event:thinking_start": {
+    "ignored": "streaming bookkeeping; text arrives as text_delta and is committed at message_end"
+  },
+  "event:timed_out": {
+    "ignored": "no timeline counterpart yet; recorded at runtime if it appears in a real run"
+  },
+  "event:toggle_category": {
+    "ignored": "an interactive-TUI action or setup step of the CLI, not an NDJSON AgentEvent (the extractor is a deliberate superset)"
+  },
+  "event:toggle_tool": {
+    "ignored": "an interactive-TUI action or setup step of the CLI, not an NDJSON AgentEvent (the extractor is a deliberate superset)"
+  },
+  "event:tool_completed": {
+    "handled": "commandcode/session.ts: handleEvent \u2192 tool_completed"
+  },
+  "event:tool_denied": {
+    "handled": "commandcode/session.ts: handleEvent \u2192 tool_denied"
+  },
+  "event:tool_errored": {
+    "handled": "commandcode/session.ts: handleEvent \u2192 tool_errored"
+  },
+  "event:tool_hook_blocked": {
+    "handled": "commandcode/session.ts: handleEvent \u2192 tool_hook_blocked"
+  },
+  "event:tool_hooks": {
+    "ignored": "no timeline counterpart yet; recorded at runtime if it appears in a real run"
+  },
+  "event:tool_input_coerced": {
+    "ignored": "no timeline counterpart yet; recorded at runtime if it appears in a real run"
+  },
+  "event:tool_input_repaired": {
+    "ignored": "no timeline counterpart yet; recorded at runtime if it appears in a real run"
+  },
+  "event:tool_queued": {
+    "handled": "commandcode/session.ts: handleEvent \u2192 tool_queued"
+  },
+  "event:tool_result": {
+    "ignored": "no timeline counterpart yet; recorded at runtime if it appears in a real run"
+  },
+  "event:tool_running": {
+    "handled": "commandcode/session.ts: handleEvent \u2192 tool_running"
+  },
+  "event:tool_update": {
+    "ignored": "no timeline counterpart yet; recorded at runtime if it appears in a real run"
+  },
+  "event:tool_use": {
+    "ignored": "no timeline counterpart yet; recorded at runtime if it appears in a real run"
+  },
+  "event:turn_end": {
+    "handled": "commandcode/session.ts: handleEvent \u2192 turn_end"
+  },
+  "event:turn_start": {
+    "handled": "commandcode/session.ts: handleEvent \u2192 turn_start"
+  },
+  "frame:event": {
+    "handled": "commandcode/session.ts: parseLine / handleResult"
+  },
+  "frame:result": {
+    "handled": "commandcode/session.ts: parseLine / handleResult"
+  },
+  "result:error": {
+    "handled": "commandcode/session.ts: parseLine / handleResult"
+  },
+  "result:max_turns": {
+    "handled": "commandcode/session.ts: handleResult",
+    "generic": "every result subtype becomes the result subtype; the outcome is mapped by resultOutcomeFor"
+  },
+  "result:success": {
+    "handled": "commandcode/session.ts: parseLine / handleResult"
+  }
+}

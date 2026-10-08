@@ -1,0 +1,59 @@
+---
+import Base from '../layouts/Base.astro';
+import Celery from '../components/doodles/Celery.astro';
+import Note from '../components/doodles/Note.astro';
+---
+
+<Base title="Not found · Sedano" description="This page does not exist.">
+  <section class="wrap lost" aria-labelledby="lost-title">
+    <div class="art">
+      <Celery size={160} />
+      <Note class="what">hm, nothing here</Note>
+    </div>
+    <h1 id="lost-title">Page not found</h1>
+    <p class="lead">The link is wrong or the page moved.</p>
+    <p class="actions">
+      <a class="btn btn-primary" href="/">Back home</a>
+      <a class="btn btn-secondary" href="/docs/">Read the docs</a>
+    </p>
+    <p class="aside">// 404</p>
+  </section>
+</Base>
+
+<style>
+  .lost {
+    padding-top: var(--s-16);
+    text-align: center;
+    display: grid;
+    justify-items: center;
+    gap: var(--s-4);
+  }
+  .art {
+    position: relative;
+    color: var(--ink);
+    transform: rotate(-4deg);
+  }
+  .what {
+    position: absolute;
+    left: 100%;
+    top: 12px;
+    white-space: nowrap;
+  }
+  @media (max-width: 480px) {
+    .what {
+      left: 70%;
+      top: -18px;
+    }
+  }
+  h1 {
+    font-size: 2rem;
+    margin-top: var(--s-4);
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--s-3);
+    margin-top: var(--s-4);
+  }
+</style>

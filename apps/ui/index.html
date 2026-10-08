@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#212121" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+    <!-- Home-screen app on iPhone (see docs/remote.md). -->
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Sedano" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <title>sedano</title>
+    <script>
+      // Apply the stored appearance before the first paint so switching between
+      // light and dark never flashes the wrong background.
+      try {
+        var raw = localStorage.getItem('sedano.settings')
+        var s = raw ? JSON.parse(raw) : {}
+        // A phone keeps its own appearance (see store.ts#isPhoneProfile).
+        if (matchMedia('(pointer: coarse)').matches && Math.min(screen.width, screen.height) <= 820) {
+          var phone = JSON.parse(localStorage.getItem('sedano.settings.mobile') || '{}')
+          s = Object.assign({}, s, { uiFontSize: 15, contentFontSize: 16 }, phone)
+        }
+        var dark =
+          s.theme === 'dark' ||
+          ((s.theme === 'system' || !s.theme) && matchMedia('(prefers-color-scheme: dark)').matches)
+        var root = document.documentElement
+        root.dataset.theme = dark ? 'dark' : 'light'
+        root.dataset.themeChoice = s.theme || 'system'
+        // The status bar is the top bar's colour, like a native app: dark runs
+        // the top bar under a translucent status bar (its clock is white), light
+        // keeps iOS's own white one (its clock is black) — the top bar is white
+        // too, so either way there is one surface and no seam.
+        var bar = document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]')
+        if (bar) bar.setAttribute('content', dark ? 'black-translucent' : 'default')
+        if (s.uiFontSize) root.style.setProperty('--ui-font-size', s.uiFontSize + 'px')
+        if (s.contentFontSize) {
+          root.style.setProperty('--content-font-size', s.contentFontSize + 'px')
+          root.style.setProperty('--mono-font-size', Math.max(10, s.contentFontSize - 1.5) + 'px')
+        }
+      } catch (error) {
+        /* first run: defaults are fine */
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

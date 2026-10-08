@@ -1,0 +1,185 @@
+# Builds the macOS app and drafts a GitHub release with it (docs/release.md).
+#
+# Push a tag `vX.Y.Z` that matches package.json, or run it by hand. The result
+# is always a *draft*: nothing reaches users — neither the download link nor the
+# in-app updater, which reads `latest.json` from the latest *published*
+# release — until a person has smoke-tested the build and pressed Publish.
+#
+# Signing is decided by which secrets exist, so this file does not change when
+# the Apple Developer account arrives:
+#   - no APPLE_CERTIFICATE        → ad-hoc signature ("-"), not notarized; users
+#                                   open it once with "Open Anyway".
+#   - APPLE_CERTIFICATE + identity → Developer ID signature, and notarization
+#                                   when App Store Connect API keys (or an Apple
+#                                   ID + app password + team id) are set too.
+# The updater key (TAURI_SIGNING_PRIVATE_KEY) is required either way: without
+# it there is no `.sig`, and the installed apps would refuse the update.
+name: release
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+# One release build per ref at a time; a second tag push waits instead of
+# racing the first one for the same draft.
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions: {}
+
+jobs:
+  macos:
+    name: macOS (${{ matrix.target }})
+    strategy:
+      fail-fast: true
+      matrix:
+        include:
+          # Apple Silicon. For Intel add:
+          #   - { target: x86_64-apple-darwin, arch: x64 }
+          # (bun cross-compiles the sidecar; the tauri-action merges both into
+          # one latest.json). See docs/release.md, "Intel".
+          - { target: aarch64-apple-darwin, arch: aarch64 }
+    runs-on: macos-latest
+    timeout-minutes: 60
+    permissions:
+      # Creating the draft release and uploading its assets.
+      contents: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2
+        with:
+          # The same bun as ci.yml: the sidecar shipped is the server the gates
+          # tested. It must be >= 1.2.4 — older `bun build --compile` output
+          # fails `codesign` strict validation, so no signed build could exist.
+          bun-version: 1.2.23
+
+      - uses: dtolnay/rust-toolchain@89b12181fb390509a0842a86cc55eeb8eb928c1d # stable
+        with:
+          toolchain: stable
+          targets: ${{ matrix.target }}
+
+      - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6 # v2
+        with:
+          workspaces: apps/desktop/src-tauri -> target
+
+      - run: bun install --frozen-lockfile
+
+      # Refuse a release that would be broken on arrival, before spending the
+      # build on it.
+      - name: release preconditions
+        env:
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          REF_TYPE: ${{ github.ref_type }}
+          REF_NAME: ${{ github.ref_name }}
+        run: |
+          bun run check:version
+          version=$(bun -e 'console.log((await Bun.file("package.json").json()).version)')
+          if [ "$REF_TYPE" = tag ] && [ "$REF_NAME" != "v$version" ]; then
+            echo "::error::tag $REF_NAME does not match package.json version $version (run bun scripts/bump-version.ts first)"
+            exit 1
+          fi
+          if grep -q PLACEHOLDER apps/desktop/src-tauri/tauri.conf.json; then
+            echo "::error::plugins.updater.pubkey in tauri.conf.json is still the placeholder (docs/release.md, 'The updater key')"
+            exit 1
+          fi
+          if [ -z "$TAURI_SIGNING_PRIVATE_KEY" ]; then
+            echo "::error::the TAURI_SIGNING_PRIVATE_KEY secret is missing: the update could not be signed"
+            exit 1
+          fi
+          echo "VERSION=$version" >> "$GITHUB_ENV"
+          # Keep the runner's paths out of the binary (see scripts/desktop-build.ts).
+          # The last matching prefix wins, so the checkout comes after the home.
+          echo "RUSTFLAGS=--remap-path-prefix=$HOME=~ --remap-path-prefix=$GITHUB_WORKSPACE=sedano" >> "$GITHUB_ENV"
+
+      # Only the Apple variables that have a value reach the build: Tauri reads
+      # an empty APPLE_CERTIFICATE as "import this certificate" and fails.
+      - name: signing mode
+        env:
+          APPLE_CERTIFICATE: ${{ secrets.APPLE_CERTIFICATE }}
+          APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
+          APPLE_SIGNING_IDENTITY: ${{ secrets.APPLE_SIGNING_IDENTITY }}
+          APPLE_API_ISSUER: ${{ secrets.APPLE_API_ISSUER }}
+          APPLE_API_KEY: ${{ secrets.APPLE_API_KEY }}
+          APPLE_API_PRIVATE_KEY: ${{ secrets.APPLE_API_PRIVATE_KEY }}
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+        run: |
+          export_if_set() {
+            local name=$1 value=$2
+            [ -n "$value" ] || return 0
+            local delimiter
+            delimiter="EOF_$(uuidgen)"
+            { echo "$name<<$delimiter"; echo "$value"; echo "$delimiter"; } >> "$GITHUB_ENV"
+          }
+          if [ -n "$APPLE_CERTIFICATE" ] && [ -n "$APPLE_SIGNING_IDENTITY" ]; then
+            export_if_set APPLE_CERTIFICATE "$APPLE_CERTIFICATE"
+            export_if_set APPLE_CERTIFICATE_PASSWORD "$APPLE_CERTIFICATE_PASSWORD"
+            export_if_set APPLE_SIGNING_IDENTITY "$APPLE_SIGNING_IDENTITY"
+            if [ -n "$APPLE_API_ISSUER" ] && [ -n "$APPLE_API_KEY" ] && [ -n "$APPLE_API_PRIVATE_KEY" ]; then
+              key_path="$RUNNER_TEMP/AuthKey_$APPLE_API_KEY.p8"
+              printf '%s\n' "$APPLE_API_PRIVATE_KEY" > "$key_path"
+              export_if_set APPLE_API_ISSUER "$APPLE_API_ISSUER"
+              export_if_set APPLE_API_KEY "$APPLE_API_KEY"
+              export_if_set APPLE_API_KEY_PATH "$key_path"
+              echo "::notice::Developer ID signing, notarized with an App Store Connect API key"
+            elif [ -n "$APPLE_ID" ] && [ -n "$APPLE_PASSWORD" ] && [ -n "$APPLE_TEAM_ID" ]; then
+              export_if_set APPLE_ID "$APPLE_ID"
+              export_if_set APPLE_PASSWORD "$APPLE_PASSWORD"
+              export_if_set APPLE_TEAM_ID "$APPLE_TEAM_ID"
+              echo "::notice::Developer ID signing, notarized with an Apple ID"
+            else
+              echo "::warning::Developer ID signing WITHOUT notarization: Gatekeeper will still block the first launch"
+            fi
+          else
+            echo "APPLE_SIGNING_IDENTITY=-" >> "$GITHUB_ENV"
+            echo "::notice::ad-hoc signing (no Apple Developer certificate): not notarized, users need Open Anyway"
+          fi
+
+      - name: build and draft the release
+        id: tauri
+        uses: tauri-apps/tauri-action@1deb371b0cd8bd54025b384f1cd735e725c4060f # v1.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
+        with:
+          projectPath: .
+          args: --target ${{ matrix.target }} --config apps/desktop/src-tauri/tauri.release.conf.json
+          tagName: v__VERSION__
+          releaseName: Sedano v__VERSION__
+          releaseBody: See docs/release.md for the smoke test before publishing.
+          releaseDraft: true
+          prerelease: false
+          uploadUpdaterJson: true
+
+      # `releases/latest/download/Sedano_aarch64.dmg` is the link the website
+      # and README can use forever; the versioned DMG stays next to it. By
+      # release id, because a draft cannot be looked up by its tag; replaced
+      # on a re-run.
+      - name: version-free DMG name
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          RELEASE_ID: ${{ steps.tauri.outputs.releaseId }}
+          TARGET: ${{ matrix.target }}
+          STABLE_NAME: Sedano_${{ matrix.arch }}.dmg
+        run: |
+          dmg=$(find apps/desktop/src-tauri/target/"$TARGET"/release/bundle/dmg -maxdepth 1 -name '*.dmg' 2>/dev/null | head -n 1)
+          if [ -z "$dmg" ] || [ -z "$RELEASE_ID" ]; then
+            echo "::error::no DMG ($dmg) or no release id ($RELEASE_ID)"
+            exit 1
+          fi
+          existing=$(gh api "repos/$REPO/releases/$RELEASE_ID/assets" --jq ".[] | select(.name == \"$STABLE_NAME\") | .id")
+          if [ -n "$existing" ]; then
+            gh api --method DELETE "repos/$REPO/releases/assets/$existing"
+          fi
+          gh api --method POST \
+            -H 'Content-Type: application/x-apple-diskimage' \
+            "https://uploads.github.com/repos/$REPO/releases/$RELEASE_ID/assets?name=$STABLE_NAME" \
+            --input "$dmg" --jq '.browser_download_url'

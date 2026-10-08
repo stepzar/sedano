@@ -1,0 +1,30 @@
+{
+  "harness": "claude",
+  "scenario": "skill",
+  "args": [
+    "--permission-prompt-tool",
+    "stdio",
+    "--print",
+    "--input-format",
+    "stream-json",
+    "--output-format",
+    "stream-json",
+    "--include-partial-messages",
+    "--verbose",
+    "--session-id",
+    "1245429b-6e5a-489a-949e-c494232f86d2",
+    "--model",
+    "claude-haiku-4-5-20251001",
+    "--permission-mode",
+    "acceptEdits"
+  ],
+  "model": "claude-haiku-4-5-20251001",
+  "permissionMode": "acceptEdits",
+  "prompt": "Use the ping skill and then reply with exactly what it tells you to reply.",
+  "capturedAt": "2026-09-22T08:10:36.140Z",
+  "outcome": "ok",
+  "note": "",
+  "frames": 48,
+  "durationMs": 5352,
+  "transcript": "skill.transcript.jsonl"
+}

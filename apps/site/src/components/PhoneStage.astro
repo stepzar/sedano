@@ -1,0 +1,481 @@
+---
+// The landing's "From your phone" section: the copy (slot) beside the real demo
+// in its phone layout (`/demo/?embed=1&phone=1`), inside an iPhone-style mockup
+// drawn in CSS. The mockup draws the status bar, the Dynamic Island and the home
+// indicator over the iframe's edges; `embed=1&phone=1` gives the app the matching
+// safe areas, so its top bar sits under them. The iframe loads only when the
+// section nears the viewport, and like the desktop stage it takes the pointer
+// only after a click. Its theme follows the page through demo-bridge.ts.
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
+import Squiggle from './doodles/Squiggle.astro';
+import Note from './doodles/Note.astro';
+import Arrow from './doodles/Arrow.astro';
+
+const hasDemo = existsSync(join(process.cwd(), 'public', 'demo', 'index.html'));
+const shotAlt = 'Sedano on a phone: the session list as a drawer, a Claude Code transcript and the composer, sized for a thumb.';
+---
+
+<section class="phone-section" aria-labelledby="phone-title">
+  <div class="copy">
+    <h2 class="section-title" id="phone-title">From your phone<Squiggle /></h2>
+    <slot />
+    {
+      hasDemo && (
+        <p class="links">
+          <a href="/demo/?phone=1" target="_blank" rel="noopener">
+            Open the phone demo full screen
+          </a>
+        </p>
+      )
+    }
+  </div>
+
+  <figure class="phone-figure">
+    {
+      hasDemo ? (
+        <div class="fit" data-phone-fit>
+          <div class="device" data-phone-stage>
+            <i class="key action" aria-hidden="true"></i>
+            <i class="key volume-up" aria-hidden="true"></i>
+            <i class="key volume-down" aria-hidden="true"></i>
+            <i class="key power" aria-hidden="true"></i>
+            <i class="key camera" aria-hidden="true"></i>
+            <div class="bezel">
+              <div class="screen">
+                <iframe title="Interactive Sedano demo, phone layout" tabindex="-1" data-phone-demo />
+                <button class="activate" type="button" data-phone-activate aria-label="Try it: tap to play the phone demo">
+                  <span class="play">
+                    <svg viewBox="0 0 20 20" aria-hidden="true">
+                      <path d="M6.4 4.2C6 9 6.2 12.6 6.6 15.8 10 13.8 13 12 15.6 10 12.8 8 10 6 6.4 4.2Z" />
+                    </svg>
+                    Tap to try
+                  </span>
+                </button>
+                <noscript>
+                  <a class="noscript" href="/demo/?phone=1">
+                    Open the phone demo
+                  </a>
+                </noscript>
+                <div class="status" aria-hidden="true">
+                  <span class="time">9:41</span>
+                  <span class="icons">
+                    <svg class="signal" viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="0.8" /><rect x="5" y="5.5" width="3" height="6.5" rx="0.8" /><rect x="10" y="3" width="3" height="9" rx="0.8" /><rect x="15" y="0" width="3" height="12" rx="0.8" /></svg>
+                    <svg class="wifi" viewBox="0 0 16 12"><path d="M8 11.6 5.6 9.1a3.4 3.4 0 0 1 4.8 0L8 11.6Zm-4.2-4.3L2.4 5.9a8 8 0 0 1 11.2 0l-1.4 1.4a6 6 0 0 0-8.4 0ZM.9 4.4-.5 3a12.1 12.1 0 0 1 17 0l-1.4 1.4a10.1 10.1 0 0 0-14.2 0Z" /></svg>
+                    <svg class="battery" viewBox="0 0 27 13"><rect class="case" x="0.5" y="0.5" width="23" height="12" rx="3.6" /><rect x="2.2" y="2.2" width="16.6" height="8.6" rx="2" /><path class="cap" d="M25 4.4v4.2c.9-.3 1.5-1.1 1.5-2.1s-.6-1.8-1.5-2.1Z" /></svg>
+                  </span>
+                </div>
+                <div class="island" aria-hidden="true"></div>
+                <div class="home" aria-hidden="true"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div class="stills">
+          <img class="still-light" src="/shots/phone-light.webp" alt={shotAlt} width="864" height="1792" loading="lazy" />
+          <img class="still-dark" src="/shots/phone-dark.webp" alt={shotAlt} width="864" height="1792" loading="lazy" />
+        </div>
+      )
+    }
+    {
+      hasDemo && (
+        <figcaption class="phone-note">
+          <Arrow class="phone-arrow" flip />
+          <Note>yes, it is the real thing, <br />tap it</Note>
+        </figcaption>
+      )
+    }
+  </figure>
+</section>
+
+<script>
+  import { bridgeDemo, pageTheme } from '../scripts/demo-bridge';
+
+  const fit = document.querySelector<HTMLElement>('[data-phone-fit]');
+  const stage = document.querySelector<HTMLElement>('[data-phone-stage]');
+  const frame = stage?.querySelector<HTMLIFrameElement>('iframe[data-phone-demo]');
+  const overlay = stage?.querySelector<HTMLButtonElement>('[data-phone-activate]');
+
+  // The device is drawn at its real size (420×892 with the frame) and scaled to
+  // what fits: the column's width, and most of the window's height.
+  const DEVICE = { width: 420, height: 892 };
+  if (fit) {
+    const resize = () => {
+      const room = fit.parentElement?.clientWidth ?? DEVICE.width;
+      const scale = Math.min(1, room / (DEVICE.width + 16), (innerHeight * 0.86) / DEVICE.height);
+      fit.style.setProperty('--s', scale.toFixed(3));
+    };
+    resize();
+    new ResizeObserver(resize).observe(fit.parentElement ?? fit);
+    window.addEventListener('resize', resize);
+  }
+
+  if (stage && frame && overlay) {
+    const demo = bridgeDemo(frame, () => `/demo/?${new URLSearchParams({ embed: '1', phone: '1', theme: pageTheme() })}`);
+
+    // Only once the section is close: the desktop stage above already runs one demo.
+    const near = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        near.disconnect();
+        demo.load();
+      },
+      { rootMargin: '600px 0px' },
+    );
+    near.observe(stage);
+
+    const activate = () => {
+      stage.classList.add('is-active');
+      frame.removeAttribute('tabindex');
+      frame.focus({ preventScroll: true });
+    };
+    overlay.addEventListener('click', activate);
+    // Touching anything else hands scrolling back to the page.
+    document.addEventListener('pointerdown', (event) => {
+      if (stage.contains(event.target as Node)) return;
+      stage.classList.remove('is-active');
+      frame.setAttribute('tabindex', '-1');
+    });
+  }
+</script>
+
+<style>
+  .phone-section {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: var(--s-8) var(--s-12);
+    /* The copy lines up with every other section; the phone hangs out to the
+       right on wide screens. */
+    max-width: calc(var(--content) + 2 * var(--s-6));
+    margin-inline: auto;
+    padding: var(--s-16) var(--s-6) 0;
+  }
+  .copy {
+    max-width: var(--content);
+    display: grid;
+    gap: var(--s-4);
+    color: var(--ink-2);
+  }
+  .copy .section-title {
+    justify-self: start;
+    margin-bottom: var(--s-2);
+    color: var(--ink);
+  }
+  .links {
+    margin-top: var(--s-2);
+    font-weight: 600;
+  }
+
+  .phone-figure {
+    position: relative;
+    margin: 0;
+    z-index: 1;
+    /* Room for the tilt and the shadow. */
+    padding: var(--s-4) var(--s-4) var(--s-8);
+  }
+
+  /* The device at scale --s: the box takes the scaled size, the device inside
+     keeps its real one, so the iframe's viewport is exactly 402×874. */
+  .fit {
+    --s: 0.78;
+    --tilt: 2deg;
+    position: relative;
+    width: calc(420px * var(--s));
+    height: calc(892px * var(--s));
+    margin-inline: auto;
+  }
+  .device {
+    --frame-1: #d6d6d2;
+    --frame-2: #9d9d98;
+    --frame-3: #f2f2ef;
+    --frame-edge: rgba(0, 0, 0, 0.32);
+    --status-ink: #000;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 420px;
+    height: 892px;
+    padding: 4px;
+    border-radius: 66px;
+    /* Brushed aluminium: a soft band of light across the rails. */
+    background:
+      linear-gradient(90deg, var(--frame-2), var(--frame-3) 9%, var(--frame-1) 22%, var(--frame-1) 78%, var(--frame-3) 91%, var(--frame-2)),
+      var(--frame-1);
+    box-shadow:
+      inset 0 0 0 1px var(--frame-edge),
+      inset 0 1.5px 1px rgba(255, 255, 255, 0.55),
+      0 2px 4px rgba(0, 0, 0, 0.08),
+      0 28px 60px -12px rgba(20, 20, 20, 0.32),
+      0 60px 90px -40px rgba(20, 20, 20, 0.28);
+    transform: translate(-50%, -50%) scale(var(--s)) rotate(var(--tilt));
+  }
+  :global(:root[data-theme='dark']) .device {
+    --frame-1: #47474a;
+    --frame-2: #232325;
+    --frame-3: #6c6c70;
+    --frame-edge: rgba(255, 255, 255, 0.1);
+    --status-ink: #fff;
+    box-shadow:
+      inset 0 0 0 1px var(--frame-edge),
+      inset 0 1.5px 1px rgba(255, 255, 255, 0.18),
+      0 28px 60px -12px rgba(0, 0, 0, 0.7),
+      0 60px 90px -40px rgba(0, 0, 0, 0.6);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .device {
+      transition: transform 320ms var(--ease);
+    }
+  }
+  .device.is-active {
+    transform: translate(-50%, -50%) scale(var(--s)) rotate(0deg);
+  }
+
+  /* Side keys: action button and volume on the left, power and camera control on the right. */
+  .key {
+    position: absolute;
+    width: 4px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--frame-2), var(--frame-3), var(--frame-2));
+    box-shadow: inset 0 0 0 0.5px var(--frame-edge);
+  }
+  .action,
+  .volume-up,
+  .volume-down {
+    left: -3px;
+  }
+  .power,
+  .camera {
+    right: -3px;
+  }
+  .action {
+    top: 150px;
+    height: 34px;
+  }
+  .volume-up {
+    top: 212px;
+    height: 62px;
+  }
+  .volume-down {
+    top: 290px;
+    height: 62px;
+  }
+  .power {
+    top: 236px;
+    height: 98px;
+  }
+  .camera {
+    top: 520px;
+    height: 72px;
+    border-radius: 3px;
+  }
+
+  .bezel {
+    height: 100%;
+    padding: 5px;
+    border-radius: 62px;
+    background: #050505;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+  }
+  .screen {
+    position: relative;
+    width: 402px;
+    height: 874px;
+    overflow: hidden;
+    border-radius: 56px;
+    background: var(--paper-2);
+    /* Keeps the rounded clip on the iframe in Safari. */
+    isolation: isolate;
+  }
+  iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  .stills img {
+    display: block;
+    width: min(330px, 100%);
+    height: auto;
+    margin-inline: auto;
+  }
+  :global(:root[data-theme='dark']) .still-light,
+  :global(:root:not([data-theme='dark'])) .still-dark {
+    display: none;
+  }
+
+  .status {
+    position: absolute;
+    inset: 0 0 auto;
+    height: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 30px 0 52px;
+    color: var(--status-ink);
+    pointer-events: none;
+  }
+  .time {
+    font: 600 17px/1 -apple-system, 'SF Pro Text', var(--font-sans);
+    letter-spacing: -0.01em;
+  }
+  .icons {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .icons svg {
+    fill: currentColor;
+  }
+  .signal {
+    width: 18px;
+    height: 12px;
+  }
+  .wifi {
+    width: 16px;
+    height: 12px;
+  }
+  .battery {
+    width: 27px;
+    height: 13px;
+  }
+  .battery .case {
+    fill: none;
+    stroke: currentColor;
+    stroke-opacity: 0.4;
+  }
+  .battery .cap {
+    fill-opacity: 0.4;
+  }
+  .island {
+    position: absolute;
+    top: 11px;
+    left: 50%;
+    width: 124px;
+    height: 36px;
+    margin-left: -62px;
+    border-radius: 18px;
+    background: #000;
+    pointer-events: none;
+  }
+  .home {
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    width: 140px;
+    height: 5px;
+    margin-left: -70px;
+    border-radius: 3px;
+    background: var(--status-ink);
+    opacity: 0.85;
+    pointer-events: none;
+  }
+
+  .activate {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: linear-gradient(to top, color-mix(in srgb, var(--paper) 50%, transparent), transparent 50%);
+    cursor: pointer;
+  }
+  .activate:focus-visible {
+    outline-offset: -8px;
+  }
+  .is-active .activate {
+    display: none;
+  }
+  .play {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    min-height: 56px;
+    padding: var(--s-2) var(--s-8) var(--s-2) var(--s-6);
+    border: 2px solid var(--ink);
+    border-radius: var(--r-3);
+    background: var(--paper);
+    color: var(--ink);
+    box-shadow: var(--sticker-shadow);
+    font: 600 1.25rem/1.2 var(--font-sans);
+  }
+  .play svg {
+    width: 22px;
+    height: 22px;
+    fill: var(--ink);
+    stroke: var(--ink);
+    stroke-width: 1.4;
+    stroke-linejoin: round;
+  }
+  .noscript {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    font-weight: 600;
+  }
+
+  @media (min-width: 1100px) {
+    .phone-figure {
+      margin-right: -128px;
+    }
+  }
+  .phone-note {
+    position: absolute;
+    right: calc(100% + 6px);
+    bottom: 5%;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-end;
+    pointer-events: none;
+    transform: rotate(-4deg);
+  }
+  .phone-note :global(.phone-arrow) {
+    transform: scaleX(-1) rotate(-30deg);
+    margin-right: -6px;
+  }
+  .phone-note :global(.note) {
+    margin-top: 4px;
+    white-space: nowrap;
+    text-align: right;
+  }
+
+  /* One column: the copy, then the phone centred under it, upright. */
+  @media (max-width: 860px) {
+    .phone-section {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .fit {
+      --tilt: 0deg;
+    }
+    .phone-figure {
+      padding-inline: 0;
+    }
+    .phone-note {
+      position: static;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      margin-top: var(--s-6);
+      transform: none;
+    }
+    .phone-note :global(.phone-arrow) {
+      display: none;
+    }
+    .phone-note :global(.note) {
+      text-align: center;
+    }
+    .phone-note :global(br) {
+      display: none;
+    }
+  }
+  @media (max-width: 480px) {
+    .phone-section {
+      padding-inline: var(--s-4);
+    }
+  }
+</style>

@@ -1,0 +1,85 @@
+/* Sedano site design tokens: ink on paper, one blue ballpoint accent.
+   Light is the base; [data-theme='dark'] overrides. The inline theme script
+   always sets data-theme, the media query only covers no-JS visitors. */
+
+:root {
+  --paper: #fafaf7;
+  --paper-2: #f2f1ec;
+  --ink: #141414;
+  --ink-2: #3d3d3d;
+  --ink-mute: #6b6b66;
+  --hair: rgba(0, 0, 0, 0.08);
+  --hair-strong: rgba(0, 0, 0, 0.16);
+  --pen: #1f5eff;
+  --hi: #ffe066;
+  --hi-bg: #ffe066;
+  --ok: #2f6b4a;
+  --warn: #8a6512;
+  --err: #b3261e;
+  --claude: #d97757;
+  --gemini: #3186ff;
+
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, 'SF Mono', Menlo, monospace;
+  --font-hand: 'Caveat', 'Comic Sans MS', cursive;
+
+  --r-1: 6px;
+  --r-2: 10px;
+  --r-3: 14px;
+  --stroke: 1.5px;
+  --sticker-shadow: 3px 3px 0 var(--ink);
+  --sticker-shadow-hover: 5px 5px 0 var(--ink);
+
+  --content: 760px;
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-6: 24px;
+  --s-8: 32px;
+  --s-12: 48px;
+  --s-16: 64px;
+  --s-24: 96px;
+
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur: 130ms;
+
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  --paper: #161514;
+  --paper-2: #1f1e1c;
+  --ink: #ece9e2;
+  --ink-2: #b9b6ae;
+  --ink-mute: #938a77; /* brief: #8b8270, nudged for AA on paper-2 */
+  --hair: rgba(255, 255, 255, 0.09);
+  --hair-strong: rgba(255, 255, 255, 0.18);
+  --pen: #7aa2ff;
+  --hi: #d8a657;
+  --hi-bg: rgba(216, 166, 87, 0.32);
+  --ok: #7fbf98;
+  --warn: #d8a657;
+  --err: #f2847c;
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --paper: #161514;
+    --paper-2: #1f1e1c;
+    --ink: #ece9e2;
+    --ink-2: #b9b6ae;
+    --ink-mute: #938a77; /* brief: #8b8270, nudged for AA on paper-2 */
+    --hair: rgba(255, 255, 255, 0.09);
+    --hair-strong: rgba(255, 255, 255, 0.18);
+    --pen: #7aa2ff;
+    --hi: #d8a657;
+    --hi-bg: rgba(216, 166, 87, 0.32);
+    --ok: #7fbf98;
+    --warn: #d8a657;
+    --err: #f2847c;
+    color-scheme: dark;
+  }
+}

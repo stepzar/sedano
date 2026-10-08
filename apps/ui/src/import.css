@@ -1,0 +1,204 @@
+/* Import sessions popup (components/ImportSessions.tsx): a compact picker in
+   the palette's language. Head, search and filters stay put; only the list
+   scrolls. */
+.import-overlay {
+  padding-top: 9vh;
+}
+
+.import-dialog {
+  width: min(560px, 94vw);
+  height: min(520px, 82vh);
+  max-height: none;
+}
+
+.import-head {
+  flex: none;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 12px 4px 18px;
+}
+
+.import-head > div:first-child {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.import-head h2 {
+  font-size: 1.05em;
+  font-weight: 650;
+}
+
+.import-head p {
+  margin-top: 2px;
+  overflow: hidden;
+  color: var(--fg-mute);
+  font-size: 0.88em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.import-head strong {
+  color: var(--fg-2);
+  font-weight: 600;
+}
+
+.import-search {
+  flex: none;
+  margin: 8px 14px 0;
+}
+
+.import-search svg {
+  left: 10px;
+}
+
+.import-search input {
+  padding-left: 31px;
+}
+
+/* One line that scrolls sideways: many harnesses never push the list down. */
+.import-chips {
+  flex: none;
+  display: flex;
+  gap: 6px;
+  padding: 10px 14px 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+  /* Chips cut by the edge fade out instead of ending on a hard line. */
+  mask-image: linear-gradient(to right, #000 calc(100% - 22px), transparent);
+}
+
+.import-chips::-webkit-scrollbar {
+  display: none;
+}
+
+.import-chips .chip {
+  flex: none;
+  height: 26px;
+  padding: 0 9px;
+  border-radius: 999px;
+}
+
+.import-count {
+  color: var(--fg-faint);
+  font-variant-numeric: tabular-nums;
+}
+
+.import-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  margin-top: 10px;
+  padding: 0 6px 8px;
+  border-top: 1px solid var(--line-soft);
+}
+
+.import-group {
+  padding: 10px 10px 4px;
+  color: var(--fg-faint);
+  font-size: 0.8em;
+  font-weight: 600;
+}
+
+.import-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 38px;
+  padding: 0 6px 0 10px;
+  border-radius: var(--r-md);
+  color: var(--fg-2);
+  cursor: pointer;
+}
+
+.import-row.sel {
+  background: var(--selected);
+  color: var(--fg);
+}
+
+.import-row[aria-disabled='true'] {
+  cursor: progress;
+}
+
+.import-harness {
+  flex: none;
+  display: inline-flex;
+  color: var(--fg-mute);
+}
+
+.import-title {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.import-badge {
+  flex: none;
+  padding: 0 6px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  color: var(--fg-mute);
+  font-size: 0.8em;
+  font-weight: 550;
+}
+
+.import-when {
+  flex: none;
+  min-width: 42px;
+  color: var(--fg-faint);
+  font-size: 0.84em;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+/* The secondary action appears on the row you are on; clicking the row
+   itself is Continue. */
+.import-transfer {
+  flex: none;
+  height: 26px;
+  width: 26px;
+  visibility: hidden;
+}
+
+.import-row.sel .import-transfer,
+.import-row:hover .import-transfer,
+.import-transfer:focus-visible {
+  visibility: visible;
+}
+
+.import-row .spin {
+  flex: none;
+  margin: 0 6px;
+  color: var(--fg-mute);
+}
+
+.import-state {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 24px 12px;
+  color: var(--fg-mute);
+}
+
+.import-empty {
+  justify-content: center;
+  padding-top: 48px;
+  color: var(--fg-faint);
+}
+
+.import-note {
+  padding: 6px 10px;
+  color: var(--fg-faint);
+  font-size: 0.84em;
+}
+
+.import-note.warn {
+  color: var(--err);
+}
+
+/* The composer's import button, beside the folder chip. */
+.import-btn {
+  flex: none;
+}

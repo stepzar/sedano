@@ -1,0 +1,80 @@
+---
+title: Install
+description: Install Sedano from the unsigned DMG or build it from source, plus the requirements and the first-launch steps on macOS.
+sidebar:
+  order: 2
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+## Requirements
+
+- macOS 13 Ventura or later.
+- Apple Silicon. There is no Intel build today.
+- `tmux` for terminal tabs (`brew install tmux`), on this Mac and on every SSH
+  host where you want terminal tabs.
+- The harness CLIs you want to use, installed and logged in separately. Nothing
+  is bundled. See [Harnesses](/docs/harnesses/overview/) for each one.
+
+## Install the DMG
+
+<Steps>
+
+1. Download the `.dmg` from the
+   [releases page](https://github.com/stepzar/sedano/releases) and drag
+   **Sedano** into **Applications**.
+
+2. Open it once. The build is not signed or notarized yet, so macOS refuses to
+   open it and shows a warning.
+
+3. Open **System Settings > Privacy & Security**, scroll down and click
+   **Open Anyway**. Or remove the quarantine flag from a terminal:
+
+   ```bash
+   xattr -dr com.apple.quarantine /Applications/Sedano.app
+   ```
+
+4. Open Sedano again. It starts its own local server on `127.0.0.1:7788` and
+   keeps its data in `~/.sedano`.
+
+</Steps>
+
+<Aside type="caution">
+Only clear the quarantine flag on a build you downloaded from the official
+releases page.
+</Aside>
+
+## Build from source
+
+You need [Bun](https://bun.sh), [Rust](https://rustup.rs) and the Xcode Command
+Line Tools.
+
+```bash
+git clone https://github.com/stepzar/sedano.git
+cd sedano
+bun install
+bun run install:app
+```
+
+`install:app` builds the UI, the server binary (the "sidecar") and the release
+`.app`, swaps it into `/Applications/Sedano.app`, keeps the previous bundle as
+`Sedano.app.previous`, clears the quarantine flag and launches it. Run it again
+to update; see [Updating the app](/docs/updates/app/).
+
+To get the `.app` and a `.dmg` without installing:
+
+```bash
+bun run sidecar
+bun run desktop:build
+```
+
+If you only want to work on Sedano itself, use the development copy instead:
+[Dev setup](/docs/contributing/dev-setup/).
+
+## Install the harnesses
+
+Each harness is a separate CLI from its vendor. Install the ones you want, log
+in from a terminal once, then open Sedano. If you install one while Sedano is
+open, use **Settings > Advanced > Installed software > Scan again**.
+
+Next: [First session](/docs/getting-started/first-session/).

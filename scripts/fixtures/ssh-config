@@ -1,0 +1,33 @@
+# An ~/.ssh/config the way one actually looks after a couple of years: split
+# across includes, full of patterns that are options rather than destinations,
+# and commented in the two places a parser gets wrong.
+
+Include ssh-config.d/*.conf
+
+Host *
+  ServerAliveInterval 30
+  AddKeysToAgent yes
+
+Host vps            # the box everything runs on
+  HostName 203.0.113.10
+  User deploy
+
+Host db-a db-b db-c
+  HostName %h.internal.example.com
+  User postgres
+
+Host *.staging.example.com
+  User ci
+
+Host bastion-?
+  User jump
+
+# Everything but the locked one: the negation is a filter, `prod-a` is the host.
+Host !prod-locked prod-a
+  User ops
+
+Host=laptop
+  HostName 192.168.1.20
+
+# Host never-enabled
+#   HostName 198.51.100.7

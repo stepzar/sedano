@@ -1,0 +1,164 @@
+{
+  "update:agent_message_chunk": {
+    "handled": "acp/driver.ts: session/update \u2192 agent_message_chunk"
+  },
+  "update:agent_thought_chunk": {
+    "handled": "acp/driver.ts: session/update \u2192 agent_thought_chunk"
+  },
+  "update:tool_call": {
+    "handled": "acp/driver.ts: session/update \u2192 tool_call"
+  },
+  "update:tool_call_update": {
+    "handled": "acp/driver.ts: session/update \u2192 tool_call_update"
+  },
+  "update:usage_update": {
+    "handled": "acp/driver.ts: session/update \u2192 usage_update"
+  },
+  "update:config_option_update": {
+    "handled": "acp/driver.ts: session/update \u2192 config_option_update"
+  },
+  "update:current_mode_update": {
+    "handled": "acp/driver.ts: session/update \u2192 current_mode_update"
+  },
+  "update:plan": {
+    "handled": "acp/driver.ts: session/update \u2192 plan"
+  },
+  "update:available_commands_update": {
+    "handled": "acp/driver.ts: session/update \u2192 available_commands_update"
+  },
+  "update:user_message_chunk": {
+    "ignored": "the echo of our own prompt, already on screen"
+  },
+  "update:compaction_summary_chunk": {
+    "ignored": "compaction is shown only when a harness reports it as a system line; not rendered yet"
+  },
+  "update:compaction_update": {
+    "ignored": "see compaction_summary_chunk"
+  },
+  "update:notice": {
+    "ignored": "agent notices have no timeline counterpart yet"
+  },
+  "update:plan_removed": {
+    "ignored": "plans are replaced in place by the next plan update"
+  },
+  "update:plan_update": {
+    "ignored": "see plan"
+  },
+  "update:session_info_update": {
+    "ignored": "session title/metadata from the agent; titles come from the first prompt"
+  },
+  "method:session/update": {
+    "handled": "acp/driver.ts: onNotification \u2192 handleUpdate"
+  },
+  "method:session/request_permission": {
+    "handled": "acp/driver.ts: onRequest \u2192 askPermission / approval mode"
+  },
+  "method:fs/read_text_file": {
+    "handled": "acp/driver.ts: onRequest \u2192 readTextAsync"
+  },
+  "method:fs/write_text_file": {
+    "handled": "acp/driver.ts: onRequest \u2192 writeTextAsync"
+  },
+  "method:elicitation/create": {
+    "handled": "acp/driver.ts: onRequest \u2192 askElicitation"
+  },
+  "method:elicitation/complete": {
+    "ignored": "the elicitation is resolved by our own answer"
+  },
+  "method:terminal/create": {
+    "ignored": "not advertised (clientCapabilities.terminal = false); answered with an error if called"
+  },
+  "method:terminal/kill": {
+    "ignored": "not advertised (clientCapabilities.terminal = false); answered with an error if called"
+  },
+  "method:terminal/output": {
+    "ignored": "not advertised (clientCapabilities.terminal = false); answered with an error if called"
+  },
+  "method:terminal/release": {
+    "ignored": "not advertised (clientCapabilities.terminal = false); answered with an error if called"
+  },
+  "method:terminal/wait_for_exit": {
+    "ignored": "not advertised (clientCapabilities.terminal = false); answered with an error if called"
+  },
+  "method:mcp/connect": {
+    "ignored": "MCP-over-ACP is not advertised; answered with an error if called"
+  },
+  "method:mcp/disconnect": {
+    "ignored": "MCP-over-ACP is not advertised; answered with an error if called"
+  },
+  "method:mcp/message": {
+    "ignored": "MCP-over-ACP is not advertised; answered with an error if called"
+  },
+  "toolKind:read": {
+    "handled": "acp/driver.ts: passed through as tool.kind"
+  },
+  "toolKind:edit": {
+    "handled": "acp/driver.ts: passed through as tool.kind"
+  },
+  "toolKind:delete": {
+    "handled": "acp/driver.ts: passed through as tool.kind"
+  },
+  "toolKind:move": {
+    "handled": "acp/driver.ts: passed through as tool.kind"
+  },
+  "toolKind:search": {
+    "handled": "acp/driver.ts: passed through as tool.kind"
+  },
+  "toolKind:execute": {
+    "handled": "acp/driver.ts: passed through as tool.kind"
+  },
+  "toolKind:think": {
+    "handled": "acp/driver.ts: passed through as tool.kind"
+  },
+  "toolKind:fetch": {
+    "handled": "acp/driver.ts: passed through as tool.kind"
+  },
+  "toolKind:switch_mode": {
+    "handled": "acp/driver.ts: passed through as tool.kind",
+    "generic": "every kind is passed through unchanged"
+  },
+  "toolKind:other": {
+    "handled": "acp/driver.ts: passed through as tool.kind"
+  },
+  "toolContent:content": {
+    "handled": "acp/driver.ts: toolText"
+  },
+  "toolContent:diff": {
+    "handled": "acp/driver.ts: file_change from the diff"
+  },
+  "toolContent:terminal": {
+    "ignored": "terminal output is not advertised (see method:terminal/create)"
+  },
+  "content:text": {
+    "handled": "acp/driver.ts: message and tool text"
+  },
+  "content:image": {
+    "ignored": "non-text agent output is not rendered yet; tool text still shows"
+  },
+  "content:audio": {
+    "ignored": "non-text agent output is not rendered yet; tool text still shows"
+  },
+  "content:resource": {
+    "ignored": "non-text agent output is not rendered yet; tool text still shows"
+  },
+  "content:resource_link": {
+    "ignored": "non-text agent output is not rendered yet; tool text still shows"
+  },
+  "stopReason:end_turn": {
+    "handled": "acp/driver.ts: prompt response \u2192 result outcome"
+  },
+  "stopReason:cancelled": {
+    "handled": "acp/driver.ts: prompt response \u2192 result outcome"
+  },
+  "stopReason:max_tokens": {
+    "handled": "acp/driver.ts: prompt response \u2192 result outcome",
+    "generic": "every stop reason becomes the result subtype; the outcome is mapped by resultOutcomeFor"
+  },
+  "stopReason:max_turn_requests": {
+    "handled": "acp/driver.ts: prompt response \u2192 result outcome",
+    "generic": "every stop reason becomes the result subtype; the outcome is mapped by resultOutcomeFor"
+  },
+  "stopReason:refusal": {
+    "handled": "acp/driver.ts: prompt response \u2192 result outcome"
+  }
+}

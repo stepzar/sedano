@@ -1,0 +1,2 @@
+{"timestamp":"2026-09-04T08:05:00.000Z","ordinal":0,"type":"session_meta","payload":{"id":"01a00000-0000-7000-8000-0000000000aa","cwd":"__CWD__","source":{"subagent":{"thread_spawn":{"parent_thread_id":"01a00000-0000-7000-8000-00000000c0de","depth":1}}},"thread_source":"subagent"}}
+{"timestamp":"2026-09-04T08:05:01.000Z","ordinal":1,"type":"response_item","payload":{"type":"message","role":"user","content":[{"type":"input_text","text":"A sub-agent's task, not a conversation"}]}}

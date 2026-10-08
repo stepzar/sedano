@@ -1,0 +1,52 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Sedano",
+  "version": "../../../package.json",
+  "identifier": "app.sedano.desktop",
+  "build": {
+    "frontendDist": "../../ui/dist",
+    "devUrl": "http://localhost:5174",
+    "beforeDevCommand": {
+      "script": "bun scripts/dev-ui.ts",
+      "cwd": "../../.."
+    },
+    "beforeBuildCommand": {
+      "script": "bun run build:ui && bun run sidecar --release",
+      "cwd": "../../.."
+    }
+  },
+  "app": {
+    "withGlobalTauri": false,
+    "macOSPrivateApi": true,
+    "security": {
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: http://127.0.0.1:* https:; font-src 'self' data:; connect-src 'self' ipc: http://ipc.localhost http://127.0.0.1:* ws://127.0.0.1:*; object-src 'none'; base-uri 'self'; frame-src 'none'"
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": ["app", "dmg"],
+    "externalBin": ["binaries/sedano-server"],
+    "resources": { "../../ui/dist/": "ui/" },
+    "category": "DeveloperTool",
+    "shortDescription": "Cockpit for coding-agent harnesses",
+    "longDescription": "Run Claude Code, Codex, Gemini CLI, Grok, opencode, Command Code and Freebuff sessions side by side with live subagent visibility, subscription limits and token metrics.",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "macOS": {
+      "minimumSystemVersion": "13.0",
+      "infoPlist": "Info.plist",
+      "entitlements": "Entitlements.plist"
+    }
+  },
+  "plugins": {
+    "updater": {
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDMxNzMwN0U4ODQzNDQzMDcKUldRSFF6U0U2QWR6TVRjL2VDUEN4MlRNeEw3bWkyOTRaOXlTRVdNU0RtSzVZMzg3QW5VZ0xMcUsK",
+      "endpoints": ["https://github.com/stepzar/sedano/releases/latest/download/latest.json"]
+    }
+  }
+}

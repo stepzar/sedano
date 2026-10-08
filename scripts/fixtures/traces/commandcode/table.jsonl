@@ -1,0 +1,75 @@
+{"dir":"client","ms":2,"line":"Reply with only a GitHub-flavoured markdown table. Two columns, headed Key and Value. Exactly two rows: a with 1, and b with 2. No prose before or after the table."}
+{"dir":"agent","ms":554,"line":"{\"type\":\"event\",\"event\":{\"type\":\"run_start\",\"sessionId\":\"98c91e59-fd09-4530-afff-f79aaa959c80\"}}"}
+{"dir":"agent","ms":593,"line":"{\"type\":\"event\",\"event\":{\"type\":\"turn_start\",\"turnNumber\":1}}"}
+{"dir":"agent","ms":611,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_start\"}}"}
+{"dir":"agent","ms":611,"line":"{\"type\":\"event\",\"event\":{\"type\":\"model_request_start\",\"model\":\"poolside/laguna-s-2.1-free\"}}"}
+{"dir":"agent","ms":628,"line":"{\"type\":\"event\",\"event\":{\"type\":\"model_trace\",\"traceId\":\"793e159ce7d37d20477269b37957f9b3\"}}"}
+{"dir":"agent","ms":2824,"line":"{\"type\":\"event\",\"event\":{\"type\":\"model_trace\",\"traceId\":\"793e159ce7d37d20477269b37957f9b3\"}}"}
+{"dir":"agent","ms":4755,"line":"{\"type\":\"event\",\"event\":{\"type\":\"model_trace\",\"traceId\":\"793e159ce7d37d20477269b37957f9b3\"}}"}
+{"dir":"agent","ms":5534,"line":"{\"type\":\"event\",\"event\":{\"type\":\"api_retry\",\"attempt\":3,\"error\":\"The request limited providers for this model and they are currently at capacity. Add more providers or remove restrictions for automatic fallback. Providers considered: poolside.\",\"delayMs\":1000}}"}
+{"dir":"agent","ms":6537,"line":"{\"type\":\"event\",\"event\":{\"type\":\"model_trace\",\"traceId\":\"793e159ce7d37d20477269b37957f9b3\"}}"}
+{"dir":"agent","ms":7496,"line":"{\"type\":\"event\",\"event\":{\"type\":\"api_retry\",\"attempt\":4,\"error\":\"The request limited providers for this model and they are currently at capacity. Add more providers or remove restrictions for automatic fallback. Providers considered: poolside.\",\"delayMs\":1000}}"}
+{"dir":"agent","ms":8498,"line":"{\"type\":\"event\",\"event\":{\"type\":\"model_trace\",\"traceId\":\"793e159ce7d37d20477269b37957f9b3\"}}"}
+{"dir":"agent","ms":10050,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"|\"}}"}
+{"dir":"agent","ms":10050,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"|\"}]}}"}
+{"dir":"agent","ms":10050,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" Key\"}}"}
+{"dir":"agent","ms":10050,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"| Key\"}]}}"}
+{"dir":"agent","ms":10050,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" |\"}}"}
+{"dir":"agent","ms":10050,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"| Key |\"}]}}"}
+{"dir":"agent","ms":10050,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" Value\"}}"}
+{"dir":"agent","ms":10050,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"| Key | Value\"}]}}"}
+{"dir":"agent","ms":10058,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" |\"}}"}
+{"dir":"agent","ms":10058,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"| Key | Value |\"}]}}"}
+{"dir":"agent","ms":10221,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"\\n\"}}"}
+{"dir":"agent","ms":10221,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"| Key | Value |\\n\"}]}}"}
+{"dir":"agent","ms":10221,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"|\"}}"}
+{"dir":"agent","ms":10221,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"| Key | Value |\\n|\"}]}}"}
+{"dir":"agent","ms":10221,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"-----|\"}}"}
+{"dir":"agent","ms":10221,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"| Key | Value |\\n|-----|\"}]}}"}
+{"dir":"agent","ms":10221,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"-------|\"}}"}
+{"dir":"agent","ms":10221,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"| Key | Value |\\n|-----|-------|\"}]}}"}
+{"dir":"agent","ms":10221,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"\\n\"}}"}
+{"dir":"agent","ms":10221,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"| Key | Value |\\n|-----|-------|\\n\"}]}}"}
+{"dir":"agent","ms":10222,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"|\"}}"}
+{"dir":"agent","ms":10222,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"| Key | Value |\\n|-----|-------|\\n|\"}]}}"}
+{"dir":"agent","ms":10222,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" a\"}}"}
+{"dir":"agent","ms":10222,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"| Key | Value |\\n|-----|-------|\\n| a\"}]}}"}
+{"dir":"agent","ms":10222,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"  \"}}"}
+{"dir":"agent","ms":10222,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"| Key | Value |\\n|-----|-------|\\n| a  \"}]}}"}
+{"dir":"agent","ms":10222,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" |\"}}"}
+{"dir":"agent","ms":10222,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"| Key | Value |\\n|-----|-------|\\n| a   |\"}]}}"}
+{"dir":"agent","ms":10222,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" \"}}"}
+{"dir":"agent","ms":10222,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"| Key | Value |\\n|-----|-------|\\n| a   | \"}]}}"}
+{"dir":"agent","ms":10226,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"1\"}}"}
+{"dir":"agent","ms":10226,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"| Key | Value |\\n|-----|-------|\\n| a   | 1\"}]}}"}
+{"dir":"agent","ms":10244,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"  \"}}"}
+{"dir":"agent","ms":10245,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"| Key | Value |\\n|-----|-------|\\n| a   | 1  \"}]}}"}
+{"dir":"agent","ms":10260,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"  \"}}"}
+{"dir":"agent","ms":10261,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"| Key | Value |\\n|-----|-------|\\n| a   | 1    \"}]}}"}
+{"dir":"agent","ms":11758,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" |\"}}"}
+{"dir":"agent","ms":11759,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"| Key | Value |\\n|-----|-------|\\n| a   | 1     |\"}]}}"}
+{"dir":"agent","ms":12694,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"\\n\"}}"}
+{"dir":"agent","ms":12695,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"| Key | Value |\\n|-----|-------|\\n| a   | 1     |\\n\"}]}}"}
+{"dir":"agent","ms":12702,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"|\"}}"}
+{"dir":"agent","ms":12703,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"| Key | Value |\\n|-----|-------|\\n| a   | 1     |\\n|\"}]}}"}
+{"dir":"agent","ms":12703,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" b\"}}"}
+{"dir":"agent","ms":12703,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"| Key | Value |\\n|-----|-------|\\n| a   | 1     |\\n| b\"}]}}"}
+{"dir":"agent","ms":12703,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"  \"}}"}
+{"dir":"agent","ms":12703,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"| Key | Value |\\n|-----|-------|\\n| a   | 1     |\\n| b  \"}]}}"}
+{"dir":"agent","ms":12703,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" |\"}}"}
+{"dir":"agent","ms":12703,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"| Key | Value |\\n|-----|-------|\\n| a   | 1     |\\n| b   |\"}]}}"}
+{"dir":"agent","ms":12713,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" \"}}"}
+{"dir":"agent","ms":12713,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"| Key | Value |\\n|-----|-------|\\n| a   | 1     |\\n| b   | \"}]}}"}
+{"dir":"agent","ms":12713,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"2\"}}"}
+{"dir":"agent","ms":12713,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"| Key | Value |\\n|-----|-------|\\n| a   | 1     |\\n| b   | 2\"}]}}"}
+{"dir":"agent","ms":12713,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"  \"}}"}
+{"dir":"agent","ms":12713,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"| Key | Value |\\n|-----|-------|\\n| a   | 1     |\\n| b   | 2  \"}]}}"}
+{"dir":"agent","ms":12713,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"  \"}}"}
+{"dir":"agent","ms":12713,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"| Key | Value |\\n|-----|-------|\\n| a   | 1     |\\n| b   | 2    \"}]}}"}
+{"dir":"agent","ms":12723,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" |\"}}"}
+{"dir":"agent","ms":12723,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"| Key | Value |\\n|-----|-------|\\n| a   | 1     |\\n| b   | 2     |\"}]}}"}
+{"dir":"agent","ms":12843,"line":"{\"type\":\"event\",\"event\":{\"type\":\"model_request_end\",\"model\":\"poolside/laguna-s-2.1-free\",\"usage\":{\"inputTokens\":17765,\"outputTokens\":30,\"cacheReadTokens\":9728,\"cacheWriteTokens\":0},\"stopReason\":\"stop\"}}"}
+{"dir":"agent","ms":12843,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_end\",\"content\":[{\"type\":\"text\",\"text\":\"| Key | Value |\\n|-----|-------|\\n| a   | 1     |\\n| b   | 2     |\"}]}}"}
+{"dir":"agent","ms":12844,"line":"{\"type\":\"event\",\"event\":{\"type\":\"turn_end\",\"turnNumber\":1,\"hadToolCalls\":false,\"usage\":{\"inputTokens\":17765,\"outputTokens\":30,\"cacheReadTokens\":9728,\"cacheWriteTokens\":0}}}"}
+{"dir":"agent","ms":12849,"line":"{\"type\":\"event\",\"event\":{\"type\":\"run_end\",\"result\":{\"finalText\":\"| Key | Value |\\n|-----|-------|\\n| a   | 1     |\\n| b   | 2     |\",\"stopReason\":\"end_turn\",\"turnCount\":1,\"usage\":{\"inputTokens\":17765,\"outputTokens\":30,\"cacheReadTokens\":9728,\"cacheWriteTokens\":0},\"systemPromptTokens\":null,\"nextState\":{\"sessionId\":\"98c91e59-fd09-4530-afff-f79aaa959c80\",\"messages\":[{\"role\":\"user\",\"content\":[{\"type\":\"text\",\"text\":\"Reply with only a GitHub-flavoured markdown table. Two columns, headed Key and Value. Exactly two rows: a with 1, and b with 2. No prose before or after the table.\"}],\"meta\":{\"source\":\"user\",\"createdAt\":1790007255582,\"messageId\":\"a3f060b6-cde7-421c-be96-9935346a951e\"}},{\"role\":\"assistant\",\"content\":[{\"type\":\"text\",\"text\":\"| Key | Value |\\n|-----|-------|\\n| a   | 1     |\\n| b   | 2     |\"}],\"meta\":{\"source\":\"model\",\"createdAt\":1790007267872,\"messageId\":\"c5463652-884b-4cf7-8922-343b42bb4fa5\"}}],\"interrupted\":false,\"modState\":{\"workspace\":{\"cwd\":\"/private/tmp/sedano-capture\",\"platform\":\"darwin\",\"branch\":null,\"gitStatus\":null,\"recentCommits\":[],\"additionalDirectories\":[]},\"compaction\":{\"tokens\":17788,\"basis\":{\"role\":\"assistant\",\"content\":[{\"type\":\"text\",\"text\":\"| Key | Value |\\n|-----|-------|\\n| a   | 1     |\\n| b   | 2     |\"}],\"meta\":{\"source\":\"model\",\"createdAt\":1790007267872,\"messageId\":\"c5463652-884b-4cf7-8922-343b42bb4fa5\"}}}}}}}}"}
+{"dir":"agent","ms":12850,"line":"{\"type\":\"result\",\"subtype\":\"success\",\"sessionId\":\"98c91e59-fd09-4530-afff-f79aaa959c80\",\"stopReason\":\"end_turn\",\"usage\":{\"inputTokens\":17765,\"outputTokens\":30,\"cacheReadTokens\":9728,\"cacheWriteTokens\":0},\"durationMs\":12351,\"finalText\":\"| Key | Value |\\n|-----|-------|\\n| a   | 1     |\\n| b   | 2     |\"}"}

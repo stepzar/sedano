@@ -1,0 +1,94 @@
+---
+import Celery from './doodles/Celery.astro';
+import ThemeToggle from './ThemeToggle.astro';
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+---
+
+<header class="nav-wrap">
+  <nav class="nav wrap" aria-label="Main">
+    <a class="brand" href="/" aria-label="Sedano home">
+      <Celery size={30} />
+      <span>sedano</span>
+    </a>
+    <ul class="links">
+      <li><a href="/docs/">Docs</a></li>
+      <li class="gh"><a href="https://github.com/stepzar/sedano">GitHub</a></li>
+      <li>
+        <a href="/download/" class="dl" aria-current={path === '/download' ? 'page' : undefined}>Download</a>
+      </li>
+      <li><ThemeToggle /></li>
+    </ul>
+  </nav>
+</header>
+
+<style>
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-4);
+    min-height: 72px;
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    color: var(--ink);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.125rem;
+    letter-spacing: -0.02em;
+  }
+  .links {
+    display: flex;
+    align-items: center;
+    gap: var(--s-1);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    padding: 0 var(--s-2);
+    color: var(--ink-2);
+    text-decoration: none;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    border-radius: var(--r-1);
+  }
+  .links a:hover {
+    color: var(--ink);
+    background: var(--paper-2);
+  }
+  .links .dl {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  /* Wide screens: the bulb hangs just outside the text column, like a lamp at
+     the edge of the desk, and the links stay flush with the column. */
+  @media (min-width: 960px) {
+    .links :global(.bulb-slot) {
+      width: 0;
+    }
+    .links :global(.bulb) {
+      margin-left: 28px;
+    }
+  }
+  @media (max-width: 400px) {
+    .links a {
+      padding: 0 6px;
+      font-size: 0.875rem;
+    }
+    .brand span {
+      font-size: 1rem;
+    }
+  }
+  /* The smallest phones: GitHub is still in the hero and the footer. */
+  @media (max-width: 359px) {
+    .gh {
+      display: none;
+    }
+  }
+</style>

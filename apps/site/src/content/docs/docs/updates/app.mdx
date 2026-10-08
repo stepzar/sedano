@@ -1,0 +1,92 @@
+---
+title: Updating the app
+description: How Sedano updates - the in-app updater, a new DMG or install:app from a checkout - how to roll back, and what happens to running agents.
+sidebar:
+  order: 1
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+{/* The updater is built in, but it has nothing to fetch until the first signed
+    public release is published (its public key in tauri.conf.json is still a
+    placeholder). Once that release is out, drop this Aside and keep the manual
+    paths below as fallbacks. */}
+<Aside type="note" title="Available from the first public release">
+The in-app updater described below ships with the app, but it only has
+something to install once the first signed public release is published. Until
+then, update with one of the manual paths further down.
+</Aside>
+
+## Automatic updates
+
+The desktop app checks for a new release about ten seconds after it opens and
+every few hours after that. It reads the release's `latest.json` from GitHub
+and verifies the download against the public key built into the app before
+installing anything.
+
+When a newer version exists, a pill in the window offers it. Nothing happens
+until you click: Sedano downloads and installs the update, then asks before it
+restarts. **Settings > Advanced > Version** shows the version you run, the last
+check, and a **Check for updates** button. A check or install that fails stays
+visible there and in the pill instead of failing quietly.
+
+Only the Mac app updates itself. A browser tab or a paired phone loads the UI
+from the Mac's server, so it is current as soon as the Mac is. A development
+copy (`tauri dev`) never offers updates.
+
+Restarting goes through the normal quit path, so the old server stops before the
+new app starts, and [durable agents](/docs/getting-started/concepts/#durable-agents)
+keep running.
+
+## From a DMG
+
+1. Quit Sedano.
+2. Download the new `.dmg` from the
+   [releases page](https://github.com/stepzar/sedano/releases) and drag Sedano
+   into **Applications**, replacing the old copy.
+3. Repeat the [first-launch steps](/docs/getting-started/install/#install-the-dmg)
+   if macOS warns again.
+
+Quitting the app stops the server it started, but
+[durable agents](/docs/getting-started/concepts/#durable-agents) keep running
+and are picked up again by the new version.
+
+## From a checkout
+
+```bash
+git pull
+bun install
+bun run install:app
+```
+
+`install:app` builds what changed (unchanged UI and server code is skipped by
+content hash, and cargo is incremental), quits the running Sedano through its
+normal quit path, swaps the new bundle into `/Applications`, keeps the old one as
+`Sedano.app.previous`, clears quarantine and relaunches. It prints timings per
+step. If port 7788 is held by something else, it installs but does not launch,
+and says so.
+
+## Rolling back
+
+```bash
+bun run install:app --rollback
+```
+
+This swaps `Sedano.app.previous` back in. The build you rolled back from becomes
+the new `.previous`, so running `--rollback` again undoes it.
+
+<Aside type="caution">
+A rollback restores the app, not the data. A database migrated forward by a
+newer build cannot be read by an older one. A release that changes the schema
+keeps a copy of the database it found; see
+[Data and backups](/docs/updates/data-and-backups/) for where it is and how to
+restore it.
+</Aside>
+
+## Check what is running
+
+```bash
+curl -s http://127.0.0.1:7788/api/health
+```
+
+It should report `"instance":"app"` and a `home` of `~/.sedano`.

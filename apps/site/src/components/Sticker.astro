@@ -1,0 +1,59 @@
+---
+// A harness logo as a sticker: rounded square, paper outline, hard shadow,
+// tilted by a small angle derived from the name so every build looks the same.
+import HarnessLogo from './HarnessLogo.astro';
+import type { Harness } from '../data/harnesses';
+interface Props {
+  harness: Harness;
+  label: string;
+}
+const { harness, label } = Astro.props;
+let hash = 0;
+for (const ch of label) hash = (hash * 31 + ch.charCodeAt(0)) % 997;
+const tilt = ((hash % 13) / 12) * 6 - 3; // -3deg .. +3deg
+---
+
+<li class="sticker-item">
+  <span class="sticker" style={`--tilt: ${tilt.toFixed(2)}deg`}>
+    <HarnessLogo harness={harness} />
+  </span>
+  <span class="sticker-label">{label}</span>
+</li>
+
+<style>
+  .sticker-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--s-3);
+    list-style: none;
+  }
+  .sticker {
+    display: grid;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+    border-radius: var(--r-3);
+    background: var(--paper);
+    color: var(--ink);
+    border: var(--stroke) solid var(--ink);
+    box-shadow: 0 0 0 3px var(--paper), var(--sticker-shadow);
+    transform: rotate(var(--tilt));
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .sticker {
+      transition:
+        transform var(--dur) var(--spring),
+        box-shadow var(--dur) var(--spring);
+    }
+    .sticker:hover {
+      transform: rotate(var(--tilt)) translate(-1px, -1px);
+      box-shadow: 0 0 0 3px var(--paper), var(--sticker-shadow-hover);
+    }
+  }
+  .sticker-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--ink-2);
+  }
+</style>

@@ -1,0 +1,78 @@
+/* Bridge the site tokens onto Starlight's variables.
+   Starlight treats :root as dark and [data-theme='light'] as light. */
+
+:root,
+:root[data-theme='dark'] {
+  --sl-color-white: #ece9e2;
+  --sl-color-gray-1: #d6d3cb;
+  --sl-color-gray-2: #b9b6ae;
+  --sl-color-gray-3: #938a77;
+  --sl-color-gray-4: #5a5650;
+  --sl-color-gray-5: #383633;
+  --sl-color-gray-6: #1f1e1c;
+  --sl-color-black: #161514;
+  --sl-color-accent-low: #1d2740;
+  --sl-color-accent: #7aa2ff;
+  --sl-color-accent-high: #c9d8ff;
+}
+
+:root[data-theme='light'] {
+  --sl-color-white: #141414;
+  --sl-color-gray-1: #2a2a2a;
+  --sl-color-gray-2: #3d3d3d;
+  --sl-color-gray-3: #6b6b66;
+  --sl-color-gray-4: #9a9993;
+  --sl-color-gray-5: #d6d5cf;
+  --sl-color-gray-6: #f2f1ec;
+  --sl-color-gray-7: #f5f4f0;
+  --sl-color-black: #fafaf7;
+  --sl-color-accent-low: #dbe5ff;
+  --sl-color-accent: #1f5eff;
+  --sl-color-accent-high: #0f2f8a;
+}
+
+:root {
+  --sl-font: var(--font-sans);
+  --sl-font-mono: var(--font-mono);
+  --sl-color-hairline: var(--hair);
+  --sl-color-hairline-light: var(--hair);
+  --sl-color-hairline-shade: var(--hair-strong);
+  --sl-content-width: 46rem;
+}
+
+/* Hand-drawn squiggle under the current sidebar item instead of a filled pill. */
+.sidebar-content a[aria-current='page'],
+.sidebar-content a[aria-current='page']:hover,
+.sidebar-content a[aria-current='page']:focus {
+  background-color: transparent;
+  color: var(--sl-color-white);
+  font-weight: 600;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 8' preserveAspectRatio='none'%3E%3Cpath d='M2 5.2C14 2.2 22 7.4 36 4.6S58 2.4 72 5.1 98 6.6 118 3.4' fill='none' stroke='%231f5eff' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: var(--sl-sidebar-item-padding-inline, 0.5rem) calc(100% - 1px);
+  background-size: min(7rem, 70%) 7px;
+}
+
+:root[data-theme='dark'] .sidebar-content a[aria-current='page'] {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 8' preserveAspectRatio='none'%3E%3Cpath d='M2 5.2C14 2.2 22 7.4 36 4.6S58 2.4 72 5.1 98 6.6 118 3.4' fill='none' stroke='%237aa2ff' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+.sl-markdown-content :focus-visible,
+.sidebar-content a:focus-visible,
+header a:focus-visible {
+  outline: 2px solid var(--pen);
+  outline-offset: 2px;
+}
+
+/* Wide docs tables scroll sideways on a phone. Edge shadows show that there is
+   more to the side, since a mobile scrollbar is invisible until touched. */
+@media (max-width: 50rem) {
+  .sl-markdown-content table {
+    font-size: var(--sl-text-sm);
+    background:
+      linear-gradient(to right, var(--sl-color-bg), transparent) left / 1.5rem 100% no-repeat local,
+      linear-gradient(to left, var(--sl-color-bg), transparent) right / 1.5rem 100% no-repeat local,
+      radial-gradient(farthest-side at 0 50%, var(--hair-strong), transparent) left / 0.75rem 100% no-repeat scroll,
+      radial-gradient(farthest-side at 100% 50%, var(--hair-strong), transparent) right / 0.75rem 100% no-repeat scroll;
+  }
+}

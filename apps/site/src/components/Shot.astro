@@ -1,0 +1,56 @@
+---
+// A product screenshot inside the hand-drawn frame, for the docs. Click to zoom.
+import SketchFrame from './doodles/SketchFrame.astro';
+import Lightbox from './Lightbox.astro';
+
+interface Props {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  caption?: string;
+  /** Narrow shots (a phone, a popover) look wrong stretched to the column. */
+  maxWidth?: string;
+  /** The same shot in the dark theme: each theme then shows its own. */
+  darkSrc?: string;
+}
+const { src, alt, width, height, caption, maxWidth, darkSrc } = Astro.props;
+---
+
+<figure class="shot not-content" style={maxWidth ? `max-width: ${maxWidth}` : undefined}>
+  <SketchFrame>
+    <a class:list={['zoomable', { 'only-light': darkSrc }]} href={src} data-caption={caption ?? alt}>
+      <img src={src} alt={alt} width={width} height={height} loading="lazy" decoding="async" />
+    </a>
+    {
+      darkSrc && (
+        <a class="zoomable only-dark" href={darkSrc} data-caption={caption ?? alt}>
+          <img src={darkSrc} alt={alt} width={width} height={height} loading="lazy" decoding="async" />
+        </a>
+      )
+    }
+  </SketchFrame>
+  <Lightbox />
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>
+
+<style>
+  .shot {
+    margin: 1.5rem 0;
+  }
+  .shot img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: var(--r-1);
+  }
+  :global(:root[data-theme='dark']) .only-light,
+  :global(:root:not([data-theme='dark'])) .only-dark {
+    display: none;
+  }
+  figcaption {
+    margin-top: 0.5rem;
+    color: var(--sl-color-gray-3);
+    font-size: var(--sl-text-sm);
+  }
+</style>

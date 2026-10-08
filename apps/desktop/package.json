@@ -1,0 +1,12 @@
+{
+  "name": "@sedano/desktop",
+  "version": "0.1.0",
+  "license": "Apache-2.0",
+  "private": true,
+  "scripts": {
+    "dev": "tauri dev",
+    "build": "tauri build",
+    "icon": "tauri icon",
+    "sidecar": "bun run ../../scripts/build-sidecar.ts"
+  }
+}

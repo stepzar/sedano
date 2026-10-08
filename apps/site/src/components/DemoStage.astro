@@ -1,0 +1,468 @@
+---
+// The landing's centrepiece: the interactive demo (public/demo/, built separately)
+// in a hand-drawn app window. The iframe only takes the mouse and keyboard after a
+// click, so scrolling the page never gets stuck inside it. Before the demo bundle
+// exists the window shows the zoomable screenshots instead, so the site always builds.
+//
+// Demo contract (apps/site/DEMO.md): /demo/?embed=1&theme=light|dark[&session=<id>][&panel=limits].
+// Once the demo posts { type: 'sedano-demo:ready', liveTheme: true }, theme changes go
+// as { type: 'sedano:theme', theme } and captions as { type: 'sedano:goto', session, panel }
+// instead of reloading the iframe; { type: 'sedano-demo:theme', theme } from the demo
+// (its own Settings) moves the page's theme, so the bulb and the demo always agree.
+// The protocol lives in ../scripts/demo-bridge.ts, shared with PhoneStage.astro.
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
+import SketchFrame from './doodles/SketchFrame.astro';
+import Note from './doodles/Note.astro';
+import Arrow from './doodles/Arrow.astro';
+import Lightbox from './Lightbox.astro';
+
+const hasDemo = existsSync(join(process.cwd(), 'public', 'demo', 'index.html'));
+const shotAlt =
+  'The Sedano window: sessions grouped by workspace on the left, a Claude Code transcript with a question card waiting for an answer, and the composer at the bottom.';
+
+// `session` / `panel` deep-link the demo to that moment; ids come from apps/site/DEMO.md.
+const moments: { caption: string; detail: string; session?: string; panel?: string }[] = [
+  { caption: 'Ask a question mid-run', detail: 'the agent stops to ask; you answer in a card', session: 'demo-question' },
+  { caption: 'Approve a tool', detail: 'a permission request, allowed or denied in place', session: 'demo-permission' },
+  { caption: 'See your limits', detail: 'rate limits and cost, live, per harness', panel: 'limits' },
+];
+---
+
+<section class="stage" aria-label={hasDemo ? 'Interactive demo' : 'Screenshot'}>
+  <div class="window" data-stage>
+    <SketchFrame>
+      <div class="titlebar">
+        <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="title">{hasDemo ? 'sedano · live demo' : 'sedano'}</span>
+        {
+          hasDemo && (
+            <span class="actions">
+              <button class="icon" type="button" data-expand aria-label="Expand the demo" title="Expand">
+                <svg viewBox="0 0 20 20" aria-hidden="true">
+                  <path class="open" d="M3.5 8V3.6H8M16.5 8V3.6H12M3.5 12v4.4H8M16.5 12v4.4H12" />
+                  <path class="shut" d="M8 3.5V8H3.6M12 3.5V8h4.4M8 16.5V12H3.6M12 16.5V12h4.4" />
+                </svg>
+              </button>
+              <a class="icon" href="/demo/" target="_blank" rel="noopener" aria-label="Open the demo in a new tab" title="New tab">
+                <svg viewBox="0 0 20 20" aria-hidden="true">
+                  <path d="M11.5 3.6h4.9v4.9M16.2 3.8 9.4 10.6M8.5 4.4H4.2v11.4h11.4v-4.3" />
+                </svg>
+              </a>
+            </span>
+          )
+        }
+      </div>
+      {
+        hasDemo ? (
+          <div class="viewport">
+            <iframe title="Interactive Sedano demo" loading="lazy" tabindex="-1" data-demo />
+            <script is:inline>
+              (() => {
+                // Set src here, not in the markup, so the first load already has the page theme.
+                const theme = document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
+                document.currentScript.previousElementSibling.src = `/demo/?embed=1&theme=${theme}`;
+              })();
+            </script>
+            <button class="activate" type="button" data-activate aria-label="Try it: click to play the interactive demo">
+              <span class="play">
+                <svg viewBox="0 0 20 20" aria-hidden="true">
+                  <path d="M6.4 4.2C6 9 6.2 12.6 6.6 15.8 10 13.8 13 12 15.6 10 12.8 8 10 6 6.4 4.2Z" />
+                </svg>
+                Try it
+              </span>
+              <span class="hint" aria-hidden="true">
+                <Arrow class="hint-arrow" />
+                <Note>click to play</Note>
+              </span>
+            </button>
+            <noscript>
+              <a class="noscript" href="/demo/">
+                Open the interactive demo
+              </a>
+            </noscript>
+          </div>
+        ) : (
+          <div class="still">
+            <a class="zoomable shot-dark" href="/shots/hero-dark.webp" data-caption={shotAlt}>
+              <img src="/shots/hero-dark.webp" alt={shotAlt} width="3200" height="2000" fetchpriority="high" />
+            </a>
+            <a class="zoomable shot-light" href="/shots/hero-light.webp" data-caption={shotAlt}>
+              <img src="/shots/hero-light.webp" alt={shotAlt} width="3200" height="2000" />
+            </a>
+            <Lightbox />
+          </div>
+        )
+      }
+    </SketchFrame>
+  </div>
+
+  <ol class="moments">
+    {
+      moments.map((m, i) => (
+        <li>
+          {hasDemo && (m.session || m.panel) ? (
+            <button type="button" class="moment" data-session={m.session} data-panel={m.panel}>
+              <span class="n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+              <span class="caption">{m.caption}</span>
+              <span class="detail">{m.detail}</span>
+            </button>
+          ) : (
+            <div class="moment">
+              <span class="n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+              <span class="caption">{m.caption}</span>
+              <span class="detail">{m.detail}</span>
+            </div>
+          )}
+        </li>
+      ))
+    }
+  </ol>
+</section>
+
+<script>
+  import { bridgeDemo, pageTheme } from '../scripts/demo-bridge';
+
+  const stage = document.querySelector<HTMLElement>('[data-stage]');
+  const frame = stage?.querySelector<HTMLIFrameElement>('iframe[data-demo]');
+  const overlay = stage?.querySelector<HTMLButtonElement>('[data-activate]');
+  const expand = stage?.querySelector<HTMLButtonElement>('[data-expand]');
+
+  if (stage && frame && overlay && expand) {
+    let session: string | undefined;
+    let panel: string | undefined;
+
+    const demo = bridgeDemo(frame, () => {
+      const params = new URLSearchParams({ embed: '1', theme: pageTheme() });
+      if (session) params.set('session', session);
+      if (panel) params.set('panel', panel);
+      return `/demo/?${params}`;
+    });
+
+    const activate = () => {
+      stage.classList.add('is-active');
+      frame.removeAttribute('tabindex');
+      frame.focus();
+    };
+    const deactivate = () => {
+      if (stage.classList.contains('is-full')) return;
+      stage.classList.remove('is-active');
+      frame.setAttribute('tabindex', '-1');
+    };
+
+    const setFull = (full: boolean) => {
+      stage.classList.toggle('is-full', full);
+      document.body.classList.toggle('demo-full', full);
+      expand.setAttribute('aria-label', full ? 'Close the expanded demo' : 'Expand the demo');
+      expand.title = full ? 'Close' : 'Expand';
+      if (full) activate();
+      else expand.focus();
+    };
+
+    overlay.addEventListener('click', activate);
+    expand.addEventListener('click', () => setFull(!stage.classList.contains('is-full')));
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && stage.classList.contains('is-full')) setFull(false);
+    });
+    // Clicking anywhere else on the page hands scrolling back to the page.
+    document.addEventListener('pointerdown', (event) => {
+      if (!stage.contains(event.target as Node)) deactivate();
+    });
+
+    document.querySelectorAll<HTMLButtonElement>('button.moment').forEach((button) => {
+      button.addEventListener('click', () => {
+        session = button.dataset.session;
+        panel = button.dataset.panel;
+        demo.sendOrReload({ type: 'sedano:goto', session, panel });
+        stage.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
+        activate();
+      });
+    });
+  }
+</script>
+
+<style>
+  .stage {
+    max-width: calc(1200px + 2 * var(--s-6));
+    margin: var(--s-16) auto 0;
+    padding: 0 var(--s-6);
+  }
+  @media (max-width: 480px) {
+    .stage {
+      padding: 0 var(--s-4);
+    }
+  }
+
+  /* The frame's strokes sit about 1.5% in from each edge, so the padding has to
+     grow with the window or the content runs over the lines. */
+  .window :global(.sketch-frame) {
+    padding: max(12px, 2%);
+    background: var(--paper);
+  }
+  .titlebar {
+    display: flex;
+    align-items: center;
+    gap: var(--s-3);
+    min-height: 36px;
+    padding: 0 var(--s-1) var(--s-2);
+  }
+  .dots {
+    display: inline-flex;
+    gap: 7px;
+  }
+  .dots i {
+    width: 11px;
+    height: 11px;
+    border: 1.3px solid var(--ink);
+    border-radius: 50% 46% 52% 48%;
+  }
+  .dots i:nth-child(1) {
+    background: #ff6159;
+  }
+  .dots i:nth-child(2) {
+    background: #ffbd2e;
+  }
+  .dots i:nth-child(3) {
+    background: #28c941;
+  }
+  .title {
+    flex: 1;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--ink-mute);
+  }
+  .actions {
+    display: inline-flex;
+    gap: var(--s-1);
+  }
+  .icon {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border: 0;
+    border-radius: var(--r-1);
+    background: transparent;
+    color: var(--ink-2);
+    cursor: pointer;
+  }
+  .icon:hover {
+    color: var(--ink);
+    background: var(--paper-2);
+  }
+  .icon svg {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .icon .shut,
+  .is-full .icon .open {
+    display: none;
+  }
+  .is-full .icon .shut {
+    display: inline;
+  }
+
+  .viewport {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    max-height: 82vh;
+    width: 100%;
+    overflow: hidden;
+    border: 1px solid var(--hair-strong);
+    border-radius: var(--r-1);
+    background: var(--paper-2);
+  }
+  iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  .activate {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: linear-gradient(to top, color-mix(in srgb, var(--paper) 55%, transparent), transparent 55%);
+    cursor: pointer;
+  }
+  .activate:focus-visible {
+    outline-offset: -4px;
+  }
+  .is-active .activate {
+    display: none;
+  }
+  .play {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    min-height: 48px;
+    padding: var(--s-2) var(--s-6) var(--s-2) var(--s-4);
+    border: var(--stroke) solid var(--ink);
+    border-radius: var(--r-2);
+    background: var(--paper);
+    color: var(--ink);
+    box-shadow: var(--sticker-shadow);
+    font: 600 1rem/1.2 var(--font-sans);
+  }
+  .play svg {
+    width: 18px;
+    height: 18px;
+    fill: var(--ink);
+    stroke: var(--ink);
+    stroke-width: 1.4;
+    stroke-linejoin: round;
+  }
+  .hint {
+    position: absolute;
+    top: calc(50% + 34px);
+    left: calc(50% + 40px);
+    display: inline-flex;
+    align-items: flex-start;
+    pointer-events: none;
+  }
+  .hint :global(.hint-arrow) {
+    transform: scaleY(-1) rotate(8deg);
+    margin-top: -18px;
+  }
+  .hint :global(.note) {
+    margin-top: 14px;
+    white-space: nowrap;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .play {
+      transition:
+        transform var(--dur) var(--spring),
+        box-shadow var(--dur) var(--spring);
+    }
+    .activate:hover .play {
+      transform: translate(-1px, -1px);
+      box-shadow: var(--sticker-shadow-hover);
+    }
+  }
+  .noscript {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    font-weight: 600;
+  }
+
+  /* Expanded: the same window, fixed over the page, so the demo keeps its state. */
+  .is-full {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    padding: var(--s-4);
+    background: var(--paper);
+  }
+  .is-full :global(.sketch-frame) {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  .is-full .viewport {
+    flex: 1;
+    aspect-ratio: auto;
+    max-height: none;
+  }
+  :global(body.demo-full) {
+    overflow: hidden;
+  }
+
+  /* Phones: the demo in a phone-shaped window, as the app looks on a phone. */
+  @media (max-width: 640px) {
+    .window:not(.is-full) {
+      max-width: 390px;
+      margin-inline: auto;
+    }
+    .window:not(.is-full) .viewport {
+      aspect-ratio: auto;
+      height: min(720px, 78svh);
+      border-radius: 22px;
+    }
+    .hint {
+      left: auto;
+      right: 8%;
+    }
+  }
+
+  .still {
+    border-radius: var(--r-1);
+    overflow: hidden;
+  }
+  .still img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  :global(:root[data-theme='dark']) .shot-light,
+  :global(:root:not([data-theme='dark'])) .shot-dark {
+    display: none;
+  }
+
+  .moments {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s-4) var(--s-6);
+    max-width: 1000px;
+    margin: var(--s-8) auto 0;
+    padding: 0;
+    list-style: none;
+  }
+  @media (max-width: 720px) {
+    .moments {
+      grid-template-columns: 1fr;
+      max-width: var(--content);
+    }
+  }
+  .moment {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0 var(--s-2);
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+  }
+  button.moment {
+    cursor: pointer;
+    border-radius: var(--r-1);
+  }
+  button.moment:hover .caption {
+    text-decoration: underline;
+    text-decoration-color: var(--pen);
+    text-underline-offset: 4px;
+  }
+  .n {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    color: var(--pen);
+    padding-top: 3px;
+  }
+  .caption {
+    font-family: var(--font-hand);
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.1;
+    color: var(--ink);
+  }
+  .detail {
+    grid-column: 2;
+    margin-top: var(--s-1);
+    font-size: 0.9375rem;
+    color: var(--ink-2);
+  }
+</style>

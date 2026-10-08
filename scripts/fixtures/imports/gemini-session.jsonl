@@ -1,0 +1,4 @@
+{"sessionId":"d37416ea-8f31-49cd-8bcf-888aa8b386b8","projectHash":"__HASH__","startTime":"2026-09-06T11:58:27.075Z","lastUpdated":"2026-09-06T11:59:27.075Z","kind":"main"}
+{"$set":{"messages":[{"id":"ctx","timestamp":"2026-09-06T11:58:27.075Z","type":"user","content":[{"text":"<session_context>\nThis is the Gemini CLI.\n</session_context>"}]}]}}
+{"id":"u1","timestamp":"2026-09-06T11:58:40.000Z","type":"user","content":[{"text":"Summarize the open issues"}]}
+{"id":"g1","timestamp":"2026-09-06T11:58:50.000Z","type":"gemini","content":"Three are open."}

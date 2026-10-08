@@ -1,0 +1,76 @@
+---
+title: Claude Code
+description: How Sedano runs Claude Code over stream-json, what it supports (subagents, questions, six approval modes) and how its usage limits are read.
+sidebar:
+  order: 2
+---
+
+import Shot from '../../../../components/Shot.astro';
+
+## How it is launched
+
+```bash
+claude --print --verbose \
+  --input-format stream-json --output-format stream-json \
+  --include-partial-messages --permission-prompt-tool stdio \
+  --session-id <uuid> \
+  [--model <alias>] [--effort <level>] [--permission-mode <mode>]
+```
+
+A resumed session uses `--resume <uuid>` instead of `--session-id`.
+`bypassPermissions` maps to `--dangerously-skip-permissions`. The process runs
+as a [durable agent](/docs/getting-started/concepts/#durable-agents), so it
+survives a server restart.
+
+Next to the stream, Sedano reads Claude Code's own transcript files under
+`~/.claude/projects/`. That is where subagent work is written.
+
+## Supported
+
+- **Models:** the aliases the installed CLI knows (Opus, Sonnet, Haiku and their
+  1M-context variants where available). Versions are read from the installed
+  binary, so they follow CLI updates without spending tokens.
+- **Effort:** `--effort <level>`.
+- **Approval modes:** `default`, `acceptEdits`, `auto`, `manual`, `plan`,
+  `bypassPermissions`.
+- **Questions:** permission requests and the native `AskUserQuestion` tool both
+  become a card you answer.
+- **Subagents:** live cards with their own tool calls while they run. Claude
+  Code is the only harness where this exists.
+- **Mid-turn input:** a prompt sent while a turn runs goes straight to the CLI
+  and opens its own turn.
+- **Images**, resume, SSH hosts.
+- **Tokens:** input, output, cache read and write, reasoning, context window and
+  cost, as reported. Tokens per second use the CLI's own incremental counts
+  while it thinks.
+
+## Not supported
+
+- The `dontAsk` approval mode.
+
+## Usage limits
+
+Claude Code reports its rate-limit windows on every turn, so the bars update
+from the session itself with no extra request. When no session has reported
+recently, Sedano asks Anthropic's OAuth usage endpoint with the token Claude
+Code stored in the macOS keychain (or `~/.claude/.credentials.json`). See
+[Limits and usage](/docs/settings/limits/).
+
+<Shot
+  src="/shots/limits.webp"
+  alt="The limits panel: Claude Code on a Max plan at 12% of the 5-hour window and 68% of the 7-day window, with Command Code and Codex readings below and a Refresh now button."
+  width={946}
+  height={856}
+  maxWidth="420px"
+/>
+
+## Install
+
+```bash
+npm install -g @anthropic-ai/claude-code
+claude   # log in once
+```
+
+Any install method works as long as `claude` is on a path Sedano searches; see
+[CLI not found](/docs/faq/troubleshooting/#a-cli-is-installed-but-sedano-says-it-is-missing).
+A terminal tab can also run the official Claude Code TUI (preset **Claude Code**).

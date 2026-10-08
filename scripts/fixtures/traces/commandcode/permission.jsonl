@@ -1,0 +1,95 @@
+{"dir":"client","ms":3,"line":"Use the Bash tool to run exactly: echo hi"}
+{"dir":"agent","ms":589,"line":"{\"type\":\"event\",\"event\":{\"type\":\"run_start\",\"sessionId\":\"09594126-95b2-40d9-b511-637f1eb536a0\"}}"}
+{"dir":"agent","ms":628,"line":"{\"type\":\"event\",\"event\":{\"type\":\"turn_start\",\"turnNumber\":1}}"}
+{"dir":"agent","ms":646,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_start\"}}"}
+{"dir":"agent","ms":646,"line":"{\"type\":\"event\",\"event\":{\"type\":\"model_request_start\",\"model\":\"poolside/laguna-s-2.1-free\"}}"}
+{"dir":"agent","ms":660,"line":"{\"type\":\"event\",\"event\":{\"type\":\"model_trace\",\"traceId\":\"b152499648a3ddc80dd8cfe8afd5bbd5\"}}"}
+{"dir":"agent","ms":2904,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"I\"}}"}
+{"dir":"agent","ms":2904,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"I\"}]}}"}
+{"dir":"agent","ms":2904,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"'ll\"}}"}
+{"dir":"agent","ms":2904,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"I'll\"}]}}"}
+{"dir":"agent","ms":2904,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" run\"}}"}
+{"dir":"agent","ms":2904,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"I'll run\"}]}}"}
+{"dir":"agent","ms":2904,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" that\"}}"}
+{"dir":"agent","ms":2904,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"I'll run that\"}]}}"}
+{"dir":"agent","ms":2904,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" command\"}}"}
+{"dir":"agent","ms":2905,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"I'll run that command\"}]}}"}
+{"dir":"agent","ms":2905,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" for\"}}"}
+{"dir":"agent","ms":2905,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"I'll run that command for\"}]}}"}
+{"dir":"agent","ms":2931,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" you\"}}"}
+{"dir":"agent","ms":2931,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"I'll run that command for you\"}]}}"}
+{"dir":"agent","ms":2961,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" right\"}}"}
+{"dir":"agent","ms":2961,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"I'll run that command for you right\"}]}}"}
+{"dir":"agent","ms":2984,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" away\"}}"}
+{"dir":"agent","ms":2984,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"I'll run that command for you right away\"}]}}"}
+{"dir":"agent","ms":3052,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\".\"}}"}
+{"dir":"agent","ms":3052,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"I'll run that command for you right away.\"}]}}"}
+{"dir":"agent","ms":3308,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"I'll run that command for you right away.\"},{\"type\":\"tool_use\",\"id\":\"chatcmpl-tool-9b8f1929d7a2433480a025dc6c1db6f9\",\"name\":\"shell_command\",\"input\":{\"command\":\"echo hi\"}}]}}"}
+{"dir":"agent","ms":3310,"line":"{\"type\":\"event\",\"event\":{\"type\":\"model_request_end\",\"model\":\"poolside/laguna-s-2.1-free\",\"usage\":{\"inputTokens\":17744,\"outputTokens\":33,\"cacheReadTokens\":9728,\"cacheWriteTokens\":0},\"stopReason\":\"tool_calls\"}}"}
+{"dir":"agent","ms":3310,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_end\",\"content\":[{\"type\":\"text\",\"text\":\"I'll run that command for you right away.\"},{\"type\":\"tool_use\",\"id\":\"chatcmpl-tool-9b8f1929d7a2433480a025dc6c1db6f9\",\"name\":\"shell_command\",\"input\":{\"command\":\"echo hi\"}}]}}"}
+{"dir":"agent","ms":3310,"line":"{\"type\":\"event\",\"event\":{\"type\":\"tool_queued\",\"toolCallId\":\"chatcmpl-tool-9b8f1929d7a2433480a025dc6c1db6f9\",\"toolName\":\"shell_command\",\"input\":{\"command\":\"echo hi\"}}}"}
+{"dir":"agent","ms":3316,"line":"{\"type\":\"event\",\"event\":{\"type\":\"tool_hook_blocked\",\"toolCallId\":\"chatcmpl-tool-9b8f1929d7a2433480a025dc6c1db6f9\",\"toolName\":\"shell_command\",\"hookOutput\":\"Error: Tool \\\"shell_command\\\" requires permissions. Use --yolo (or --dangerously-skip-permissions) to enable file writes and shell commands in print mode.\"}}"}
+{"dir":"agent","ms":3316,"line":"{\"type\":\"event\",\"event\":{\"type\":\"turn_end\",\"turnNumber\":1,\"hadToolCalls\":true,\"usage\":{\"inputTokens\":17744,\"outputTokens\":33,\"cacheReadTokens\":9728,\"cacheWriteTokens\":0}}}"}
+{"dir":"agent","ms":3319,"line":"{\"type\":\"event\",\"event\":{\"type\":\"turn_start\",\"turnNumber\":2}}"}
+{"dir":"agent","ms":3321,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_start\"}}"}
+{"dir":"agent","ms":3321,"line":"{\"type\":\"event\",\"event\":{\"type\":\"model_request_start\",\"model\":\"poolside/laguna-s-2.1-free\"}}"}
+{"dir":"agent","ms":3321,"line":"{\"type\":\"event\",\"event\":{\"type\":\"model_trace\",\"traceId\":\"eb6105ceca9ba50340efe2c2b9ef8267\"}}"}
+{"dir":"agent","ms":4921,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"The\"}}"}
+{"dir":"agent","ms":4921,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"The\"}]}}"}
+{"dir":"agent","ms":4921,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" shell\"}}"}
+{"dir":"agent","ms":4921,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"The shell\"}]}}"}
+{"dir":"agent","ms":4921,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" command\"}}"}
+{"dir":"agent","ms":4921,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"The shell command\"}]}}"}
+{"dir":"agent","ms":4921,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" tool\"}}"}
+{"dir":"agent","ms":4921,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"The shell command tool\"}]}}"}
+{"dir":"agent","ms":4921,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" isn\"}}"}
+{"dir":"agent","ms":4921,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"The shell command tool isn\"}]}}"}
+{"dir":"agent","ms":4921,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"'t\"}}"}
+{"dir":"agent","ms":4921,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"The shell command tool isn't\"}]}}"}
+{"dir":"agent","ms":4921,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" available\"}}"}
+{"dir":"agent","ms":4921,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"The shell command tool isn't available\"}]}}"}
+{"dir":"agent","ms":4921,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" in\"}}"}
+{"dir":"agent","ms":4921,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"The shell command tool isn't available in\"}]}}"}
+{"dir":"agent","ms":4921,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" this\"}}"}
+{"dir":"agent","ms":4921,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"The shell command tool isn't available in this\"}]}}"}
+{"dir":"agent","ms":4921,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" environment\"}}"}
+{"dir":"agent","ms":4921,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"The shell command tool isn't available in this environment\"}]}}"}
+{"dir":"agent","ms":4921,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\".\"}}"}
+{"dir":"agent","ms":4921,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"The shell command tool isn't available in this environment.\"}]}}"}
+{"dir":"agent","ms":4921,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" You\"}}"}
+{"dir":"agent","ms":4921,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"The shell command tool isn't available in this environment. You\"}]}}"}
+{"dir":"agent","ms":4921,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" can\"}}"}
+{"dir":"agent","ms":4922,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"The shell command tool isn't available in this environment. You can\"}]}}"}
+{"dir":"agent","ms":4922,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" run\"}}"}
+{"dir":"agent","ms":4922,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"The shell command tool isn't available in this environment. You can run\"}]}}"}
+{"dir":"agent","ms":4922,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" `\"}}"}
+{"dir":"agent","ms":4922,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"The shell command tool isn't available in this environment. You can run `\"}]}}"}
+{"dir":"agent","ms":4922,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"echo\"}}"}
+{"dir":"agent","ms":4922,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"The shell command tool isn't available in this environment. You can run `echo\"}]}}"}
+{"dir":"agent","ms":4922,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" hi\"}}"}
+{"dir":"agent","ms":4922,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"The shell command tool isn't available in this environment. You can run `echo hi\"}]}}"}
+{"dir":"agent","ms":4922,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\"`\"}}"}
+{"dir":"agent","ms":4922,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"The shell command tool isn't available in this environment. You can run `echo hi`\"}]}}"}
+{"dir":"agent","ms":4922,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" directly\"}}"}
+{"dir":"agent","ms":4922,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"The shell command tool isn't available in this environment. You can run `echo hi` directly\"}]}}"}
+{"dir":"agent","ms":4922,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" in\"}}"}
+{"dir":"agent","ms":4922,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"The shell command tool isn't available in this environment. You can run `echo hi` directly in\"}]}}"}
+{"dir":"agent","ms":4923,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" your\"}}"}
+{"dir":"agent","ms":4923,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"The shell command tool isn't available in this environment. You can run `echo hi` directly in your\"}]}}"}
+{"dir":"agent","ms":4945,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" terminal\"}}"}
+{"dir":"agent","ms":4945,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"The shell command tool isn't available in this environment. You can run `echo hi` directly in your terminal\"}]}}"}
+{"dir":"agent","ms":4951,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" to\"}}"}
+{"dir":"agent","ms":4952,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"The shell command tool isn't available in this environment. You can run `echo hi` directly in your terminal to\"}]}}"}
+{"dir":"agent","ms":4979,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" get\"}}"}
+{"dir":"agent","ms":4979,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"The shell command tool isn't available in this environment. You can run `echo hi` directly in your terminal to get\"}]}}"}
+{"dir":"agent","ms":4981,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" the\"}}"}
+{"dir":"agent","ms":4981,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"The shell command tool isn't available in this environment. You can run `echo hi` directly in your terminal to get the\"}]}}"}
+{"dir":"agent","ms":5039,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\" output\"}}"}
+{"dir":"agent","ms":5039,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"The shell command tool isn't available in this environment. You can run `echo hi` directly in your terminal to get the output\"}]}}"}
+{"dir":"agent","ms":5039,"line":"{\"type\":\"event\",\"event\":{\"type\":\"text_delta\",\"delta\":\".\"}}"}
+{"dir":"agent","ms":5039,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_update\",\"content\":[{\"type\":\"text\",\"text\":\"The shell command tool isn't available in this environment. You can run `echo hi` directly in your terminal to get the output.\"}]}}"}
+{"dir":"agent","ms":5055,"line":"{\"type\":\"event\",\"event\":{\"type\":\"model_request_end\",\"model\":\"poolside/laguna-s-2.1-free\",\"usage\":{\"inputTokens\":17823,\"outputTokens\":28,\"cacheReadTokens\":17760,\"cacheWriteTokens\":0},\"stopReason\":\"stop\"}}"}
+{"dir":"agent","ms":5055,"line":"{\"type\":\"event\",\"event\":{\"type\":\"message_end\",\"content\":[{\"type\":\"text\",\"text\":\"The shell command tool isn't available in this environment. You can run `echo hi` directly in your terminal to get the output.\"}]}}"}
+{"dir":"agent","ms":5055,"line":"{\"type\":\"event\",\"event\":{\"type\":\"turn_end\",\"turnNumber\":2,\"hadToolCalls\":false,\"usage\":{\"inputTokens\":17823,\"outputTokens\":28,\"cacheReadTokens\":17760,\"cacheWriteTokens\":0}}}"}
+{"dir":"agent","ms":5059,"line":"{\"type\":\"event\",\"event\":{\"type\":\"run_end\",\"result\":{\"finalText\":\"The shell command tool isn't available in this environment. You can run `echo hi` directly in your terminal to get the output.\",\"stopReason\":\"end_turn\",\"turnCount\":2,\"usage\":{\"inputTokens\":35567,\"outputTokens\":61,\"cacheReadTokens\":27488,\"cacheWriteTokens\":0},\"systemPromptTokens\":null,\"nextState\":{\"sessionId\":\"09594126-95b2-40d9-b511-637f1eb536a0\",\"messages\":[{\"role\":\"user\",\"content\":[{\"type\":\"text\",\"text\":\"Use the Bash tool to run exactly: echo hi\"}],\"meta\":{\"source\":\"user\",\"createdAt\":1790007330394,\"messageId\":\"c473d2a8-cbe4-420b-9127-e70dc232bbce\"}},{\"role\":\"assistant\",\"content\":[{\"type\":\"text\",\"text\":\"I'll run that command for you right away.\"},{\"type\":\"tool_use\",\"id\":\"chatcmpl-tool-9b8f1929d7a2433480a025dc6c1db6f9\",\"name\":\"shell_command\",\"input\":{\"command\":\"echo hi\"}}],\"meta\":{\"source\":\"model\",\"createdAt\":1790007333116,\"messageId\":\"cd40febd-1c0f-4894-92c9-d4823a606fe2\"}},{\"role\":\"user\",\"content\":[{\"type\":\"tool_result\",\"tool_use_id\":\"chatcmpl-tool-9b8f1929d7a2433480a025dc6c1db6f9\",\"content\":[{\"type\":\"text\",\"text\":\"Error: Tool \\\"shell_command\\\" requires permissions. Use --yolo (or --dangerously-skip-permissions) to enable file writes and shell commands in print mode.\"}]}],\"meta\":{\"source\":\"tool\",\"messageId\":\"7f47bfba-5925-4099-bec7-64a0b09bb05c\"}},{\"role\":\"assistant\",\"content\":[{\"type\":\"text\",\"text\":\"The shell command tool isn't available in this environment. You can run `echo hi` directly in your terminal to get the output.\"}],\"meta\":{\"source\":\"model\",\"createdAt\":1790007334861,\"messageId\":\"d5df34d7-23de-4117-b06b-dfdaa623c9e9\"}}],\"interrupted\":false,\"modState\":{\"workspace\":{\"cwd\":\"/private/tmp/sedano-capture\",\"platform\":\"darwin\",\"branch\":null,\"gitStatus\":null,\"recentCommits\":[],\"additionalDirectories\":[]},\"compaction\":{\"tokens\":17861,\"basis\":{\"role\":\"assistant\",\"content\":[{\"type\":\"text\",\"text\":\"The shell command tool isn't available in this environment. You can run `echo hi` directly in your terminal to get the output.\"}],\"meta\":{\"source\":\"model\",\"createdAt\":1790007334861,\"messageId\":\"d5df34d7-23de-4117-b06b-dfdaa623c9e9\"}}}}}}}}"}
+{"dir":"agent","ms":5059,"line":"{\"type\":\"result\",\"subtype\":\"success\",\"sessionId\":\"09594126-95b2-40d9-b511-637f1eb536a0\",\"stopReason\":\"end_turn\",\"usage\":{\"inputTokens\":35567,\"outputTokens\":61,\"cacheReadTokens\":27488,\"cacheWriteTokens\":0},\"durationMs\":4524,\"finalText\":\"The shell command tool isn't available in this environment. You can run `echo hi` directly in your terminal to get the output.\"}"}

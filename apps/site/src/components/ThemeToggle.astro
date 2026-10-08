@@ -1,0 +1,286 @@
+---
+// The theme switch: a light bulb hanging from the top edge of the page on a cord.
+// Lit = light theme, unlit = dark theme. Pulling it (click, Enter, Space) tugs the
+// cord and flips the theme; hovering makes it sway.
+//
+// The button is absolutely positioned with only `top: 0`, so it keeps the
+// horizontal place of its slot but hangs from the top of its containing block:
+// the page on the marketing pages, the fixed header in the docs. Hidden until the
+// script runs, since it does nothing without JS; the slot keeps its size, so
+// nothing moves when it appears.
+const glowId = `bulb-glow-${Math.random().toString(36).slice(2, 8)}`;
+---
+
+<span class="bulb-slot">
+  <button class="bulb" type="button" aria-label="Toggle theme" aria-pressed="false" title="Toggle theme" hidden>
+    <svg viewBox="0 0 44 84" aria-hidden="true">
+      <defs>
+        <radialGradient id={glowId}>
+          <stop offset="0%" stop-color="#ffd43b" stop-opacity="0.9"></stop>
+          <stop offset="45%" stop-color="#ffd43b" stop-opacity="0.35"></stop>
+          <stop offset="100%" stop-color="#ffd43b" stop-opacity="0"></stop>
+        </radialGradient>
+      </defs>
+      <g class="sway">
+        <g class="tug">
+          <circle class="halo" cx="22" cy="59" r="26" fill={`url(#${glowId})`}></circle>
+          <path class="cord" d="M22 -80C22.4 -20 21.6 14 22 38.4"></path>
+          <path class="socket" d="M17.2 38.4L26.8 38L26.6 46.2L17.4 46.4Z"></path>
+          <path class="thread" d="M17.6 41L26.4 40.8M17.6 43.6L26.4 43.4"></path>
+          <path
+            class="glass"
+            d="M18 46.4C18 49.6 11.6 52 11.6 59.4A10.4 10.4 0 1 0 32.4 59.4C32.4 52 26 49.6 26 46.4"
+          ></path>
+          <path
+            class="glass-sketch"
+            d="M18.6 47C18.4 50 12.2 52.6 12.3 59.8C12.6 66 17 69.8 22.4 69.6C27.8 69.4 32 65.2 31.8 59.2C31.6 52.4 25.6 50 25.4 46.8"
+          ></path>
+          <path class="filament" d="M19.6 46.6L19.2 55.6l1.4-2.6 1.4 2.6 1.4-2.6 1.4 2.6L24.4 46.6"></path>
+          <path class="shine" d="M15.4 58.6C15.4 55.8 16.6 53.8 18.4 52.8"></path>
+        </g>
+      </g>
+    </svg>
+  </button>
+</span>
+
+<script is:inline>
+  (() => {
+    const button = document.currentScript.previousElementSibling.querySelector('.bulb');
+    const root = document.documentElement;
+    // Every bulb on the page follows data-theme, whoever changed it.
+    const sync = () => button.setAttribute('aria-pressed', String(root.dataset.theme !== 'dark'));
+    sync();
+    button.hidden = false;
+    new MutationObserver(sync).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
+    button.addEventListener('click', () => {
+      const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+      root.dataset.theme = next;
+      try {
+        localStorage.setItem('starlight-theme', next);
+      } catch {}
+      // Restart the tug even on a quick second pull.
+      button.classList.remove('pulled');
+      void button.getBoundingClientRect();
+      button.classList.add('pulled');
+    });
+    button.addEventListener('animationend', (event) => {
+      if (event.target.classList.contains('tug')) button.classList.remove('pulled');
+    });
+  })();
+</script>
+
+<style>
+  .bulb-slot {
+    display: block;
+    width: 44px;
+    height: 40px;
+  }
+  .bulb {
+    --cord: var(--ink-mute);
+    --line: var(--ink);
+    --glass: #ffe98a;
+    --filament: #c2410c;
+    position: absolute;
+    top: 0;
+    z-index: 30;
+    display: block;
+    width: 44px;
+    height: 84px;
+    padding: 0;
+    border: 0;
+    border-radius: 0 0 22px 22px;
+    background: transparent;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .bulb[hidden] {
+    display: none;
+  }
+  .bulb:focus-visible {
+    outline: 2px solid var(--pen);
+    outline-offset: 2px;
+  }
+  .bulb svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    overflow: visible;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .cord {
+    fill: none;
+    stroke: var(--cord);
+    stroke-width: 1.2;
+  }
+  .socket {
+    fill: var(--ink-mute);
+    stroke: var(--line);
+    stroke-width: 1.2;
+  }
+  .thread {
+    fill: none;
+    stroke: var(--paper);
+    stroke-width: 0.9;
+  }
+  .glass {
+    fill: var(--glass);
+    stroke: var(--line);
+    stroke-width: 1.5;
+  }
+  .glass-sketch {
+    fill: none;
+    stroke: var(--line);
+    stroke-width: 0.9;
+    opacity: 0.45;
+  }
+  .filament {
+    fill: none;
+    stroke: var(--filament);
+    stroke-width: 1.2;
+  }
+  .shine {
+    fill: none;
+    stroke: #fff;
+    stroke-width: 1.4;
+    opacity: 0.85;
+  }
+
+  /* Unlit: the dark theme. */
+  .bulb[aria-pressed='false'] {
+    --line: var(--ink-2);
+    --glass: var(--paper-2);
+    --filament: var(--ink-mute);
+  }
+  .bulb[aria-pressed='false'] .halo,
+  .bulb[aria-pressed='false'] .shine {
+    opacity: 0;
+  }
+  .bulb[aria-pressed='false']:hover {
+    --glass: #2c2a27;
+  }
+  .bulb[aria-pressed='true']:hover {
+    --glass: #fff2b8;
+  }
+
+  .sway {
+    transform-box: view-box;
+    transform-origin: 22px 0;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .glass,
+    .filament,
+    .halo,
+    .shine {
+      transition:
+        fill 400ms var(--ease),
+        stroke 400ms var(--ease),
+        opacity 400ms var(--ease);
+    }
+    .bulb:hover .sway {
+      animation: bulb-sway 1.8s var(--ease);
+    }
+    .bulb.pulled .sway {
+      animation: bulb-sway-pulled 1.6s var(--ease);
+    }
+    .bulb.pulled .tug {
+      animation: bulb-tug 700ms var(--ease);
+    }
+  }
+  @keyframes bulb-sway {
+    0% {
+      transform: rotate(0);
+    }
+    18% {
+      transform: rotate(5deg);
+    }
+    40% {
+      transform: rotate(-3.5deg);
+    }
+    60% {
+      transform: rotate(2deg);
+    }
+    80% {
+      transform: rotate(-0.8deg);
+    }
+    100% {
+      transform: rotate(0);
+    }
+  }
+  @keyframes bulb-sway-pulled {
+    0%,
+    20% {
+      transform: rotate(0);
+    }
+    40% {
+      transform: rotate(-3deg);
+    }
+    62% {
+      transform: rotate(2deg);
+    }
+    82% {
+      transform: rotate(-0.8deg);
+    }
+    100% {
+      transform: rotate(0);
+    }
+  }
+  @keyframes bulb-tug {
+    0% {
+      transform: translateY(0);
+    }
+    22% {
+      transform: translateY(8px);
+    }
+    45% {
+      transform: translateY(-3px);
+    }
+    65% {
+      transform: translateY(2px);
+    }
+    82% {
+      transform: translateY(-0.8px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  /* Wide screens: a longer cord, so the bulb hangs just below the nav line. */
+  @media (min-width: 960px) {
+    .bulb {
+      width: 48px;
+      height: 96px;
+    }
+  }
+
+  /* Phones: shorter cord, same 44px-wide tap target. */
+  @media (max-width: 640px) {
+    .bulb {
+      height: 72px;
+    }
+  }
+
+  /* Starlight puts the theme control in the mobile menu footer: no cord there,
+     just the bulb in a 44px square. */
+  :global(.mobile-preferences) .bulb-slot {
+    height: 44px;
+  }
+  :global(.mobile-preferences) .bulb {
+    position: relative;
+    height: 44px;
+    overflow: hidden;
+    border-radius: var(--r-2, 10px);
+  }
+  :global(.mobile-preferences) .bulb svg {
+    position: absolute;
+    top: -33px;
+    left: 0;
+    height: 84px;
+  }
+  :global(.mobile-preferences) .cord {
+    display: none;
+  }
+</style>

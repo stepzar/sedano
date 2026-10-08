@@ -1,0 +1,73 @@
+---
+title: First session
+description: Open an agent tab, pick a workspace, harness, model and approval mode, send a prompt and answer the agent's questions.
+sidebar:
+  order: 3
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import Shot from '../../../../components/Shot.astro';
+
+<Steps>
+
+1. Press `⌘D`. A new tab opens with a launchpad: one text field and a row of
+   chips under it for the workspace, the harness, the model, the reasoning
+   effort and the approval mode. It is a tab, not a dialog.
+
+2. Pick a **workspace** (a folder, on this Mac or on an enabled SSH host). The
+   list is filled from `~/Projects`, the session stores of Claude Code, Codex
+   and Grok, and your SSH hosts. `⌘K` jumps to any workspace or session.
+
+3. Pick a **harness**. Only installed harnesses are offered; one whose binary is
+   missing says so. Freebuff opens as a terminal tab, because it has no
+   machine-readable mode.
+
+4. Pick a **model**, an **effort** and an **approval mode**. The lists come from
+   the harness on that machine, so they can differ between hosts. An option the
+   harness cannot honour is not offered.
+
+5. Type a prompt and send it. The tab is named after your first message.
+
+</Steps>
+
+## While the agent works
+
+- Tool calls, reasoning and replies stream into the transcript. `esc`
+  interrupts the running turn.
+- If you send another prompt while a turn is running, it is queued on disk and
+  sent when the turn ends. Claude Code is the exception: its CLI takes input
+  mid-turn, so the prompt goes straight in.
+- When the harness asks for permission or asks a question, a card appears with
+  the options it offered. The turn waits until you pick one.
+
+<Shot
+  src="/shots/permission-card.webp"
+  alt="A permission card: the harness asks to remove generated build artifacts, with the options Allow once and Deny."
+  width={1498}
+  height={722}
+/>
+
+<Shot
+  src="/shots/question-card.webp"
+  alt="A question card: the agent asks what a rate limiter should cover, with two described options and a note that it is waiting for an answer."
+  width={1498}
+  height={668}
+/>
+
+Command Code never asks: in headless mode it decides on its own. See
+[Command Code](/docs/harnesses/command-code/).
+
+## Terminal tabs
+
+`⌘T` opens a terminal tab on the machine you are looking at. It runs in `tmux`,
+so it keeps running after you close the tab or quit the app. See
+[Terminal tabs](/docs/harnesses/terminal/).
+
+## Older conversations
+
+The import picker (the icon next to the composer's folder chip, or a
+workspace's right-click menu) lists archived sessions and the conversations each
+harness keeps in its own store for that folder. Continuing one resumes it in
+Sedano. This scan only runs on this Mac.
+
+Next: [Concepts](/docs/getting-started/concepts/).

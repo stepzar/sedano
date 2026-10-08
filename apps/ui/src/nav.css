@@ -1,0 +1,311 @@
+/**
+ * Navigation surfaces: the folder picker's columns, and the terminal that comes
+ * up from the bottom edge.
+ *
+ * Loaded after `styles.css` (see the import in `App.tsx`), so it inherits every
+ * token and every button rule and only adds the shapes those two surfaces need.
+ * Nothing here restyles a control that already exists elsewhere.
+ */
+
+/* Folder picker: columns ------------------------------------------------- */
+
+/* The panel is as wide as the path is deep, up to a cap: a fixed 880px frame
+   left two thirds of itself empty while you were still standing in the first
+   column, which reads as a panel that failed to load. The floor is what the
+   header needs (host, search, the dot-folder toggle) before it wraps. */
+.folder-picker {
+  width: fit-content;
+  min-width: min(600px, 94vw);
+  max-width: min(900px, 94vw);
+}
+
+/* The strip the columns live in. It scrolls sideways — a path is as deep as it
+   is — and each column keeps its own vertical scroll, so walking down does not
+   move the levels you came through. */
+.fp-cols {
+  display: flex;
+  align-items: stretch;
+  min-height: 300px;
+  max-height: min(340px, 46vh);
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: thin;
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fp-cols {
+    scroll-behavior: auto;
+  }
+}
+
+.fp-cols::-webkit-scrollbar {
+  height: 5px;
+}
+
+.fp-cols::-webkit-scrollbar-thumb {
+  background: var(--line-strong);
+  border-radius: 3px;
+}
+
+.fp-col {
+  display: flex;
+  flex-direction: column;
+  flex: none;
+  width: 236px;
+  min-width: 236px;
+  padding: 4px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  border-right: 1px solid var(--line-soft);
+}
+
+.fp-col:last-child {
+  border-right: none;
+}
+
+/* The column the keyboard is in. A tint rather than an outline: an outline on a
+   scrolling container draws over its own rows at the edges. */
+.fp-col.focus {
+  background: var(--surface-2);
+}
+
+.fp-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  height: 32px;
+  flex: none;
+  padding: 0 4px 0 8px;
+  border: none;
+  border-radius: var(--r-md);
+  background: transparent;
+  box-shadow: none;
+  color: var(--fg-2);
+  text-align: left;
+}
+
+.fp-row:hover:not(:disabled) {
+  background: var(--hover);
+  color: var(--fg);
+}
+
+/* The selected row of every column stays marked, not only the focused one: that
+   standing mark down the strip is what says which path you are looking at. */
+.fp-row.sel {
+  background: var(--active);
+  color: var(--fg);
+}
+
+.fp-row.dim {
+  color: var(--fg-mute);
+}
+
+.fp-name {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* The "there is more inside this one" mark, kept quiet until the row matters. */
+.fp-into {
+  display: inline-flex;
+  flex: none;
+  color: var(--fg-faint);
+  opacity: 0;
+}
+
+.fp-row:hover .fp-into,
+.fp-row.sel .fp-into {
+  opacity: 1;
+}
+
+/* Reading, empty, failed. Three states, three shapes: the one thing this may
+   never do is draw a machine that did not answer the way it draws a folder with
+   nothing in it. */
+.fp-state {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 8px;
+  color: var(--fg-faint);
+  font-size: 0.92em;
+}
+
+.fp-state[data-state='error'] {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+  margin: 4px;
+  padding: 9px 10px;
+  border: 1px solid var(--err);
+  border-radius: var(--r-md);
+  background: var(--err-soft);
+  color: var(--err);
+}
+
+.fp-error-kind {
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.fp-error-why {
+  color: var(--fg-2);
+  font-size: 0.92em;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+/* Step out of the leftmost column. Full height and flush against the strip, so
+   it reads as the edge of the path rather than as a button floating over it. */
+.fp-out {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 28px;
+  padding: 0;
+  border: none;
+  border-right: 1px solid var(--line-soft);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: var(--fg-faint);
+  transform: rotate(180deg);
+}
+
+.fp-out:hover:not(:disabled) {
+  background: var(--hover);
+  color: var(--fg);
+}
+
+.fp-out:disabled {
+  opacity: 0.3;
+}
+
+/* The terminal, from the bottom ------------------------------------------ */
+
+/**
+ * The control sits inside the bottom bar; the panel rises above it. An icon
+ * only — the shortcut is in its tooltip.
+ */
+.term-handle {
+  flex: none;
+  margin: 0;
+  border: 1px solid transparent;
+  border-radius: var(--r-md);
+  background: transparent;
+  box-shadow: none;
+  color: var(--fg-mute);
+}
+
+.term-handle:hover:not(:disabled) {
+  background: var(--hover);
+  color: var(--fg);
+}
+
+.term-handle.on {
+  background: var(--active);
+  border-color: var(--line);
+  color: var(--fg);
+}
+
+/**
+ * The panel rises from the edge it is docked to, and it takes a share of the
+ * window rather than a fixed 250px: on a short window a fixed strip left the
+ * composer with nothing, which is the one thing raising a terminal must not do.
+ */
+.dock-bottom {
+  position: relative;
+  /* `--dock-height` is what the top edge was dragged to (see `DockResizer`);
+     the limits hold on a window that got smaller since. */
+  height: var(--dock-height, clamp(150px, 34vh, 260px));
+  min-height: 120px;
+  max-height: 80vh;
+  animation: dock-rise 190ms var(--ease);
+}
+
+/* The grab strip on the top edge: invisible until the pointer finds it, then
+   a quiet line — the ghost of the border it sits on. */
+.dock-resizer {
+  position: absolute;
+  top: -4px;
+  left: 0;
+  right: 0;
+  z-index: 4;
+  height: 8px;
+  cursor: row-resize;
+  touch-action: none;
+}
+
+.dock-resizer::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 3px;
+  height: 2px;
+  background: transparent;
+  transition: background var(--dur) var(--ease);
+}
+
+.dock-resizer:hover::after,
+.dock-resizer:active::after {
+  background: var(--line-strong);
+}
+
+body.resizing-rows,
+body.resizing-rows * {
+  cursor: row-resize !important;
+}
+
+/* On a phone the panel is a sheet over the lower part of the pane, with a
+   finger-sized grab strip. */
+@media (max-width: 820px) {
+  .dock-bottom {
+    height: var(--dock-height, 45%);
+    max-height: 75%;
+  }
+
+  .dock-resizer {
+    top: -14px;
+    height: 28px;
+  }
+
+  .dock-resizer::after {
+    top: 13px;
+    left: calc(50% - 20px);
+    right: auto;
+    width: 40px;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--line-strong);
+  }
+
+  .dock-head .icon-btn,
+  .dock-tab,
+  .dock-tab-add {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+@keyframes dock-rise {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dock-bottom {
+    animation: none;
+  }
+}

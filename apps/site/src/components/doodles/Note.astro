@@ -1,0 +1,21 @@
+---
+// Handwritten aside in Caveat. Decoration only: say the same thing in the body text.
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+---
+
+<span class:list={['note', className]}><slot /></span>
+
+<style>
+  .note {
+    font-family: var(--font-hand);
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1;
+    color: var(--pen);
+    display: inline-block;
+    transform: rotate(-3deg);
+  }
+</style>

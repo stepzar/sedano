@@ -1,0 +1,73 @@
+---
+title: Data and backups
+description: Where Sedano keeps its SQLite database and other state, how to back it up and restore it, and how migrations behave.
+sidebar:
+  order: 3
+---
+
+## Where it is
+
+Everything Sedano owns is in `~/.sedano` (the installed app) or `~/.sedano-dev`
+(a development copy). The main file is `~/.sedano/sedano.db`, one SQLite
+database with sessions, events, the prompt queue, pending questions, usage
+readings and settings. The full list is in
+[Concepts](/docs/getting-started/concepts/#where-data-lives).
+
+Not in there: the harnesses' own transcripts and credentials, which stay where
+each CLI keeps them (for example `~/.claude`, `~/.codex`).
+
+## Backing up
+
+Migrations run when the server opens the database. They are transactional and
+idempotent, but they only go forward: once a release has changed the schema, an
+older build cannot read the file.
+
+### Automatic backup before a migration
+
+The first time a new release opens the database, Sedano copies it (including
+anything still in the write-ahead log) before running the migrations. If the
+schema actually changed, the copy is kept next to the database as
+`~/.sedano/sedano.db.bak-<previous version>`, readable by your user only;
+if nothing changed, it is deleted. Opening with the same release takes no
+copy. The three most recent automatic backups are kept and older ones are
+deleted; copies you made by hand are never touched. If the copy cannot be
+written, the server logs it and starts anyway.
+
+### By hand
+
+To keep a copy at a moment you choose:
+
+```bash
+cp -a ~/.sedano/sedano.db ~/.sedano/sedano.db.bak-$(date +%Y%m%d)
+```
+
+Quit Sedano first so the copy is consistent, or use SQLite's own backup while it
+runs:
+
+```bash
+sqlite3 ~/.sedano/sedano.db ".backup '$HOME/sedano-backup.db'"
+```
+
+To keep attachments and settings too, copy the whole folder while Sedano is
+quit:
+
+```bash
+cp -a ~/.sedano ~/sedano-backup-$(date +%Y%m%d)
+```
+
+## Restoring
+
+1. Quit Sedano.
+2. Copy the backup over `~/.sedano/sedano.db` (an automatic one is
+   `~/.sedano/sedano.db.bak-<version>`, named after the release that last used
+   it).
+3. If the backup is older than the build you run, roll the app back too
+   (`bun run install:app --rollback` or the matching DMG): a newer build may
+   have migrated the schema in a way an older build cannot read.
+
+## Moving the data directory
+
+`SEDANO_HOME` sets a different directory for the process that reads it, for
+example a server you start yourself with `bun run start`. A development copy
+uses `SEDANO_DEV_HOME`. An app opened from Finder does not inherit your shell's
+variables, so it uses `~/.sedano`.

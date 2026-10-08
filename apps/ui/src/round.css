@@ -1,0 +1,177 @@
+/**
+ * Round controls and marks, one geometry for all of them.
+ *
+ * Close buttons, the prompt-jump button, counters and status dots are exact
+ * circles (equal sides, 50% radius) from a small set of sizes, and their glyph
+ * is an SVG centred by flexbox — never a "×" character, whose ink sits wherever
+ * the font puts it. Icon-only buttons are exact squares for the same reason.
+ * Loaded after `styles.css` and `shell.css`, before the phone layer.
+ * `check:round-ui` measures all of it.
+ */
+
+:root {
+  --round-xs: 18px;
+  --round-sm: 22px;
+  --round-md: 28px;
+  --round-lg: 36px;
+  --dot: 8px;
+}
+
+/* Close buttons ---------------------------------------------------------- */
+
+.tab .x,
+.dock-tab-x,
+.rail-search-clear,
+.ws-delete:not(.armed),
+.transcript-search-box .search-close,
+.round-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  box-sizing: border-box;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  line-height: 1;
+  font-size: 0;
+}
+
+.tab .x,
+.dock-tab-x {
+  width: var(--round-xs);
+  min-width: var(--round-xs);
+  height: var(--round-xs);
+}
+
+.tab .x {
+  margin-right: -3px;
+}
+
+.dock-tab-x {
+  margin-left: 4px;
+}
+
+.tab .x:hover,
+.dock-tab-x:hover {
+  background: var(--hover);
+}
+
+.rail-search-clear,
+.ws-delete:not(.armed),
+.transcript-search-box .search-close {
+  width: var(--round-sm);
+  min-width: var(--round-sm);
+  height: var(--round-sm);
+}
+
+.rail-search-clear {
+  right: 8px;
+}
+
+.round-close {
+  width: var(--round-md);
+  height: var(--round-md);
+}
+
+.tab .x svg,
+.dock-tab-x svg,
+.rail-search-clear svg,
+.ws-delete svg,
+.round-close svg,
+.search-close svg {
+  display: block;
+  flex: none;
+}
+
+/* The one shown only where a pointer cannot hover or Escape is missing. */
+.mobile-only {
+  display: none !important;
+}
+
+/* The jump back to a long prompt's start. */
+.msg-jump {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: var(--round-md);
+  min-width: var(--round-md);
+  height: var(--round-md);
+  padding: 0;
+  line-height: 1;
+}
+
+.msg-jump svg {
+  display: block;
+  transform: none;
+}
+
+/* Icon-only buttons: squares, glyph in the middle. */
+.icon-btn,
+.transcript-search-toggle,
+.transcript-search-box button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--round-md);
+  min-width: var(--round-md);
+  padding: 0;
+  line-height: 1;
+}
+
+.icon-btn {
+  width: var(--round-md);
+}
+
+.icon-btn svg,
+.transcript-search-toggle svg,
+.transcript-search-box button svg {
+  display: block;
+  flex: none;
+}
+
+/* Counters and dots ------------------------------------------------------ */
+
+/* A count is a circle while it has one digit, and a pill with the same ends
+   once it has more. */
+.icon-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-width: 14px;
+  height: 14px;
+  padding: 0;
+  border-radius: 7px;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.ord {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  border-radius: 10px;
+  line-height: 1;
+}
+
+.dot,
+.machine-dot,
+.env-dot {
+  width: var(--dot);
+  min-width: var(--dot);
+  height: var(--dot);
+  border-radius: 50%;
+  flex: none;
+}
+
+/* The search field's magnifier is positioned absolutely; its clear button's
+   cross must not inherit that. */
+.rail-search .rail-search-clear svg {
+  position: static;
+}

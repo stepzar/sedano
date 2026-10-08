@@ -1,0 +1,2271 @@
+{
+ "harness": "claude",
+ "name": "claude-4f5184d5-compact",
+ "description": "Session 4f5184d5 after 11:52: a resumed CLI, a /compact the user typed, and restarts of sedano while an agent works \u2014 every restart re-read the transcript and duplicated earlier prompts as turnless bubbles",
+ "source": "built by scripts/replay-build.ts from a real session (412 records, sanitized)",
+ "recordedSessionId": "9fabc4f4-bba2-4fe7-a76e-4e78ba0974ee",
+ "cycles": [
+  {
+   "trigger": "prompt",
+   "frames": [
+    {
+     "ms": 0,
+     "transcript": {
+      "parentUuid": "50ba551a-43b4-4de3-bbe2-c10270694890",
+      "isSidechain": false,
+      "promptId": "[promptId]",
+      "type": "user",
+      "message": {
+       "role": "user",
+       "content": "<task-notification>\n<task-id>a856f60ca9459aa16</task-id>\n<task-id>ae84acdc571eae4df</task-id>\n<status>stopped</status>\n<summary>[summary]</summary>\n</task-notification>"
+      },
+      "uuid": "1efefb8e-7198-4f2b-9f1b-d81ff0cc0d84",
+      "timestamp": "2026-09-24T09:22:52.789Z",
+      "permissionMode": "[permissionMode]",
+      "origin": {
+       "kind": "task-notification"
+      },
+      "promptSource": "[promptSource]",
+      "queueSkipAttachments": true,
+      "queueTranscriptOnly": true,
+      "userType": "external",
+      "entrypoint": "sdk-cli",
+      "cwd": "/tmp/sedano-capture",
+      "sessionId": "9fabc4f4-bba2-4fe7-a76e-4e78ba0974ee",
+      "version": "2.1.280",
+      "gitBranch": "main"
+     }
+    },
+    {
+     "ms": 20,
+     "transcript": {
+      "parentUuid": "1efefb8e-7198-4f2b-9f1b-d81ff0cc0d84",
+      "isSidechain": false,
+      "promptId": "[promptId]",
+      "type": "user",
+      "message": {
+       "role": "user",
+       "content": [
+        {
+         "type": "text",
+         "text": "[prompt 1]"
+        }
+       ]
+      },
+      "uuid": "e6c9e5b2-659d-490d-86c5-9e8b57ce0294",
+      "timestamp": "2026-09-24T09:22:52.804Z",
+      "permissionMode": "[permissionMode]",
+      "promptSource": "[promptSource]",
+      "turnOrigin": "[turnOrigin]",
+      "userType": "external",
+      "entrypoint": "sdk-cli",
+      "cwd": "/tmp/sedano-capture",
+      "sessionId": "9fabc4f4-bba2-4fe7-a76e-4e78ba0974ee",
+      "version": "2.1.280",
+      "gitBranch": "main"
+     }
+    },
+    {
+     "ms": 140,
+     "transcript": {
+      "parentUuid": "bfdc77fb-723d-4e7d-a5ec-945997e0ceea",
+      "isSidechain": false,
+      "message": {
+       "model": "claude-opus-5-5",
+       "id": "msg_011CfN29Ma42ZvT7Chmz3fbJ",
+       "type": "message",
+       "role": "assistant",
+       "content": [
+        {
+         "type": "thinking",
+         "thinking": "",
+         "signature": ""
+        }
+       ],
+       "container": null,
+       "stop_reason": "tool_use",
+       "stop_sequence": null,
+       "stop_details": null,
+       "usage": {
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 117918,
+        "cache_read_input_tokens": 11666,
+        "output_tokens": 281,
+        "output_tokens_details": {
+         "thinking_tokens": 77
+        },
+        "server_tool_use": {
+         "web_search_requests": 0,
+         "web_fetch_requests": 0
+        },
+        "service_tier": "[service_tier]",
+        "cache_creation": {
+         "ephemeral_1h_input_tokens": 117918,
+         "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "[inference_geo]",
+        "iterations": [
+         {
+          "input_tokens": 2,
+          "output_tokens": 281,
+          "cache_read_input_tokens": 11666,
+          "cache_creation_input_tokens": 117918,
+          "cache_creation": {
+           "ephemeral_5m_input_tokens": 0,
+           "ephemeral_1h_input_tokens": 117918
+          },
+          "type": "message",
+          "model": null
+         }
+        ],
+        "speed": "[speed]"
+       },
+       "input_transformations": [],
+       "diagnostics": {
+        "cache_miss_reason": {
+         "type": "previous_message_not_found"
+        }
+       },
+       "context_management": null
+      },
+      "apiBlockIndex": 0,
+      "requestId": "[requestId]",
+      "type": "assistant",
+      "uuid": "dfe1015d-636f-4740-8edb-4c7e31a9bf21",
+      "timestamp": "2026-09-24T09:22:59.995Z",
+      "effort": "[effort]",
+      "perTurnEffort": "[perTurnEffort]",
+      "userType": "external",
+      "entrypoint": "sdk-cli",
+      "cwd": "/tmp/sedano-capture",
+      "sessionId": "9fabc4f4-bba2-4fe7-a76e-4e78ba0974ee",
+      "version": "2.1.280",
+      "gitBranch": "main"
+     }
+    },
+    {
+     "ms": 140,
+     "stream": {
+      "type": "assistant",
+      "parent_tool_use_id": null,
+      "message": {
+       "id": "msg_011CfN29Ma42ZvT7Chmz3fbJ",
+       "role": "assistant",
+       "model": "claude-replay",
+       "content": [],
+       "usage": {
+        "input_tokens": 1,
+        "output_tokens": 1
+       }
+      }
+     }
+    },
+    {
+     "ms": 260,
+     "transcript": {
+      "parentUuid": "dfe1015d-636f-4740-8edb-4c7e31a9bf21",
+      "isSidechain": false,
+      "message": {
+       "model": "claude-opus-5-5",
+       "id": "msg_011CfN29Ma42ZvT7Chmz3fbJ",
+       "type": "message",
+       "role": "assistant",
+       "content": [
+        {
+         "type": "tool_use",
+         "id": "toolu_01SJE8rh69e3fgQZUxpLbcKL",
+         "name": "Bash",
+         "input": {
+          "command": "[command]",
+          "description": "[description]"
+         },
+         "caller": {
+          "type": "direct"
+         }
+        }
+       ],
+       "container": null,
+       "stop_reason": "tool_use",
+       "stop_sequence": null,
+       "stop_details": null,
+       "usage": {
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 117918,
+        "cache_read_input_tokens": 11666,
+        "output_tokens": 281,
+        "output_tokens_details": {
+         "thinking_tokens": 77
+        },
+        "server_tool_use": {
+         "web_search_requests": 0,
+         "web_fetch_requests": 0
+        },
+        "service_tier": "[service_tier]",
+        "cache_creation": {
+         "ephemeral_1h_input_tokens": 117918,
+         "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "[inference_geo]",
+        "iterations": [
+         {
+          "input_tokens": 2,
+          "output_tokens": 281,
+          "cache_read_input_tokens": 11666,
+          "cache_creation_input_tokens": 117918,
+          "cache_creation": {
+           "ephemeral_5m_input_tokens": 0,
+           "ephemeral_1h_input_tokens": 117918
+          },
+          "type": "message",
+          "model": null
+         }
+        ],
+        "speed": "[speed]"
+       },
+       "input_transformations": [],
+       "diagnostics": {
+        "cache_miss_reason": {
+         "type": "previous_message_not_found"
+        }
+       },
+       "context_management": null
+      },
+      "apiBlockIndex": 1,
+      "requestId": "[requestId]",
+      "type": "assistant",
+      "uuid": "a3a2a79d-efce-4df7-9dff-f5e06e96f268",
+      "timestamp": "2026-09-24T09:23:01.744Z",
+      "effort": "[effort]",
+      "perTurnEffort": "[perTurnEffort]",
+      "userType": "external",
+      "entrypoint": "sdk-cli",
+      "cwd": "/tmp/sedano-capture",
+      "sessionId": "9fabc4f4-bba2-4fe7-a76e-4e78ba0974ee",
+      "version": "2.1.280",
+      "gitBranch": "main"
+     }
+    },
+    {
+     "ms": 260,
+     "stream": {
+      "type": "assistant",
+      "parent_tool_use_id": null,
+      "message": {
+       "id": "msg_011CfN29Ma42ZvT7Chmz3fbJ",
+       "role": "assistant",
+       "model": "claude-replay",
+       "content": [],
+       "usage": {
+        "input_tokens": 1,
+        "output_tokens": 1
+       }
+      }
+     }
+    },
+    {
+     "ms": 380,
+     "transcript": {
+      "parentUuid": "a3a2a79d-efce-4df7-9dff-f5e06e96f268",
+      "isSidechain": false,
+      "promptId": "[promptId]",
+      "type": "user",
+      "message": {
+       "role": "user",
+       "content": [
+        {
+         "tool_use_id": "toolu_01SJE8rh69e3fgQZUxpLbcKL",
+         "type": "tool_result",
+         "content": "[content]",
+         "is_error": false
+        }
+       ]
+      },
+      "uuid": "031ae627-2878-4eab-86e0-41f1f699e31d",
+      "timestamp": "2026-09-24T09:23:03.605Z",
+      "toolUseResult": {
+       "stdout": "[stdout]",
+       "stderr": "",
+       "interrupted": false,
+       "isImage": false,
+       "noOutputExpected": false
+      },
+      "sourceToolAssistantUUID": "[sourceToolAssistantUUID]",
+      "userType": "external",
+      "entrypoint": "sdk-cli",
+      "cwd": "/tmp/sedano-capture",
+      "sessionId": "9fabc4f4-bba2-4fe7-a76e-4e78ba0974ee",
+      "version": "2.1.280",
+      "gitBranch": "main"
+     }
+    },
+    {
+     "ms": 500,
+     "transcript": {
+      "parentUuid": "f6e15f8e-3e7a-4817-b256-57a15cb99825",
+      "isSidechain": false,
+      "message": {
+       "model": "claude-opus-5-5",
+       "id": "msg_011CfN2A9Up7KX9gF3kJ844e",
+       "type": "message",
+       "role": "assistant",
+       "content": [
+        {
+         "type": "thinking",
+         "thinking": "",
+         "signature": ""
+        }
+       ],
+       "container": null,
+       "stop_reason": "tool_use",
+       "stop_sequence": null,
+       "stop_details": null,
+       "usage": {
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 4365,
+        "cache_read_input_tokens": 129584,
+        "output_tokens": 230,
+        "output_tokens_details": {
+         "thinking_tokens": 11
+        },
+        "server_tool_use": {
+         "web_search_requests": 0,
+         "web_fetch_requests": 0
+        },
+        "service_tier": "[service_tier]",
+        "cache_creation": {
+         "ephemeral_1h_input_tokens": 4365,
+         "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "[inference_geo]",
+        "iterations": [
+         {
+          "input_tokens": 2,
+          "output_tokens": 230,
+          "cache_read_input_tokens": 129584,
+          "cache_creation_input_tokens": 4365,
+          "cache_creation": {
+           "ephemeral_5m_input_tokens": 0,
+           "ephemeral_1h_input_tokens": 4365
+          },
+          "type": "message",
+          "model": null
+         }
+        ],
+        "speed": "[speed]"
+       },
+       "input_transformations": [],
+       "diagnostics": null,
+       "context_management": null
+      },
+      "apiBlockIndex": 0,
+      "requestId": "[requestId]",
+      "type": "assistant",
+      "uuid": "66153fda-49a5-42dc-afdf-be6bee4d90f8",
+      "timestamp": "2026-09-24T09:23:06.954Z",
+      "effort": "[effort]",
+      "perTurnEffort": "[perTurnEffort]",
+      "userType": "external",
+      "entrypoint": "sdk-cli",
+      "cwd": "/tmp/sedano-capture",
+      "sessionId": "9fabc4f4-bba2-4fe7-a76e-4e78ba0974ee",
+      "version": "2.1.280",
+      "gitBranch": "main"
+     }
+    },
+    {
+     "ms": 500,
+     "stream": {
+      "type": "assistant",
+      "parent_tool_use_id": null,
+      "message": {
+       "id": "msg_011CfN2A9Up7KX9gF3kJ844e",
+       "role": "assistant",
+       "model": "claude-replay",
+       "content": [],
+       "usage": {
+        "input_tokens": 1,
+        "output_tokens": 1
+       }
+      }
+     }
+    },
+    {
+     "ms": 620,
+     "transcript": {
+      "parentUuid": "66153fda-49a5-42dc-afdf-be6bee4d90f8",
+      "isSidechain": false,
+      "message": {
+       "model": "claude-opus-5-5",
+       "id": "msg_011CfN2A9Up7KX9gF3kJ844e",
+       "type": "message",
+       "role": "assistant",
+       "content": [
+        {
+         "type": "tool_use",
+         "id": "toolu_01ByANpcJJkBTiSpcmRfQbyc",
+         "name": "Bash",
+         "input": {
+          "command": "[command]",
+          "description": "[description]"
+         },
+         "caller": {
+          "type": "direct"
+         }
+        }
+       ],
+       "container": null,
+       "stop_reason": "tool_use",
+       "stop_sequence": null,
+       "stop_details": null,
+       "usage": {
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 4365,
+        "cache_read_input_tokens": 129584,
+        "output_tokens": 230,
+        "output_tokens_details": {
+         "thinking_tokens": 11
+        },
+        "server_tool_use": {
+         "web_search_requests": 0,
+         "web_fetch_requests": 0
+        },
+        "service_tier": "[service_tier]",
+        "cache_creation": {
+         "ephemeral_1h_input_tokens": 4365,
+         "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "[inference_geo]",
+        "iterations": [
+         {
+          "input_tokens": 2,
+          "output_tokens": 230,
+          "cache_read_input_tokens": 129584,
+          "cache_creation_input_tokens": 4365,
+          "cache_creation": {
+           "ephemeral_5m_input_tokens": 0,
+           "ephemeral_1h_input_tokens": 4365
+          },
+          "type": "message",
+          "model": null
+         }
+        ],
+        "speed": "[speed]"
+       },
+       "input_transformations": [],
+       "diagnostics": null,
+       "context_management": null
+      },
+      "apiBlockIndex": 1,
+      "requestId": "[requestId]",
+      "type": "assistant",
+      "uuid": "32664a61-9731-43ca-b442-2142a6e5b948",
+      "timestamp": "2026-09-24T09:23:07.981Z",
+      "effort": "[effort]",
+      "perTurnEffort": "[perTurnEffort]",
+      "userType": "external",
+      "entrypoint": "sdk-cli",
+      "cwd": "/tmp/sedano-capture",
+      "sessionId": "9fabc4f4-bba2-4fe7-a76e-4e78ba0974ee",
+      "version": "2.1.280",
+      "gitBranch": "main"
+     }
+    },
+    {
+     "ms": 620,
+     "stream": {
+      "type": "assistant",
+      "parent_tool_use_id": null,
+      "message": {
+       "id": "msg_011CfN2A9Up7KX9gF3kJ844e",
+       "role": "assistant",
+       "model": "claude-replay",
+       "content": [],
+       "usage": {
+        "input_tokens": 1,
+        "output_tokens": 1
+       }
+      }
+     }
+    },
+    {
+     "ms": 740,
+     "transcript": {
+      "parentUuid": "32664a61-9731-43ca-b442-2142a6e5b948",
+      "isSidechain": false,
+      "promptId": "[promptId]",
+      "type": "user",
+      "message": {
+       "role": "user",
+       "content": [
+        {
+         "tool_use_id": "toolu_01ByANpcJJkBTiSpcmRfQbyc",
+         "type": "tool_result",
+         "content": "[content]",
+         "is_error": false
+        }
+       ]
+      },
+      "uuid": "dd073cb9-5cb7-4013-95d1-6d3960645821",
+      "timestamp": "2026-09-24T09:23:08.675Z",
+      "toolUseResult": {
+       "stdout": "[stdout]",
+       "stderr": "",
+       "interrupted": false,
+       "isImage": false,
+       "noOutputExpected": false
+      },
+      "sourceToolAssistantUUID": "[sourceToolAssistantUUID]",
+      "userType": "external",
+      "entrypoint": "sdk-cli",
+      "cwd": "/tmp/sedano-capture",
+      "sessionId": "9fabc4f4-bba2-4fe7-a76e-4e78ba0974ee",
+      "version": "2.1.280",
+      "gitBranch": "main"
+     }
+    },
+    {
+     "ms": 860,
+     "transcript": {
+      "parentUuid": "66077ce4-664b-4f81-966c-ef3bdcebd3c2",
+      "isSidechain": false,
+      "message": {
+       "model": "claude-opus-5-5",
+       "id": "msg_011CfN2AUGeZanRqU8XJE3RM",
+       "type": "message",
+       "role": "assistant",
+       "content": [
+        {
+         "type": "thinking",
+         "thinking": "",
+         "signature": ""
+        }
+       ],
+       "container": null,
+       "stop_reason": "tool_use",
+       "stop_sequence": null,
+       "stop_details": null,
+       "usage": {
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 381,
+        "cache_read_input_tokens": 133949,
+        "output_tokens": 235,
+        "output_tokens_details": {
+         "thinking_tokens": 155
+        },
+        "server_tool_use": {
+         "web_search_requests": 0,
+         "web_fetch_requests": 0
+        },
+        "service_tier": "[service_tier]",
+        "cache_creation": {
+         "ephemeral_1h_input_tokens": 381,
+         "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "[inference_geo]",
+        "iterations": [
+         {
+          "input_tokens": 2,
+          "output_tokens": 235,
+          "cache_read_input_tokens": 133949,
+          "cache_creation_input_tokens": 381,
+          "cache_creation": {
+           "ephemeral_5m_input_tokens": 0,
+           "ephemeral_1h_input_tokens": 381
+          },
+          "type": "message",
+          "model": null
+         }
+        ],
+        "speed": "[speed]"
+       },
+       "input_transformations": [],
+       "diagnostics": null,
+       "context_management": null
+      },
+      "apiBlockIndex": 0,
+      "requestId": "[requestId]",
+      "type": "assistant",
+      "uuid": "f2f6fe47-9bf0-4edd-b28d-9466f3630e4f",
+      "timestamp": "2026-09-24T09:23:12.776Z",
+      "effort": "[effort]",
+      "perTurnEffort": "[perTurnEffort]",
+      "userType": "external",
+      "entrypoint": "sdk-cli",
+      "cwd": "/tmp/sedano-capture",
+      "sessionId": "9fabc4f4-bba2-4fe7-a76e-4e78ba0974ee",
+      "version": "2.1.280",
+      "gitBranch": "main"
+     }
+    },
+    {
+     "ms": 860,
+     "stream": {
+      "type": "assistant",
+      "parent_tool_use_id": null,
+      "message": {
+       "id": "msg_011CfN2AUGeZanRqU8XJE3RM",
+       "role": "assistant",
+       "model": "claude-replay",
+       "content": [],
+       "usage": {
+        "input_tokens": 1,
+        "output_tokens": 1
+       }
+      }
+     }
+    },
+    {
+     "ms": 864,
+     "transcript": {
+      "parentUuid": "f2f6fe47-9bf0-4edd-b28d-9466f3630e4f",
+      "isSidechain": false,
+      "message": {
+       "model": "claude-opus-5-5",
+       "id": "msg_011CfN2AUGeZanRqU8XJE3RM",
+       "type": "message",
+       "role": "assistant",
+       "content": [
+        {
+         "type": "tool_use",
+         "id": "toolu_01GqUNEw8wuyuyUf8q9rcTS9",
+         "name": "ToolSearch",
+         "input": {
+          "query": "[query]",
+          "max_results": 1
+         },
+         "caller": {
+          "type": "direct"
+         }
+        }
+       ],
+       "container": null,
+       "stop_reason": "tool_use",
+       "stop_sequence": null,
+       "stop_details": null,
+       "usage": {
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 381,
+        "cache_read_input_tokens": 133949,
+        "output_tokens": 235,
+        "output_tokens_details": {
+         "thinking_tokens": 155
+        },
+        "server_tool_use": {
+         "web_search_requests": 0,
+         "web_fetch_requests": 0
+        },
+        "service_tier": "[service_tier]",
+        "cache_creation": {
+         "ephemeral_1h_input_tokens": 381,
+         "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "[inference_geo]",
+        "iterations": [
+         {
+          "input_tokens": 2,
+          "output_tokens": 235,
+          "cache_read_input_tokens": 133949,
+          "cache_creation_input_tokens": 381,
+          "cache_creation": {
+           "ephemeral_5m_input_tokens": 0,
+           "ephemeral_1h_input_tokens": 381
+          },
+          "type": "message",
+          "model": null
+         }
+        ],
+        "speed": "[speed]"
+       },
+       "input_transformations": [],
+       "diagnostics": null,
+       "context_management": null
+      },
+      "apiBlockIndex": 1,
+      "requestId": "[requestId]",
+      "type": "assistant",
+      "uuid": "a35b3c0f-d8ca-42f0-b9c3-fe8f37917fe9",
+      "timestamp": "2026-09-24T09:23:12.780Z",
+      "effort": "[effort]",
+      "perTurnEffort": "[perTurnEffort]",
+      "userType": "external",
+      "entrypoint": "sdk-cli",
+      "cwd": "/tmp/sedano-capture",
+      "sessionId": "9fabc4f4-bba2-4fe7-a76e-4e78ba0974ee",
+      "version": "2.1.280",
+      "gitBranch": "main"
+     }
+    },
+    {
+     "ms": 864,
+     "stream": {
+      "type": "assistant",
+      "parent_tool_use_id": null,
+      "message": {
+       "id": "msg_011CfN2AUGeZanRqU8XJE3RM",
+       "role": "assistant",
+       "model": "claude-replay",
+       "content": [],
+       "usage": {
+        "input_tokens": 1,
+        "output_tokens": 1
+       }
+      }
+     }
+    },
+    {
+     "ms": 880,
+     "transcript": {
+      "parentUuid": "a35b3c0f-d8ca-42f0-b9c3-fe8f37917fe9",
+      "isSidechain": false,
+      "promptId": "[promptId]",
+      "type": "user",
+      "message": {
+       "role": "user",
+       "content": [
+        {
+         "type": "tool_result",
+         "tool_use_id": "toolu_01GqUNEw8wuyuyUf8q9rcTS9",
+         "content": [
+          {
+           "type": "tool_reference",
+           "tool_name": "[tool_name]"
+          }
+         ]
+        }
+       ]
+      },
+      "uuid": "cc1eadde-787d-4e73-b8fe-29fed1aa9b3f",
+      "timestamp": "2026-09-24T09:23:12.796Z",
+      "toolUseResult": {
+       "matches": [
+        "[matches]"
+       ],
+       "query": "[query]",
+       "total_deferred_tools": 126
+      },
+      "sourceToolAssistantUUID": "[sourceToolAssistantUUID]",
+      "userType": "external",
+      "entrypoint": "sdk-cli",
+      "cwd": "/tmp/sedano-capture",
+      "sessionId": "9fabc4f4-bba2-4fe7-a76e-4e78ba0974ee",
+      "version": "2.1.280",
+      "gitBranch": "main"
+     }
+    },
+    {
+     "ms": 1000,
+     "transcript": {
+      "parentUuid": "ea5f4dd3-ad93-402a-a44f-8cbd5d077fa0",
+      "isSidechain": false,
+      "message": {
+       "model": "claude-opus-5-5",
+       "id": "msg_011CfN2AnEto5o7DnixFNx1k",
+       "type": "message",
+       "role": "assistant",
+       "content": [
+        {
+         "type": "tool_use",
+         "id": "toolu_016qwxqSfZP6MM79XnFNiuWA",
+         "name": "SendMessage",
+         "input": {
+          "to": "[to]",
+          "summary": "[summary]",
+          "message": "[message]",
+          "type": "message",
+          "recipient": "[recipient]",
+          "content": "[content]"
+         },
+         "caller": {
+          "type": "direct"
+         }
+        }
+       ],
+       "container": null,
+       "stop_reason": "tool_use",
+       "stop_sequence": null,
+       "stop_details": null,
+       "usage": {
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 3025,
+        "cache_read_input_tokens": 134330,
+        "output_tokens": 566,
+        "output_tokens_details": {
+         "thinking_tokens": 0
+        },
+        "server_tool_use": {
+         "web_search_requests": 0,
+         "web_fetch_requests": 0
+        },
+        "service_tier": "[service_tier]",
+        "cache_creation": {
+         "ephemeral_1h_input_tokens": 3025,
+         "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "[inference_geo]",
+        "iterations": [
+         {
+          "input_tokens": 2,
+          "output_tokens": 566,
+          "cache_read_input_tokens": 134330,
+          "cache_creation_input_tokens": 3025,
+          "cache_creation": {
+           "ephemeral_5m_input_tokens": 0,
+           "ephemeral_1h_input_tokens": 3025
+          },
+          "type": "message",
+          "model": null
+         }
+        ],
+        "speed": "[speed]"
+       },
+       "input_transformations": [],
+       "diagnostics": null,
+       "context_management": null
+      },
+      "apiBlockIndex": 0,
+      "requestId": "[requestId]",
+      "type": "assistant",
+      "uuid": "9e8241bf-b4ac-404e-beb3-6d7c1d900cf9",
+      "timestamp": "2026-09-24T09:23:17.544Z",
+      "effort": "[effort]",
+      "perTurnEffort": "[perTurnEffort]",
+      "userType": "external",
+      "entrypoint": "sdk-cli",
+      "cwd": "/tmp/sedano-capture",
+      "sessionId": "9fabc4f4-bba2-4fe7-a76e-4e78ba0974ee",
+      "version": "2.1.280",
+      "gitBranch": "main"
+     }
+    },
+    {
+     "ms": 1000,
+     "stream": {
+      "type": "assistant",
+      "parent_tool_use_id": null,
+      "message": {
+       "id": "msg_011CfN2AnEto5o7DnixFNx1k",
+       "role": "assistant",
+       "model": "claude-replay",
+       "content": [],
+       "usage": {
+        "input_tokens": 1,
+        "output_tokens": 1
+       }
+      }
+     }
+    },
+    {
+     "ms": 1030,
+     "transcript": {
+      "parentUuid": "9e8241bf-b4ac-404e-beb3-6d7c1d900cf9",
+      "isSidechain": false,
+      "promptId": "[promptId]",
+      "type": "user",
+      "message": {
+       "role": "user",
+       "content": [
+        {
+         "tool_use_id": "toolu_016qwxqSfZP6MM79XnFNiuWA",
+         "type": "tool_result",
+         "content": [
+          {
+           "type": "text",
+           "text": "[text]"
+          }
+         ]
+        }
+       ]
+      },
+      "uuid": "0abaa847-80a8-41b6-947d-04b900024b44",
+      "timestamp": "2026-09-24T09:23:17.574Z",
+      "toolUseResult": {
+       "success": false,
+       "message": "[message]"
+      },
+      "sourceToolAssistantUUID": "[sourceToolAssistantUUID]",
+      "userType": "external",
+      "entrypoint": "sdk-cli",
+      "cwd": "/tmp/sedano-capture",
+      "sessionId": "9fabc4f4-bba2-4fe7-a76e-4e78ba0974ee",
+      "version": "2.1.280",
+      "gitBranch": "main"
+     }
+    },
+    {
+     "ms": 1150,
+     "transcript": {
+      "parentUuid": "0abaa847-80a8-41b6-947d-04b900024b44",
+      "isSidechain": false,
+      "message": {
+       "model": "claude-opus-5-5",
+       "id": "msg_011CfN2AnEto5o7DnixFNx1k",
+       "type": "message",
+       "role": "assistant",
+       "content": [
+        {
+         "type": "tool_use",
+         "id": "toolu_01AZbEAEfVK1H7iUnz9LwmVc",
+         "name": "SendMessage",
+         "input": {
+          "to": "[to]",
+          "summary": "[summary]",
+          "message": "[message]",
+          "type": "message",
+          "recipient": "[recipient]",
+          "content": "[content]"
+         },
+         "caller": {
+          "type": "direct"
+         }
+        }
+       ],
+       "container": null,
+       "stop_reason": "tool_use",
+       "stop_sequence": null,
+       "stop_details": null,
+       "usage": {
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 3025,
+        "cache_read_input_tokens": 134330,
+        "output_tokens": 566,
+        "output_tokens_details": {
+         "thinking_tokens": 0
+        },
+        "server_tool_use": {
+         "web_search_requests": 0,
+         "web_fetch_requests": 0
+        },
+        "service_tier": "[service_tier]",
+        "cache_creation": {
+         "ephemeral_1h_input_tokens": 3025,
+         "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "[inference_geo]",
+        "iterations": [
+         {
+          "input_tokens": 2,
+          "output_tokens": 566,
+          "cache_read_input_tokens": 134330,
+          "cache_creation_input_tokens": 3025,
+          "cache_creation": {
+           "ephemeral_5m_input_tokens": 0,
+           "ephemeral_1h_input_tokens": 3025
+          },
+          "type": "message",
+          "model": null
+         }
+        ],
+        "speed": "[speed]"
+       },
+       "input_transformations": [],
+       "diagnostics": null,
+       "context_management": null
+      },
+      "apiBlockIndex": 1,
+      "requestId": "[requestId]",
+      "type": "assistant",
+      "uuid": "d1a92e5f-b138-4201-b941-16659ed922eb",
+      "timestamp": "2026-09-24T09:23:19.647Z",
+      "effort": "[effort]",
+      "perTurnEffort": "[perTurnEffort]",
+      "userType": "external",
+      "entrypoint": "sdk-cli",
+      "cwd": "/tmp/sedano-capture",
+      "sessionId": "9fabc4f4-bba2-4fe7-a76e-4e78ba0974ee",
+      "version": "2.1.280",
+      "gitBranch": "main"
+     }
+    },
+    {
+     "ms": 1150,
+     "stream": {
+      "type": "assistant",
+      "parent_tool_use_id": null,
+      "message": {
+       "id": "msg_011CfN2AnEto5o7DnixFNx1k",
+       "role": "assistant",
+       "model": "claude-replay",
+       "content": [],
+       "usage": {
+        "input_tokens": 1,
+        "output_tokens": 1
+       }
+      }
+     }
+    },
+    {
+     "ms": 1179,
+     "transcript": {
+      "parentUuid": "d1a92e5f-b138-4201-b941-16659ed922eb",
+      "isSidechain": false,
+      "promptId": "[promptId]",
+      "type": "user",
+      "message": {
+       "role": "user",
+       "content": [
+        {
+         "tool_use_id": "toolu_01AZbEAEfVK1H7iUnz9LwmVc",
+         "type": "tool_result",
+         "content": [
+          {
+           "type": "text",
+           "text": "[text]"
+          }
+         ]
+        }
+       ]
+      },
+      "uuid": "88a363d2-649b-48bd-8eed-9f5f6f85488a",
+      "timestamp": "2026-09-24T09:23:19.676Z",
+      "toolUseResult": {
+       "success": false,
+       "message": "[message]"
+      },
+      "sourceToolAssistantUUID": "[sourceToolAssistantUUID]",
+      "userType": "external",
+      "entrypoint": "sdk-cli",
+      "cwd": "/tmp/sedano-capture",
+      "sessionId": "9fabc4f4-bba2-4fe7-a76e-4e78ba0974ee",
+      "version": "2.1.280",
+      "gitBranch": "main"
+     }
+    },
+    {
+     "ms": 1299,
+     "transcript": {
+      "parentUuid": "c5f8ed5b-b4cd-4157-bbf7-fa89f4c8a5b2",
+      "isSidechain": false,
+      "message": {
+       "model": "claude-opus-5-5",
+       "id": "msg_011CfN2BHbVTGzA7V4YjgUaL",
+       "type": "message",
+       "role": "assistant",
+       "content": [
+        {
+         "type": "thinking",
+         "thinking": "",
+         "signature": ""
+        }
+       ],
+       "container": null,
+       "stop_reason": "end_turn",
+       "stop_sequence": null,
+       "stop_details": null,
+       "usage": {
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 787,
+        "cache_read_input_tokens": 137355,
+        "output_tokens": 714,
+        "output_tokens_details": {
+         "thinking_tokens": 21
+        },
+        "server_tool_use": {
+         "web_search_requests": 0,
+         "web_fetch_requests": 0
+        },
+        "service_tier": "[service_tier]",
+        "cache_creation": {
+         "ephemeral_1h_input_tokens": 787,
+         "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "[inference_geo]",
+        "iterations": [
+         {
+          "input_tokens": 2,
+          "output_tokens": 714,
+          "cache_read_input_tokens": 137355,
+          "cache_creation_input_tokens": 787,
+          "cache_creation": {
+           "ephemeral_5m_input_tokens": 0,
+           "ephemeral_1h_input_tokens": 787
+          },
+          "type": "message",
+          "model": null
+         }
+        ],
+        "speed": "[speed]"
+       },
+       "input_transformations": [],
+       "diagnostics": null,
+       "context_management": null
+      },
+      "apiBlockIndex": 0,
+      "requestId": "[requestId]",
+      "type": "assistant",
+      "uuid": "6b3a3704-2991-4fef-9dd1-c83bcdb7bf3d",
+      "timestamp": "2026-09-24T09:23:28.805Z",
+      "effort": "[effort]",
+      "perTurnEffort": "[perTurnEffort]",
+      "userType": "external",
+      "entrypoint": "sdk-cli",
+      "cwd": "/tmp/sedano-capture",
+      "sessionId": "9fabc4f4-bba2-4fe7-a76e-4e78ba0974ee",
+      "version": "2.1.280",
+      "gitBranch": "main"
+     }
+    },
+    {
+     "ms": 1299,
+     "stream": {
+      "type": "assistant",
+      "parent_tool_use_id": null,
+      "message": {
+       "id": "msg_011CfN2BHbVTGzA7V4YjgUaL",
+       "role": "assistant",
+       "model": "claude-replay",
+       "content": [],
+       "usage": {
+        "input_tokens": 1,
+        "output_tokens": 1
+       }
+      }
+     }
+    },
+    {
+     "ms": 1311,
+     "transcript": {
+      "parentUuid": "6b3a3704-2991-4fef-9dd1-c83bcdb7bf3d",
+      "isSidechain": false,
+      "message": {
+       "model": "claude-opus-5-5",
+       "id": "msg_011CfN2BHbVTGzA7V4YjgUaL",
+       "type": "message",
+       "role": "assistant",
+       "content": [
+        {
+         "type": "text",
+         "text": "[text]"
+        }
+       ],
+       "container": null,
+       "stop_reason": "end_turn",
+       "stop_sequence": null,
+       "stop_details": null,
+       "usage": {
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 787,
+        "cache_read_input_tokens": 137355,
+        "output_tokens": 714,
+        "output_tokens_details": {
+         "thinking_tokens": 21
+        },
+        "server_tool_use": {
+         "web_search_requests": 0,
+         "web_fetch_requests": 0
+        },
+        "service_tier": "[service_tier]",
+        "cache_creation": {
+         "ephemeral_1h_input_tokens": 787,
+         "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "[inference_geo]",
+        "iterations": [
+         {
+          "input_tokens": 2,
+          "output_tokens": 714,
+          "cache_read_input_tokens": 137355,
+          "cache_creation_input_tokens": 787,
+          "cache_creation": {
+           "ephemeral_5m_input_tokens": 0,
+           "ephemeral_1h_input_tokens": 787
+          },
+          "type": "message",
+          "model": null
+         }
+        ],
+        "speed": "[speed]"
+       },
+       "input_transformations": [],
+       "diagnostics": null,
+       "context_management": null
+      },
+      "apiBlockIndex": 1,
+      "requestId": "[requestId]",
+      "type": "assistant",
+      "uuid": "3de5bb3f-d82c-4f39-a2e5-c1b5534a37de",
+      "timestamp": "2026-09-24T09:23:28.817Z",
+      "effort": "[effort]",
+      "perTurnEffort": "[perTurnEffort]",
+      "userType": "external",
+      "entrypoint": "sdk-cli",
+      "cwd": "/tmp/sedano-capture",
+      "sessionId": "9fabc4f4-bba2-4fe7-a76e-4e78ba0974ee",
+      "version": "2.1.280",
+      "gitBranch": "main"
+     }
+    },
+    {
+     "ms": 1311,
+     "stream": {
+      "type": "assistant",
+      "parent_tool_use_id": null,
+      "message": {
+       "id": "msg_011CfN2BHbVTGzA7V4YjgUaL",
+       "role": "assistant",
+       "model": "claude-replay",
+       "content": [],
+       "usage": {
+        "input_tokens": 1,
+        "output_tokens": 1
+       }
+      }
+     }
+    },
+    {
+     "ms": 1321,
+     "stream": {
+      "type": "result",
+      "uuid": "replay-result-2",
+      "subtype": "success",
+      "is_error": false,
+      "result": "[reply]",
+      "duration_ms": 10,
+      "usage": {
+       "input_tokens": 1,
+       "output_tokens": 1
+      }
+     }
+    }
+   ]
+  },
+  {
+   "trigger": "prompt",
+   "frames": [
+    {
+     "ms": 0,
+     "transcript": {
+      "parentUuid": "3de5bb3f-d82c-4f39-a2e5-c1b5534a37de",
+      "isSidechain": false,
+      "type": "system",
+      "subtype": "stop_hook_summary",
+      "hookCount": 2,
+      "hookInfos": [
+       {
+        "command": "[command]",
+        "durationMs": 5
+       },
+       {
+        "command": "[command]",
+        "durationMs": 10
+       }
+      ],
+      "hookErrors": [],
+      "hookAdditionalContext": [],
+      "preventedContinuation": false,
+      "stopReason": "",
+      "hasOutput": false,
+      "level": "suggestion",
+      "timestamp": "2026-09-24T09:23:28.882Z",
+      "uuid": "4c334a54-e6e3-42cc-85f5-d7359a4c4f3f",
+      "toolUseID": "[toolUseID]",
+      "userType": "external",
+      "entrypoint": "sdk-cli",
+      "cwd": "/tmp/sedano-capture",
+      "sessionId": "9fabc4f4-bba2-4fe7-a76e-4e78ba0974ee",
+      "version": "2.1.280",
+      "gitBranch": "main"
+     }
+    },
+    {
+     "ms": 120,
+     "transcript": {
+      "parentUuid": null,
+      "logicalParentUuid": "4c334a54-e6e3-42cc-85f5-d7359a4c4f3f",
+      "isSidechain": false,
+      "type": "system",
+      "subtype": "compact_boundary",
+      "content": "[content]",
+      "isMeta": false,
+      "timestamp": "2026-09-24T09:54:34.619Z",
+      "uuid": "f11c3a61-2e9e-4125-bceb-6ffcdc7cc8da",
+      "level": "info",
+      "compactMetadata": {
+       "trigger": "manual",
+       "preTokens": 139247,
+       "durationMs": 53613,
+       "preCompactDiscoveredTools": [
+        "[preCompactDiscoveredTools]",
+        "[preCompactDiscoveredTools]",
+        "[preCompactDiscoveredTools]",
+        "[preCompactDiscoveredTools]"
+       ],
+       "preservedSegment": {
+        "headUuid": "[headUuid]",
+        "anchorUuid": "[anchorUuid]",
+        "tailUuid": "[tailUuid]"
+       },
+       "preservedMessages": {
+        "anchorUuid": "[anchorUuid]",
+        "uuids": [
+         "[uuids]",
+         "[uuids]",
+         "[uuids]"
+        ],
+        "allUuids": [
+         "[allUuids]",
+         "[allUuids]",
+         "[allUuids]",
+         "[allUuids]",
+         "[allUuids]"
+        ]
+       },
+       "postTokens": 10776,
+       "cumulativeDroppedTokens": 128471
+      },
+      "userType": "external",
+      "entrypoint": "sdk-cli",
+      "cwd": "/tmp/sedano-capture",
+      "sessionId": "9fabc4f4-bba2-4fe7-a76e-4e78ba0974ee",
+      "version": "2.1.280",
+      "gitBranch": "main",
+      "slug": "[slug]"
+     }
+    },
+    {
+     "ms": 120,
+     "transcript": {
+      "parentUuid": "f11c3a61-2e9e-4125-bceb-6ffcdc7cc8da",
+      "isSidechain": false,
+      "promptId": "[promptId]",
+      "type": "user",
+      "message": {
+       "role": "user",
+       "content": "[content]"
+      },
+      "isVisibleInTranscriptOnly": true,
+      "isCompactSummary": true,
+      "uuid": "e1bd6d08-d685-4b80-8f74-dc2d23111584",
+      "timestamp": "2026-09-24T09:54:34.616Z",
+      "userType": "external",
+      "entrypoint": "sdk-cli",
+      "cwd": "/tmp/sedano-capture",
+      "sessionId": "9fabc4f4-bba2-4fe7-a76e-4e78ba0974ee",
+      "version": "2.1.280",
+      "gitBranch": "main",
+      "slug": "[slug]"
+     }
+    },
+    {
+     "ms": 120,
+     "transcript": {
+      "parentUuid": "e1bd6d08-d685-4b80-8f74-dc2d23111584",
+      "isSidechain": false,
+      "promptId": "[promptId]",
+      "type": "user",
+      "message": {
+       "role": "user",
+       "content": "[content]"
+      },
+      "isMeta": true,
+      "uuid": "af0547c4-dc38-4e99-8e51-a392a1c0555f",
+      "timestamp": "2026-09-24T09:53:41.006Z",
+      "userType": "external",
+      "entrypoint": "sdk-cli",
+      "cwd": "/tmp/sedano-capture",
+      "sessionId": "9fabc4f4-bba2-4fe7-a76e-4e78ba0974ee",
+      "version": "2.1.280",
+      "gitBranch": "main",
+      "slug": "[slug]"
+     }
+    },
+    {
+     "ms": 120,
+     "transcript": {
+      "parentUuid": "af0547c4-dc38-4e99-8e51-a392a1c0555f",
+      "isSidechain": false,
+      "promptId": "[promptId]",
+      "type": "user",
+      "message": {
+       "role": "user",
+       "content": "<command-name>/compact</command-name>\n<command-message>compact</command-message>\n<command-args></command-args>"
+      },
+      "uuid": "8bf0904d-541c-441e-8e5a-864735575b33",
+      "timestamp": "2026-09-24T09:53:41.005Z",
+      "userType": "external",
+      "entrypoint": "sdk-cli",
+      "cwd": "/tmp/sedano-capture",
+      "sessionId": "9fabc4f4-bba2-4fe7-a76e-4e78ba0974ee",
+      "version": "2.1.280",
+      "gitBranch": "main",
+      "slug": "[slug]"
+     }
+    },
+    {
+     "ms": 240,
+     "transcript": {
+      "parentUuid": "8bf0904d-541c-441e-8e5a-864735575b33",
+      "isSidechain": false,
+      "promptId": "[promptId]",
+      "type": "user",
+      "message": {
+       "role": "user",
+       "content": "<local-command-stdout>[output]</local-command-stdout>"
+      },
+      "uuid": "9f872ff4-21a1-47f2-8178-0abf9af6c3de",
+      "timestamp": "2026-09-24T09:54:35.083Z",
+      "userType": "external",
+      "entrypoint": "sdk-cli",
+      "cwd": "/tmp/sedano-capture",
+      "sessionId": "9fabc4f4-bba2-4fe7-a76e-4e78ba0974ee",
+      "version": "2.1.280",
+      "gitBranch": "main",
+      "slug": "[slug]"
+     }
+    },
+    {
+     "ms": 250,
+     "stream": {
+      "type": "result",
+      "uuid": "replay-result-3",
+      "subtype": "success",
+      "is_error": false,
+      "result": "[reply]",
+      "duration_ms": 10,
+      "usage": {
+       "input_tokens": 1,
+       "output_tokens": 1
+      }
+     }
+    }
+   ]
+  },
+  {
+   "trigger": "prompt",
+   "frames": [
+    {
+     "ms": 0,
+     "transcript": {
+      "parentUuid": "ab117524-9aec-4628-9952-d807f5ba840a",
+      "isSidechain": false,
+      "promptId": "[promptId]",
+      "type": "user",
+      "message": {
+       "role": "user",
+       "content": [
+        {
+         "type": "text",
+         "text": "[prompt 2]"
+        }
+       ]
+      },
+      "uuid": "8d67ba77-ebe9-481b-b018-d5fd8f150ec0",
+      "timestamp": "2026-09-24T09:55:11.468Z",
+      "permissionMode": "[permissionMode]",
+      "promptSource": "[promptSource]",
+      "turnOrigin": "[turnOrigin]",
+      "userType": "external",
+      "entrypoint": "sdk-cli",
+      "cwd": "/tmp/sedano-capture",
+      "sessionId": "9fabc4f4-bba2-4fe7-a76e-4e78ba0974ee",
+      "version": "2.1.280",
+      "gitBranch": "main",
+      "slug": "[slug]"
+     }
+    },
+    {
+     "ms": 120,
+     "transcript": {
+      "parentUuid": "12fb5ae3-70fa-4dce-89f4-d31cc914cb08",
+      "isSidechain": false,
+      "message": {
+       "model": "claude-opus-5-5",
+       "id": "msg_011CfN4cBstGbS8nEp1gwyE3",
+       "type": "message",
+       "role": "assistant",
+       "content": [
+        {
+         "type": "thinking",
+         "thinking": "",
+         "signature": ""
+        }
+       ],
+       "container": null,
+       "stop_reason": "tool_use",
+       "stop_sequence": null,
+       "stop_details": null,
+       "usage": {
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 21308,
+        "cache_read_input_tokens": 13162,
+        "output_tokens": 679,
+        "output_tokens_details": {
+         "thinking_tokens": 454
+        },
+        "server_tool_use": {
+         "web_search_requests": 0,
+         "web_fetch_requests": 0
+        },
+        "service_tier": "[service_tier]",
+        "cache_creation": {
+         "ephemeral_1h_input_tokens": 21308,
+         "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "[inference_geo]",
+        "iterations": [
+         {
+          "input_tokens": 2,
+          "output_tokens": 679,
+          "cache_read_input_tokens": 13162,
+          "cache_creation_input_tokens": 21308,
+          "cache_creation": {
+           "ephemeral_5m_input_tokens": 0,
+           "ephemeral_1h_input_tokens": 21308
+          },
+          "type": "message",
+          "model": null
+         }
+        ],
+        "speed": "[speed]"
+       },
+       "input_transformations": [
+        {
+         "type": "thinking_dropped",
+         "path": "[path]",
+         "reason": "[reason]"
+        }
+       ],
+       "diagnostics": {
+        "cache_miss_reason": {
+         "type": "messages_changed",
+         "cache_missed_input_tokens": 18086
+        }
+       },
+       "context_management": null
+      },
+      "apiBlockIndex": 0,
+      "requestId": "[requestId]",
+      "type": "assistant",
+      "uuid": "f07e843d-ab9d-42f6-9ba6-19803652f13e",
+      "timestamp": "2026-09-24T09:55:18.900Z",
+      "effort": "[effort]",
+      "perTurnEffort": "[perTurnEffort]",
+      "userType": "external",
+      "entrypoint": "sdk-cli",
+      "cwd": "/tmp/sedano-capture",
+      "sessionId": "9fabc4f4-bba2-4fe7-a76e-4e78ba0974ee",
+      "version": "2.1.280",
+      "gitBranch": "main",
+      "slug": "[slug]"
+     }
+    },
+    {
+     "ms": 120,
+     "stream": {
+      "type": "assistant",
+      "parent_tool_use_id": null,
+      "message": {
+       "id": "msg_011CfN4cBstGbS8nEp1gwyE3",
+       "role": "assistant",
+       "model": "claude-replay",
+       "content": [],
+       "usage": {
+        "input_tokens": 1,
+        "output_tokens": 1
+       }
+      }
+     }
+    },
+    {
+     "ms": 240,
+     "transcript": {
+      "parentUuid": "f07e843d-ab9d-42f6-9ba6-19803652f13e",
+      "isSidechain": false,
+      "message": {
+       "model": "claude-opus-5-5",
+       "id": "msg_011CfN4cBstGbS8nEp1gwyE3",
+       "type": "message",
+       "role": "assistant",
+       "content": [
+        {
+         "type": "tool_use",
+         "id": "toolu_01RjrJCcCFCjFTEfKNd8FMKX",
+         "name": "Bash",
+         "input": {
+          "command": "[command]",
+          "description": "[description]"
+         },
+         "caller": {
+          "type": "direct"
+         }
+        }
+       ],
+       "container": null,
+       "stop_reason": "tool_use",
+       "stop_sequence": null,
+       "stop_details": null,
+       "usage": {
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 21308,
+        "cache_read_input_tokens": 13162,
+        "output_tokens": 679,
+        "output_tokens_details": {
+         "thinking_tokens": 454
+        },
+        "server_tool_use": {
+         "web_search_requests": 0,
+         "web_fetch_requests": 0
+        },
+        "service_tier": "[service_tier]",
+        "cache_creation": {
+         "ephemeral_1h_input_tokens": 21308,
+         "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "[inference_geo]",
+        "iterations": [
+         {
+          "input_tokens": 2,
+          "output_tokens": 679,
+          "cache_read_input_tokens": 13162,
+          "cache_creation_input_tokens": 21308,
+          "cache_creation": {
+           "ephemeral_5m_input_tokens": 0,
+           "ephemeral_1h_input_tokens": 21308
+          },
+          "type": "message",
+          "model": null
+         }
+        ],
+        "speed": "[speed]"
+       },
+       "input_transformations": [
+        {
+         "type": "thinking_dropped",
+         "path": "[path]",
+         "reason": "[reason]"
+        }
+       ],
+       "diagnostics": {
+        "cache_miss_reason": {
+         "type": "messages_changed",
+         "cache_missed_input_tokens": 18086
+        }
+       },
+       "context_management": null
+      },
+      "apiBlockIndex": 1,
+      "requestId": "[requestId]",
+      "type": "assistant",
+      "uuid": "770c6fc3-4b36-48dd-8e3d-160aa934ea25",
+      "timestamp": "2026-09-24T09:55:20.812Z",
+      "effort": "[effort]",
+      "perTurnEffort": "[perTurnEffort]",
+      "userType": "external",
+      "entrypoint": "sdk-cli",
+      "cwd": "/tmp/sedano-capture",
+      "sessionId": "9fabc4f4-bba2-4fe7-a76e-4e78ba0974ee",
+      "version": "2.1.280",
+      "gitBranch": "main",
+      "slug": "[slug]"
+     }
+    },
+    {
+     "ms": 240,
+     "stream": {
+      "type": "assistant",
+      "parent_tool_use_id": null,
+      "message": {
+       "id": "msg_011CfN4cBstGbS8nEp1gwyE3",
+       "role": "assistant",
+       "model": "claude-replay",
+       "content": [],
+       "usage": {
+        "input_tokens": 1,
+        "output_tokens": 1
+       }
+      }
+     }
+    },
+    {
+     "ms": 360,
+     "transcript": {
+      "parentUuid": "770c6fc3-4b36-48dd-8e3d-160aa934ea25",
+      "isSidechain": false,
+      "promptId": "[promptId]",
+      "type": "user",
+      "message": {
+       "role": "user",
+       "content": [
+        {
+         "tool_use_id": "toolu_01RjrJCcCFCjFTEfKNd8FMKX",
+         "type": "tool_result",
+         "content": "[content]",
+         "is_error": false
+        }
+       ]
+      },
+      "uuid": "0286eeb6-8838-47c5-be54-388730283908",
+      "timestamp": "2026-09-24T09:55:21.754Z",
+      "toolUseResult": {
+       "stdout": "[stdout]",
+       "stderr": "",
+       "interrupted": false,
+       "isImage": false,
+       "noOutputExpected": false
+      },
+      "sourceToolAssistantUUID": "[sourceToolAssistantUUID]",
+      "userType": "external",
+      "entrypoint": "sdk-cli",
+      "cwd": "/tmp/sedano-capture",
+      "sessionId": "9fabc4f4-bba2-4fe7-a76e-4e78ba0974ee",
+      "version": "2.1.280",
+      "gitBranch": "main",
+      "slug": "[slug]"
+     }
+    },
+    {
+     "ms": 480,
+     "transcript": {
+      "parentUuid": "9832772a-5842-4c3c-94c8-327ecfbd59cf",
+      "isSidechain": false,
+      "message": {
+       "model": "claude-opus-5-5",
+       "id": "msg_011CfN4cyXzhnCwfuv1kDMr2",
+       "type": "message",
+       "role": "assistant",
+       "content": [
+        {
+         "type": "thinking",
+         "thinking": "",
+         "signature": ""
+        }
+       ],
+       "container": null,
+       "stop_reason": "tool_use",
+       "stop_sequence": null,
+       "stop_details": null,
+       "usage": {
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 3565,
+        "cache_read_input_tokens": 34470,
+        "output_tokens": 1469,
+        "output_tokens_details": {
+         "thinking_tokens": 360
+        },
+        "server_tool_use": {
+         "web_search_requests": 0,
+         "web_fetch_requests": 0
+        },
+        "service_tier": "[service_tier]",
+        "cache_creation": {
+         "ephemeral_1h_input_tokens": 3565,
+         "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "[inference_geo]",
+        "iterations": [
+         {
+          "input_tokens": 2,
+          "output_tokens": 1469,
+          "cache_read_input_tokens": 34470,
+          "cache_creation_input_tokens": 3565,
+          "cache_creation": {
+           "ephemeral_5m_input_tokens": 0,
+           "ephemeral_1h_input_tokens": 3565
+          },
+          "type": "message",
+          "model": null
+         }
+        ],
+        "speed": "[speed]"
+       },
+       "input_transformations": [
+        {
+         "type": "thinking_dropped",
+         "path": "[path]",
+         "reason": "[reason]"
+        }
+       ],
+       "diagnostics": null,
+       "context_management": null
+      },
+      "apiBlockIndex": 0,
+      "requestId": "[requestId]",
+      "type": "assistant",
+      "uuid": "ba258744-a380-4159-86f0-ff236cc33d74",
+      "timestamp": "2026-09-24T09:55:28.187Z",
+      "effort": "[effort]",
+      "perTurnEffort": "[perTurnEffort]",
+      "userType": "external",
+      "entrypoint": "sdk-cli",
+      "cwd": "/tmp/sedano-capture",
+      "sessionId": "9fabc4f4-bba2-4fe7-a76e-4e78ba0974ee",
+      "version": "2.1.280",
+      "gitBranch": "main",
+      "slug": "[slug]"
+     }
+    },
+    {
+     "ms": 480,
+     "stream": {
+      "type": "assistant",
+      "parent_tool_use_id": null,
+      "message": {
+       "id": "msg_011CfN4cyXzhnCwfuv1kDMr2",
+       "role": "assistant",
+       "model": "claude-replay",
+       "content": [],
+       "usage": {
+        "input_tokens": 1,
+        "output_tokens": 1
+       }
+      }
+     }
+    },
+    {
+     "ms": 600,
+     "transcript": {
+      "parentUuid": "ba258744-a380-4159-86f0-ff236cc33d74",
+      "isSidechain": false,
+      "message": {
+       "model": "claude-opus-5-5",
+       "id": "msg_011CfN4cyXzhnCwfuv1kDMr2",
+       "type": "message",
+       "role": "assistant",
+       "content": [
+        {
+         "type": "tool_use",
+         "id": "toolu_019V2LV84yAEDph5sMianHxn",
+         "name": "Agent",
+         "input": {
+          "description": "[description]",
+          "subagent_type": "general-purpose",
+          "model": "opus",
+          "prompt": "[agent prompt]",
+          "run_in_background": true
+         },
+         "caller": {
+          "type": "direct"
+         }
+        }
+       ],
+       "container": null,
+       "stop_reason": "tool_use",
+       "stop_sequence": null,
+       "stop_details": null,
+       "usage": {
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 3565,
+        "cache_read_input_tokens": 34470,
+        "output_tokens": 1469,
+        "output_tokens_details": {
+         "thinking_tokens": 360
+        },
+        "server_tool_use": {
+         "web_search_requests": 0,
+         "web_fetch_requests": 0
+        },
+        "service_tier": "[service_tier]",
+        "cache_creation": {
+         "ephemeral_1h_input_tokens": 3565,
+         "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "[inference_geo]",
+        "iterations": [
+         {
+          "input_tokens": 2,
+          "output_tokens": 1469,
+          "cache_read_input_tokens": 34470,
+          "cache_creation_input_tokens": 3565,
+          "cache_creation": {
+           "ephemeral_5m_input_tokens": 0,
+           "ephemeral_1h_input_tokens": 3565
+          },
+          "type": "message",
+          "model": null
+         }
+        ],
+        "speed": "[speed]"
+       },
+       "input_transformations": [
+        {
+         "type": "thinking_dropped",
+         "path": "[path]",
+         "reason": "[reason]"
+        }
+       ],
+       "diagnostics": null,
+       "context_management": null
+      },
+      "apiBlockIndex": 1,
+      "requestId": "[requestId]",
+      "type": "assistant",
+      "uuid": "7cf1b11c-b0a5-495b-b8d4-8223f9cb16e1",
+      "timestamp": "2026-09-24T09:55:39.021Z",
+      "effort": "[effort]",
+      "perTurnEffort": "[perTurnEffort]",
+      "userType": "external",
+      "entrypoint": "sdk-cli",
+      "cwd": "/tmp/sedano-capture",
+      "sessionId": "9fabc4f4-bba2-4fe7-a76e-4e78ba0974ee",
+      "version": "2.1.280",
+      "gitBranch": "main",
+      "slug": "[slug]"
+     }
+    },
+    {
+     "ms": 600,
+     "stream": {
+      "type": "assistant",
+      "parent_tool_use_id": null,
+      "message": {
+       "id": "msg_011CfN4cyXzhnCwfuv1kDMr2",
+       "role": "assistant",
+       "model": "claude-replay",
+       "content": [],
+       "usage": {
+        "input_tokens": 1,
+        "output_tokens": 1
+       }
+      }
+     }
+    },
+    {
+     "ms": 600,
+     "sidecar": {
+      "agent": "a83b6ff4ce567d18a",
+      "meta": {
+       "agentType": "general-purpose",
+       "description": "[description]",
+       "toolUseId": "toolu_019V2LV84yAEDph5sMianHxn",
+       "spawnDepth": 1,
+       "requestShape": "[requestShape]",
+       "requestNonInteractive": true,
+       "model": "opus"
+      }
+     }
+    },
+    {
+     "ms": 600,
+     "stream": {
+      "type": "system",
+      "subtype": "task_started",
+      "task_id": "a83b6ff4ce567d18a",
+      "tool_use_id": "toolu_019V2LV84yAEDph5sMianHxn",
+      "task_type": "local_agent",
+      "subagent_type": "general-purpose",
+      "description": "[description]",
+      "prompt": "[agent prompt]"
+     }
+    },
+    {
+     "ms": 669,
+     "transcript": {
+      "parentUuid": "7cf1b11c-b0a5-495b-b8d4-8223f9cb16e1",
+      "isSidechain": false,
+      "promptId": "[promptId]",
+      "type": "user",
+      "message": {
+       "role": "user",
+       "content": [
+        {
+         "tool_use_id": "toolu_019V2LV84yAEDph5sMianHxn",
+         "type": "tool_result",
+         "content": [
+          {
+           "type": "text",
+           "text": "[text]"
+          }
+         ]
+        }
+       ]
+      },
+      "uuid": "9fb82919-982e-42a8-80fa-153e6c152ae3",
+      "timestamp": "2026-09-24T09:55:39.090Z",
+      "toolUseResult": {
+       "isAsync": true,
+       "status": "async_launched",
+       "agentId": "a83b6ff4ce567d18a",
+       "description": "[description]",
+       "resolvedModel": "[resolvedModel]",
+       "prompt": "[prompt]",
+       "outputFile": "[outputFile]",
+       "canReadOutputFile": true
+      },
+      "sourceToolAssistantUUID": "[sourceToolAssistantUUID]",
+      "userType": "external",
+      "entrypoint": "sdk-cli",
+      "cwd": "/tmp/sedano-capture",
+      "sessionId": "9fabc4f4-bba2-4fe7-a76e-4e78ba0974ee",
+      "version": "2.1.280",
+      "gitBranch": "main",
+      "slug": "[slug]"
+     }
+    },
+    {
+     "ms": 789,
+     "transcript": {
+      "parentUuid": "2937660d-f3a8-4267-b8da-73f30253511d",
+      "isSidechain": false,
+      "message": {
+       "model": "claude-opus-5-5",
+       "id": "msg_011CfN4eEnJe9STrnzD4Hbjt",
+       "type": "message",
+       "role": "assistant",
+       "content": [
+        {
+         "type": "thinking",
+         "thinking": "",
+         "signature": ""
+        }
+       ],
+       "container": null,
+       "stop_reason": "end_turn",
+       "stop_sequence": null,
+       "stop_details": null,
+       "usage": {
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 1882,
+        "cache_read_input_tokens": 38035,
+        "output_tokens": 305,
+        "output_tokens_details": {
+         "thinking_tokens": 71
+        },
+        "server_tool_use": {
+         "web_search_requests": 0,
+         "web_fetch_requests": 0
+        },
+        "service_tier": "[service_tier]",
+        "cache_creation": {
+         "ephemeral_1h_input_tokens": 1882,
+         "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "[inference_geo]",
+        "iterations": [
+         {
+          "input_tokens": 2,
+          "output_tokens": 305,
+          "cache_read_input_tokens": 38035,
+          "cache_creation_input_tokens": 1882,
+          "cache_creation": {
+           "ephemeral_5m_input_tokens": 0,
+           "ephemeral_1h_input_tokens": 1882
+          },
+          "type": "message",
+          "model": null
+         }
+        ],
+        "speed": "[speed]"
+       },
+       "input_transformations": [
+        {
+         "type": "thinking_dropped",
+         "path": "[path]",
+         "reason": "[reason]"
+        }
+       ],
+       "diagnostics": null,
+       "context_management": null
+      },
+      "apiBlockIndex": 0,
+      "requestId": "[requestId]",
+      "type": "assistant",
+      "uuid": "193ae94b-a621-42e5-8371-1c8904bfeca8",
+      "timestamp": "2026-09-24T09:55:44.134Z",
+      "effort": "[effort]",
+      "perTurnEffort": "[perTurnEffort]",
+      "userType": "external",
+      "entrypoint": "sdk-cli",
+      "cwd": "/tmp/sedano-capture",
+      "sessionId": "9fabc4f4-bba2-4fe7-a76e-4e78ba0974ee",
+      "version": "2.1.280",
+      "gitBranch": "main",
+      "slug": "[slug]"
+     }
+    },
+    {
+     "ms": 789,
+     "stream": {
+      "type": "assistant",
+      "parent_tool_use_id": null,
+      "message": {
+       "id": "msg_011CfN4eEnJe9STrnzD4Hbjt",
+       "role": "assistant",
+       "model": "claude-replay",
+       "content": [],
+       "usage": {
+        "input_tokens": 1,
+        "output_tokens": 1
+       }
+      }
+     }
+    },
+    {
+     "ms": 808,
+     "transcript": {
+      "parentUuid": "193ae94b-a621-42e5-8371-1c8904bfeca8",
+      "isSidechain": false,
+      "message": {
+       "model": "claude-opus-5-5",
+       "id": "msg_011CfN4eEnJe9STrnzD4Hbjt",
+       "type": "message",
+       "role": "assistant",
+       "content": [
+        {
+         "type": "text",
+         "text": "[text]"
+        }
+       ],
+       "container": null,
+       "stop_reason": "end_turn",
+       "stop_sequence": null,
+       "stop_details": null,
+       "usage": {
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 1882,
+        "cache_read_input_tokens": 38035,
+        "output_tokens": 305,
+        "output_tokens_details": {
+         "thinking_tokens": 71
+        },
+        "server_tool_use": {
+         "web_search_requests": 0,
+         "web_fetch_requests": 0
+        },
+        "service_tier": "[service_tier]",
+        "cache_creation": {
+         "ephemeral_1h_input_tokens": 1882,
+         "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "[inference_geo]",
+        "iterations": [
+         {
+          "input_tokens": 2,
+          "output_tokens": 305,
+          "cache_read_input_tokens": 38035,
+          "cache_creation_input_tokens": 1882,
+          "cache_creation": {
+           "ephemeral_5m_input_tokens": 0,
+           "ephemeral_1h_input_tokens": 1882
+          },
+          "type": "message",
+          "model": null
+         }
+        ],
+        "speed": "[speed]"
+       },
+       "input_transformations": [
+        {
+         "type": "thinking_dropped",
+         "path": "[path]",
+         "reason": "[reason]"
+        }
+       ],
+       "diagnostics": null,
+       "context_management": null
+      },
+      "apiBlockIndex": 1,
+      "requestId": "[requestId]",
+      "type": "assistant",
+      "uuid": "c8b426c4-970a-4409-ab00-c959432ce36d",
+      "timestamp": "2026-09-24T09:55:44.153Z",
+      "effort": "[effort]",
+      "perTurnEffort": "[perTurnEffort]",
+      "userType": "external",
+      "entrypoint": "sdk-cli",
+      "cwd": "/tmp/sedano-capture",
+      "sessionId": "9fabc4f4-bba2-4fe7-a76e-4e78ba0974ee",
+      "version": "2.1.280",
+      "gitBranch": "main",
+      "slug": "[slug]"
+     }
+    },
+    {
+     "ms": 808,
+     "stream": {
+      "type": "assistant",
+      "parent_tool_use_id": null,
+      "message": {
+       "id": "msg_011CfN4eEnJe9STrnzD4Hbjt",
+       "role": "assistant",
+       "model": "claude-replay",
+       "content": [],
+       "usage": {
+        "input_tokens": 1,
+        "output_tokens": 1
+       }
+      }
+     }
+    },
+    {
+     "ms": 818,
+     "stream": {
+      "type": "result",
+      "uuid": "replay-result-4",
+      "subtype": "success",
+      "is_error": false,
+      "result": "[reply]",
+      "duration_ms": 10,
+      "usage": {
+       "input_tokens": 1,
+       "output_tokens": 1
+      }
+     }
+    }
+   ]
+  }
+ ],
+ "script": [
+  {
+   "do": "checkpoint"
+  },
+  {
+   "do": "prompt",
+   "text": "[prompt 1]"
+  },
+  {
+   "do": "settle"
+  },
+  {
+   "do": "restart"
+  },
+  {
+   "do": "checkpoint"
+  },
+  {
+   "do": "prompt",
+   "text": "/compact"
+  },
+  {
+   "do": "settle"
+  },
+  {
+   "do": "restart"
+  },
+  {
+   "do": "checkpoint"
+  },
+  {
+   "do": "prompt",
+   "text": "[prompt 2]"
+  },
+  {
+   "do": "settle"
+  },
+  {
+   "do": "restart"
+  },
+  {
+   "do": "settle"
+  },
+  {
+   "do": "expectPhase",
+   "turn": 3,
+   "phase": "waiting_agents"
+  }
+ ],
+ "expect": {
+  "stableHistory": true,
+  "turns": [
+   {
+    "phase": "completed",
+    "reply": true
+   },
+   {
+    "phase": "completed"
+   },
+   {
+    "phase": "waiting_agents",
+    "reply": true
+   }
+  ]
+ }
+}

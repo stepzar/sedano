@@ -1,0 +1,29 @@
+Sedano
+Copyright 2026 Stefano Zarro
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+-------------------------------------------------------------------------------
+Third-party material
+-------------------------------------------------------------------------------
+
+Agent Client Protocol schema excerpt
+  scripts/fixtures/coverage/acp-schema-excerpt.json is an excerpt of the JSON
+  schema published by the Agent Client Protocol project
+  (https://github.com/agentclientprotocol/agent-client-protocol), used as a
+  fixture for the coverage extractor tests. It is licensed under the Apache
+  License, Version 2.0.
+
+Harness logos
+  apps/ui/src/components/Icons.tsx contains SVG path data for the logos of the
+  supported coding-agent harnesses. Several marks were taken from
+  @lobehub/icons-static-svg (https://github.com/lobehub/lobe-icons), distributed
+  under the MIT License, Copyright (c) 2023 LobeHub. The others come from each
+  product's own public website, as noted next to each icon.
+
+Trademarks
+  Claude, Claude Code, Codex, OpenAI, Gemini, Grok, opencode, Command Code,
+  Freebuff, Tailscale and every other product name or logo referenced by this
+  project are trademarks of their respective owners. They are used only to
+  identify the tool a session runs. Sedano is not affiliated with, sponsored
+  by, or endorsed by any of them.

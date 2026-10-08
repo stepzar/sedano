@@ -1,0 +1,107 @@
+# The gate, on a machine that has nothing.
+#
+# Everything here runs against fixtures and fake transports: the fake Command
+# Code CLI, the fake ACP agent and the fake ssh in `scripts/fixtures/`. No vendor
+# CLI is installed, no account is logged in, no host is reachable and no secret
+# is read — a subscription must never be what stands between a contributor and a
+# green check. The smokes that do need those (`check:smoke`, `check:term`,
+# `check:term-ui`, `check:ui` against a real vendor CLI) stay manual, as a
+# pre-release pass on a machine that has them.
+name: ci
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+  workflow_dispatch:
+
+# Read-only token: the gates only check out and test the code.
+permissions:
+  contents: read
+
+# A new push supersedes the run it interrupted: the old answer is about old code.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  hermetic:
+    name: hermetic gates
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          # Pinned: a runtime that changes under the suite turns a red gate into
+          # a question about which bun ran it. The same pin as release.yml, so the
+          # shipped sidecar is the server these gates tested; >= 1.2.4 because
+          # older `bun build --compile` output cannot be codesigned.
+          bun-version: 1.2.23
+      - run: bun install --frozen-lockfile
+      # `--without browser rust` is the part of the suite that needs nothing but
+      # bun: types, drivers against fixtures, the store, the websocket, the built
+      # bundle booted, and the compiled sidecar started. The other two groups have
+      # jobs of their own below, so a missing browser reads as "browser", not as
+      # "the tests fail".
+      - run: bun scripts/lib/check-all.ts --without browser rust
+
+  browser:
+    name: contrast (headless chromium)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.2.23
+      - run: bun install --frozen-lockfile
+      # Playwright's own chromium, not Google Chrome: it is a download this
+      # workflow controls, where the branded channel is whatever the image
+      # happens to ship. `SEDANO_BROWSER=chromium` is what the check reads.
+      - run: bunx playwright install --with-deps chromium
+      - run: bun run build:ui
+      - run: bun run check:contrast
+        env:
+          SEDANO_BROWSER: chromium
+
+  desktop:
+    name: tauri shell
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.2.23
+      # Tauri v2 builds against the system webview and its GTK dependencies; on
+      # Linux they are not in the runner image by default.
+      - name: system libraries tauri links against
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            libwebkit2gtk-4.1-dev \
+            libayatana-appindicator3-dev \
+            librsvg2-dev \
+            libxdo-dev \
+            libssl-dev \
+            build-essential \
+            file \
+            patchelf
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            apps/desktop/src-tauri/target
+          key: cargo-${{ runner.os }}-${{ hashFiles('apps/desktop/src-tauri/Cargo.lock') }}
+          restore-keys: cargo-${{ runner.os }}-
+      - run: bun install --frozen-lockfile
+      # `tauri-build` reads `tauri.conf.json`, whose `externalBin` points at the
+      # compiled server. Without it the crate fails for a reason that has nothing
+      # to do with the Rust code, so the sidecar is built first — and building it
+      # is a gate of its own anyway.
+      - run: bun run sidecar
+      # Same reason: `frontendDist` and `bundle.resources` point at the built UI.
+      - run: bun run build:ui
+      - run: bun run check:rust

@@ -1,0 +1,2 @@
+{"sessionId":"2fa2f3e6-bfc5-4c5e-bc10-78578c79732f","projectHash":"__HASH__","startTime":"2026-09-07T16:10:22.126Z","lastUpdated":"2026-09-07T16:10:22.126Z","kind":"main"}
+{"$set":{"messages":[{"id":"ctx","timestamp":"2026-09-07T16:10:22.127Z","type":"user","content":[{"text":"<session_context>\nThis is the Gemini CLI.\n</session_context>"}]}]}}

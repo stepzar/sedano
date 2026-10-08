@@ -1,0 +1,30 @@
+---
+// Starlight override: the celery mascot next to the wordmark, linking home.
+import Celery from '../doodles/Celery.astro';
+---
+
+<a href="/" class="site-title">
+  <Celery size={30} />
+  <span translate="no">sedano</span>
+  <span class="docs-tag">docs</span>
+</a>
+
+<style>
+  .site-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--sl-color-white);
+    text-decoration: none;
+    font-size: 1.125rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+  }
+  .docs-tag {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--sl-color-gray-3);
+  }
+</style>

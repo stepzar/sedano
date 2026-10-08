@@ -1,0 +1,215 @@
+/* Global styles for the marketing pages (landing, download, 404).
+   Docs pages are styled by Starlight + starlight.css. */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: var(--s-6);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+  text-wrap: balance;
+}
+
+p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+a {
+  color: var(--pen);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+
+a:hover {
+  text-decoration-thickness: 2px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--pen);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+code,
+kbd,
+pre {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+}
+
+:not(pre) > code {
+  background: var(--paper-2);
+  border: 1px solid var(--hair);
+  border-radius: var(--r-1);
+  padding: 0.05em 0.35em;
+}
+
+pre {
+  margin: 0;
+  background: var(--paper-2);
+  border: var(--stroke) solid var(--ink);
+  border-radius: var(--r-2);
+  padding: var(--s-4);
+  overflow-x: auto;
+  line-height: 1.6;
+}
+
+img,
+svg {
+  max-width: 100%;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--s-4);
+  top: -100px;
+  z-index: 10;
+  background: var(--paper);
+  color: var(--ink);
+  padding: var(--s-2) var(--s-3);
+  border: var(--stroke) solid var(--ink);
+  border-radius: var(--r-1);
+}
+
+.skip-link:focus {
+  top: var(--s-4);
+}
+
+.wrap {
+  max-width: calc(var(--content) + 2 * var(--s-6));
+  margin-inline: auto;
+  padding: 0 var(--s-6);
+}
+
+@media (max-width: 480px) {
+  .wrap {
+    padding: 0 var(--s-4);
+  }
+}
+
+/* "// comment" asides in mono. */
+.aside {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--ink-mute);
+}
+
+.muted {
+  color: var(--ink-mute);
+}
+
+/* Buttons. Only the primary CTA wears the sticker shadow. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  min-height: 44px;
+  padding: var(--s-2) var(--s-4);
+  border-radius: var(--r-2);
+  border: var(--stroke) solid var(--ink);
+  font: 600 0.9375rem/1.2 var(--font-sans);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: var(--sticker-shadow);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--ink);
+  border-color: transparent;
+  text-decoration: underline;
+  text-decoration-color: var(--hair-strong);
+  text-underline-offset: 4px;
+}
+
+.btn-secondary:hover {
+  text-decoration-color: var(--ink);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .btn {
+    transition:
+      transform var(--dur) var(--spring),
+      box-shadow var(--dur) var(--spring),
+      text-decoration-color var(--dur) var(--ease);
+  }
+  .btn-primary:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: var(--sticker-shadow-hover);
+  }
+  .btn-primary:active {
+    transform: translate(2px, 2px);
+    box-shadow: none;
+  }
+}
+
+/* Section headings with the hand-drawn underline. */
+.section {
+  padding-top: var(--s-16);
+}
+
+.section-title {
+  position: relative;
+  display: inline-block;
+  font-size: clamp(1.5rem, 1.2rem + 1.4vw, 2rem);
+  margin-bottom: var(--s-6);
+}
+
+.section-title .squiggle {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -10px;
+}
+
+.lead {
+  font-size: 1.125rem;
+  color: var(--ink-2);
+}

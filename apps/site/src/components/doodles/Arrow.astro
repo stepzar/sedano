@@ -1,0 +1,33 @@
+---
+// Curved hand-drawn arrow, pointing up-left by default (towards what it annotates).
+interface Props {
+  class?: string;
+  flip?: boolean;
+}
+const { class: className, flip = false } = Astro.props;
+---
+
+<svg
+  class:list={['arrow', className, { flip }]}
+  viewBox="0 0 90 60"
+  width="72"
+  height="48"
+  aria-hidden="true"
+>
+  <path d="M84 52C64 54.4 34 48 18.6 16.4" />
+  <path d="M10.6 24.4C12.8 18.6 15.4 13.6 17.8 8.4 22.6 11.6 27.6 13.8 33.6 15.2" />
+</svg>
+
+<style>
+  .arrow {
+    overflow: visible;
+    fill: none;
+    stroke: var(--pen);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .flip {
+    transform: scaleX(-1);
+  }
+</style>

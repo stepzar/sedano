@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <!-- Without this key macOS refuses the microphone outright, and WKWebView
+       never even exposes `navigator.mediaDevices` to the page. -->
+  <key>NSMicrophoneUsageDescription</key>
+  <string>sedano uses the microphone for dictation in the composer. Audio is transcribed by a local model on this Mac and is never uploaded.</string>
+</dict>
+</plist>

@@ -1,0 +1,166 @@
+---
+import Base from '../layouts/Base.astro';
+import Squiggle from '../components/doodles/Squiggle.astro';
+import Note from '../components/doodles/Note.astro';
+import Arrow from '../components/doodles/Arrow.astro';
+
+const repo = 'https://github.com/stepzar/sedano';
+const latest = `${repo}/releases/latest`;
+---
+
+<Base title="Download Sedano" description="Download Sedano for macOS on Apple Silicon, or build it from source.">
+  <section class="wrap top" aria-labelledby="dl-title">
+    <h1 id="dl-title">Download Sedano</h1>
+    <p class="lead">macOS 13 or later, Apple Silicon. Free and open source.</p>
+
+    <div class="release" id="release">
+      <div class="release-row">
+        <a class="btn btn-primary" id="dl-button" href={latest}>Download for macOS</a>
+        <span class="hand" id="dl-hand" aria-hidden="true"><Arrow /><Note>Apple Silicon</Note></span>
+      </div>
+      <p class="aside" id="dl-meta">// links to the latest release on GitHub</p>
+      <p class="aside">// Intel Macs are not supported yet.</p>
+      <div class="no-release" id="no-release" hidden>
+        <p>
+          <strong>No public build yet.</strong> The first release is on its way. Until then, build it from source: it takes a
+          few minutes. <a href="#source">How to build it</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap" aria-labelledby="req-title">
+    <h2 class="section-title" id="req-title">Requirements<Squiggle /></h2>
+    <ul class="list">
+      <li>macOS 13 Ventura or later, on Apple Silicon.</li>
+      <li>
+        The agent CLIs you want to use, installed and logged in: Claude Code, Codex, Gemini CLI, Grok, opencode, Command
+        Code. Nothing is bundled; a missing one says so in the picker.
+      </li>
+      <li><code>tmux</code> for terminal tabs (<code>brew install tmux</code>), on this Mac and on any SSH host you use.</li>
+    </ul>
+  </section>
+
+  <section class="section wrap" aria-labelledby="first-title">
+    <h2 class="section-title" id="first-title">First launch<Squiggle /></h2>
+    <p class="body">
+      The build is not signed or notarized yet, so macOS refuses to open it the first time. Drag Sedano to Applications,
+      open it once, then either:
+    </p>
+    <ol class="list">
+      <li>Open <strong>System Settings › Privacy &amp; Security</strong>, scroll down and click <strong>Open Anyway</strong>.</li>
+      <li>Or clear the quarantine flag from a terminal:</li>
+    </ol>
+    <pre><code>xattr -dr com.apple.quarantine /Applications/Sedano.app</code></pre>
+    <p class="aside">// only do this for a build you downloaded from the official releases page.</p>
+  </section>
+
+  <section class="section wrap" id="source" aria-labelledby="src-title">
+    <h2 class="section-title" id="src-title">Build from source<Squiggle /></h2>
+    <p class="body">
+      You need <a href="https://bun.sh">Bun</a>, <a href="https://rustup.rs">Rust</a> and the Xcode Command Line Tools.{' '}
+      <code>install:app</code> builds the app and installs it as <code>/Applications/Sedano.app</code>; run it again to update,
+      with <code>--rollback</code> to go back.
+    </p>
+    <pre><code>git clone {repo}.git
+cd sedano
+bun install
+bun run install:app</code></pre>
+    <p class="aside">// <code>bun run desktop:build</code> produces the .app and a .dmg instead.</p>
+  </section>
+
+  <section class="section wrap" aria-labelledby="other-title">
+    <h2 class="section-title" id="other-title">Windows and Linux<Squiggle /></h2>
+    <p class="body">Not yet. <a href={repo}>Watch the repository</a> to hear when that changes.</p>
+  </section>
+</Base>
+
+<script is:inline>
+  // Point the button at the Apple Silicon .dmg of the latest release, or explain
+  // that there is none yet. Without JS the button still links to the releases page.
+  (async () => {
+    const button = document.getElementById('dl-button');
+    const meta = document.getElementById('dl-meta');
+    const showNoRelease = () => {
+      document.getElementById('no-release').hidden = false;
+      document.getElementById('dl-hand').hidden = true;
+      button.textContent = 'Build from source';
+      button.href = '#source';
+      meta.textContent = '// no release published yet';
+    };
+    try {
+      const res = await fetch('https://api.github.com/repos/stepzar/sedano/releases/latest', {
+        headers: { Accept: 'application/vnd.github+json' },
+      });
+      if (!res.ok) return showNoRelease();
+      const release = await res.json();
+      const dmg = (release.assets || []).find((a) => /\.dmg$/i.test(a.name) && /(aarch64|arm64)/i.test(a.name));
+      if (!dmg) return showNoRelease();
+      const date = new Date(release.published_at).toLocaleDateString('en', { dateStyle: 'medium' });
+      const size = (dmg.size / 1024 / 1024).toFixed(0);
+      button.href = dmg.browser_download_url;
+      meta.textContent = `// ${release.tag_name} · ${date} · ${size} MB · .dmg`;
+    } catch {
+      meta.textContent = '// could not reach GitHub; the button opens the releases page';
+    }
+  })();
+</script>
+
+<style>
+  .top {
+    padding-top: var(--s-12);
+  }
+  h1 {
+    font-size: clamp(2rem, 1.4rem + 3vw, 3rem);
+    letter-spacing: -0.03em;
+  }
+  .lead {
+    margin-top: var(--s-4);
+  }
+  .release {
+    margin-top: var(--s-8);
+    display: grid;
+    gap: var(--s-2);
+  }
+  .release-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--s-3);
+    margin-bottom: var(--s-2);
+  }
+  .hand {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: var(--s-1);
+    transform: translateY(10px);
+  }
+  .hand :global(.note) {
+    margin-top: 28px;
+  }
+  .no-release {
+    margin-top: var(--s-4);
+    padding: var(--s-4);
+    border: var(--stroke) dashed var(--ink-mute);
+    border-radius: var(--r-2);
+    color: var(--ink-2);
+  }
+  .hand[hidden],
+  .no-release[hidden] {
+    display: none;
+  }
+  .list {
+    margin: 0;
+    padding-left: 1.25em;
+    display: grid;
+    gap: var(--s-2);
+    color: var(--ink-2);
+  }
+  .body {
+    color: var(--ink-2);
+    margin-bottom: var(--s-4);
+  }
+  pre {
+    margin: var(--s-4) 0 var(--s-3);
+  }
+</style>

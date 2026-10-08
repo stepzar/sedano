@@ -1,0 +1,57 @@
+#!/usr/bin/env bun
+/**
+ * The site's default Open Graph image (apps/site/public/og-default.png, 1200×630):
+ * the landing's headline in the site's ink-on-paper style, rendered by a
+ * headless Chrome so it uses the site's own fonts. Re-run after a tagline change.
+ *
+ *   bun scripts/site-og.ts
+ */
+import { readFileSync } from 'node:fs'
+import { join } from 'node:path'
+import { chromium } from 'playwright'
+import { ROOT } from './lib/harness.ts'
+
+const site = join(ROOT, 'apps/site')
+// Inlined: a page set from a string may not load file:// fonts.
+const font = (path: string) => `data:font/woff2;base64,${readFileSync(join(site, 'node_modules', path)).toString('base64')}`
+const out = join(site, 'public/og-default.png')
+
+const celery = `<svg width="43" height="64" viewBox="0 0 64 96" fill="none" stroke="#141414" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+  <path fill="#fafaf7" d="M21.5 29.5C20.2 47 18.4 70 19.6 89.4 27 93.6 37.8 93.4 44.6 89.2 45 70.4 42.6 48 40.8 29.2" />
+  <path d="M21.5 29.5C20.2 47 18.4 70 19.6 89.4M20.4 90C27.6 93.4 37.4 93.2 45 88.8M44.6 89.2C45 70.4 42.6 48 40.8 29.2" />
+  <path d="M22.4 31C21.4 48 19.6 70.6 20.6 88.4M43.6 88C43.8 70 41.8 48.6 40 30.6" opacity="0.45" />
+  <path fill="#fafaf7" d="M20.6 31C12.6 29.6 9.8 20.2 16.8 16.4 14.6 8.6 24.4 4.2 29.4 10 32.2 2.8 43.4 3.8 43 12.2 51.4 11.4 54.6 20.8 47.6 25.4 50.4 31.6 42.8 35 38.6 30.6 34.4 34.4 25.6 34.6 20.6 31Z" />
+  <path d="M30.4 21.6C30.8 25 31 28.4 31.2 32.4M30.6 22.4C27.4 19.8 24.4 19 21.6 19.6M31 23C34.4 20.2 37.8 19.8 40.8 20.8" opacity="0.6" />
+  <path d="M27.4 68.4C27 74.6 27.2 80.6 27.8 86M36.6 68.8C36.8 75 36.8 80.4 36.4 86.2" opacity="0.55" />
+  <circle cx="26.6" cy="51.4" r="1.9" fill="#141414" stroke="none" />
+  <circle cx="36.6" cy="51" r="1.9" fill="#141414" stroke="none" />
+  <path d="M28.4 58.2C30.2 60.4 33.2 60.4 35 57.8" />
+</svg>`
+
+const html = `<!doctype html><html><head><style>
+@font-face { font-family: Inter; src: url(${font('@fontsource-variable/inter/files/inter-latin-wght-normal.woff2')}); font-weight: 100 900; }
+@font-face { font-family: Mono; src: url(${font('@fontsource-variable/jetbrains-mono/files/jetbrains-mono-latin-wght-normal.woff2')}); font-weight: 100 900; }
+html, body { margin: 0; width: 1200px; height: 630px; background: #fafaf7; color: #141414; }
+body { box-sizing: border-box; padding: 80px 100px; font-family: Inter; }
+.brand { display: flex; align-items: center; gap: 22px; font-weight: 700; font-size: 32px; letter-spacing: -0.02em; }
+h1 { margin: 92px 0 0; font-size: 76px; line-height: 1.12; letter-spacing: -0.035em; font-weight: 800; }
+.circled { position: relative; display: inline-block; white-space: nowrap; }
+.circled svg { position: absolute; left: -7%; top: -8%; width: 115%; height: 132%; overflow: visible; }
+.circled path { fill: none; stroke: #1f5eff; stroke-width: 2.6; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+.aside { margin-top: 74px; font-family: Mono; font-size: 22px; color: #6b6b66; }
+</style></head><body>
+<div class="brand">${celery}<span>sedano</span></div>
+<h1>One app to rule all<br />your <span class="circled">coding agents<svg viewBox="0 0 200 80" preserveAspectRatio="none"><path d="M36 14.6C78 1.8 168 3.4 190 28.4 203.4 47.8 164 74.6 100 75.4 40.6 76.2 5.2 61.4 6.4 40.6 7.6 19.8 52 7.4 128 8.6" /></svg></span>.</h1>
+<p class="aside">// open source · local · macOS · your servers</p>
+</body></html>`
+
+const browser = await chromium.launch({ channel: 'chrome' })
+try {
+  const page = await browser.newPage({ viewport: { width: 1200, height: 630 } })
+  await page.setContent(html, { waitUntil: 'load' })
+  await page.evaluate(() => document.fonts.ready)
+  await page.screenshot({ path: out })
+  console.log(`wrote ${out}`)
+} finally {
+  await browser.close()
+}

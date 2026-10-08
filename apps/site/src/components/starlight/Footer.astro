@@ -1,0 +1,27 @@
+---
+// Starlight override: the default docs footer plus the same credit line as the
+// marketing pages' footer.
+import Default from '@astrojs/starlight/components/Footer.astro';
+---
+
+<Default><slot /></Default>
+<p class="credit-line">
+  // made by <a href="https://stefanozarro.com" rel="noopener">Stefano Zarro</a>
+</p>
+
+<style>
+  .credit-line {
+    margin-top: 2rem;
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    color: var(--ink-mute);
+  }
+  .credit-line a {
+    color: var(--ink-2);
+    text-decoration: none;
+  }
+  .credit-line a:hover {
+    color: var(--ink);
+    text-decoration: underline;
+  }
+</style>

@@ -1,0 +1,80 @@
+# The coverage contract, kept current without anyone remembering to.
+#
+# Daily, this derives the protocol inventory of the *latest* published release
+# of every harness sedano speaks — from the harness' own published schema or
+# type definitions (`npm pack`, never an install, never a live call, no API
+# keys) — and runs `check:coverage` against it. A type the mapping does not
+# cover fails the run and opens (or updates) one GitHub issue naming the new
+# types and the versions they arrived in. Fix: map them in
+# `apps/server/src/harnesses/coverage/<protocol>.mapping.json` (handled, and
+# where, or ignored, and why), then commit the refreshed inventories:
+#
+#   bun scripts/coverage/extract.ts --latest --write && bun run check:coverage
+name: coverage
+
+on:
+  schedule:
+    - cron: '17 5 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: coverage
+  cancel-in-progress: false
+
+jobs:
+  inventory:
+    name: harness protocol inventory
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.2.23
+      - run: bun install --frozen-lockfile
+      # The extractor itself first: the pinned versions must still give exactly
+      # the committed inventories, or a change in the extractor is the news.
+      - name: extractor is deterministic on the pinned versions
+        run: bun scripts/coverage/extract.ts --verify
+      - name: derive the latest published inventories
+        run: bun scripts/coverage/extract.ts --latest --write
+      - name: every type is mapped
+        id: gate
+        continue-on-error: true
+        env:
+          COVERAGE_REPORT: coverage-report.json
+        run: bun run check:coverage
+      - name: open or update the coverage issue
+        if: steps.gate.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          versions=$(for p in @anthropic-ai/claude-code @anthropic-ai/claude-agent-sdk @agentclientprotocol/sdk @agentclientprotocol/codex-acp @google/gemini-cli opencode-ai command-code; do echo "- \`$p\` $(npm view "$p" version 2>/dev/null || echo '?')"; done)
+          body=$(bun -e '
+            const report = JSON.parse(require("fs").readFileSync("coverage-report.json", "utf8"))
+            const lines = []
+            for (const entry of report) {
+              if (!entry.unmapped.length) continue
+              lines.push(`### ${entry.protocol} — \`${entry.package}@${entry.version}\``, "", ...entry.unmapped.map((key) => `- \`${key}\``), "")
+            }
+            console.log(lines.join("\n"))
+          ')
+          printf '%s\n\n%s\n\n%s\n\n%s\n' \
+            "New protocol types in the latest harness releases have no mapping. Map each one in \`apps/server/src/harnesses/coverage/<protocol>.mapping.json\` (handled, and where — or ignored, and why), then run \`bun scripts/coverage/extract.ts --latest --write && bun run check:coverage\` and commit the refreshed inventories." \
+            "$body" \
+            "Latest versions seen by this run:" \
+            "$versions" > issue.md
+          title="Coverage: harness protocol types without a mapping"
+          existing=$(gh issue list --state open --search "in:title \"$title\"" --json number --jq '.[0].number')
+          if [ -n "$existing" ]; then
+            gh issue edit "$existing" --body-file issue.md
+          else
+            gh issue create --title "$title" --body-file issue.md
+          fi
+      - name: fail on unmapped types
+        if: steps.gate.outcome == 'failure'
+        run: exit 1

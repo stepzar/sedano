@@ -1,0 +1,21 @@
+---
+// Yellow highlighter stroke behind a word. Use sparingly.
+---
+
+<mark class="hl"><slot /></mark>
+
+<style>
+  /* A background (not a pseudo-element) so the stroke follows the text when it wraps. */
+  .hl {
+    color: inherit;
+    padding: 0 0.15em;
+    margin: 0 -0.05em;
+    border-radius: 3px 8px 4px 9px;
+    background: linear-gradient(100deg, transparent 0.15em, var(--hi-bg) 0.3em, var(--hi-bg) calc(100% - 0.3em), transparent calc(100% - 0.1em));
+    background-size: 100% 78%;
+    background-position: 0 70%;
+    background-repeat: no-repeat;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+</style>

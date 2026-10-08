@@ -1,0 +1,237 @@
+/* ==================================================================
+   Limits bar
+   ------------------------------------------------------------------
+   Only the readout at the bottom-left. Every colour and radius here is
+   a token from the design system in `styles.css`; nothing is redefined.
+
+   The bar used to be one unbroken run of text, so `63% Codex No
+   Credits Opencode —` read as a single stream of words. The fix is
+   structural rather than typographic: each harness gets its own
+   bounded chip, so the boundary is a shape you see before you have
+   read anything.
+   ================================================================== */
+
+.limits-bar {
+  gap: 8px;
+}
+
+/* The caret that opens the readout.
+   ------------------------------------------------------------------
+   It used to sit after the word `Limits`, which put it between the
+   label and the chips — a divider through the middle of a row that is
+   a single control. The whole strip is the limits readout and all of
+   it opens the same panel, so the affordance goes at the far left
+   edge, before the label, and nothing is cut in two. It keeps its own
+   class rather than the shared `.caret` precisely because that shared
+   rule indents from the left, which is the wrong side now. */
+.limits-caret {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 1px;
+  color: var(--fg-mute);
+  transition: transform var(--dur) var(--ease);
+}
+
+/* Rotates with the panel, so the glyph always says which way it goes. */
+.limits-caret.open {
+  transform: rotate(180deg);
+}
+
+/* Hover belongs to the whole trigger: the caret lights up when any part
+   of the bar is hovered, because one hover means one control. */
+.statusbar .clickable:hover .limits-caret,
+.select-trigger.open .limits-caret {
+  color: var(--fg);
+}
+
+/* Keyboard users get the same affordance as the pointer: the trigger is
+   a real button, and its focus ring has to reach the caret too. */
+.select-trigger:focus-visible .limits-caret {
+  color: var(--fg);
+}
+
+/* One harness. The border is the whole point: three chips in a row can
+   never be misread as one sentence. */
+.limit-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex: none;
+  padding: 2px 8px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  background: var(--surface-2);
+  color: var(--fg-mute);
+  font-size: 0.92em;
+  /* Tight enough that the chip fits inside the status bar's designed floor
+     (`--statusbar-height`): a row that grows past it pushes everything anchored
+     above the bar — the jump control — out of position. */
+  line-height: 1.35;
+  white-space: nowrap;
+}
+
+.limit-mark {
+  flex: none;
+  color: var(--fg-faint);
+}
+
+.limit-name {
+  font-weight: 500;
+}
+
+.limit-value {
+  color: var(--fg);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Which window the percentage is of. Quieter than the number, because
+   it is the unit and not the reading. */
+.limit-window {
+  color: var(--fg-faint);
+  font-size: 0.92em;
+}
+
+.limit-tag {
+  color: var(--fg-2);
+}
+
+/* A reading older than the poll interval. One character, because the
+   number is still true — it is just not this minute's. */
+.limit-stale {
+  color: var(--fg-faint);
+}
+
+/* ---- The three states that must never look alike ---------------- */
+
+/* Close to the ceiling: worth planning around, not worth an alarm. */
+.limit-chip.tight {
+  border-color: var(--warn);
+  background: var(--warn-soft);
+  color: var(--warn);
+}
+
+.limit-chip.tight .limit-mark,
+.limit-chip.tight .limit-value,
+.limit-chip.tight .limit-window {
+  color: var(--warn);
+}
+
+/* Spent. This is the one thing the bar exists to make you notice, so it
+   is the only chip that is filled, outlined and weighted at once — and
+   `readLimits` sorts it to the front of the row. */
+.limit-chip.exhausted {
+  border-color: var(--err);
+  background: var(--err-soft);
+  color: var(--err);
+  font-weight: 600;
+}
+
+.limit-chip.exhausted .limit-mark,
+.limit-chip.exhausted .limit-tag {
+  color: var(--err);
+}
+
+/* A state tint repaints the whole logo: Gemini's colour washes would
+   otherwise keep it looking like a normal chip. */
+.limit-chip.tight .limit-mark .brand-wash,
+.limit-chip.exhausted .limit-mark .brand-wash {
+  display: none;
+}
+
+/* We asked and could not find out. An unknown is drawn as an unknown:
+   dashed, so it reads as provisional rather than as a value. */
+.limit-chip.unreadable {
+  border-style: dashed;
+  background: none;
+}
+
+/* Switched off in Settings: an unknown by choice, drawn like one. */
+.limit-chip.off {
+  border-style: dashed;
+  background: none;
+  opacity: 0.75;
+}
+
+/* Still on its way. The pulse is what separates "waiting" from
+   "nothing": an absence does not move, and is not drawn at all. */
+.limit-chip.waiting {
+  border-style: dashed;
+  background: none;
+}
+
+.limit-chip.waiting .limit-mark {
+  animation: limit-pulse 1.6s var(--ease) infinite;
+}
+
+@keyframes limit-pulse {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .limit-chip.waiting .limit-mark {
+    animation: none;
+    opacity: 0.55;
+  }
+}
+
+/* Every harness answered, and none of them with a quota. */
+.limit-chip.silent-all {
+  border-style: dashed;
+  background: none;
+  color: var(--fg-faint);
+}
+
+/* ---- Panel ------------------------------------------------------- */
+
+/* A window row whose reading has not arrived.
+   ------------------------------------------------------------------
+   The panel used to grow by a row or two the moment a harness answered,
+   which moved every harness below it while the user was reading them.
+   This row is that space, held open in advance: an empty track and
+   nothing else, because a placeholder that showed a number or a time
+   would be inventing one. It pulses, like the waiting chip in the bar,
+   so "still loading" cannot be mistaken for "nothing to report" (no
+   row at all) or for "we could not find out" (a tag in words). */
+.menu-meter.pending .label::before,
+.menu-meter.pending .value::before {
+  /* A zero-width space, so an empty row is exactly as tall as a full
+     one without hard-coding a height that the font size would break. */
+  content: '\200b';
+}
+
+.menu-meter.pending .track {
+  background: var(--sunken);
+  animation: limit-pulse 1.6s var(--ease) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu-meter.pending .track {
+    animation: none;
+    opacity: 0.55;
+  }
+}
+
+/* How old the reading is, on its own line under the legend: it is the
+   one label that rewrites itself while the panel is open, so it is kept
+   where a change of width cannot re-wrap anything. */
+.menu-note.limit-age {
+  padding-top: 0;
+}
+
+/* The tag that stands in for a number, inside the panel. Same three
+   words as the bar, same colour, so the two readings agree. */
+.menu-note.limit-note.exhausted {
+  color: var(--err);
+}
+
+.menu-note.limit-note.unreadable,
+.menu-note.limit-note.waiting,
+.menu-note.limit-note.off {
+  color: var(--fg-mute);
+}

@@ -1,0 +1,26 @@
+{
+  "sessionId": "c6c62374-f885-4def-9fe1-100c6585d31b",
+  "projectHash": "__HASH__",
+  "startTime": "2026-09-05T12:00:38.786Z",
+  "lastUpdated": "2026-09-05T12:25:18.793Z",
+  "messages": [
+    {
+      "id": "m0",
+      "timestamp": "2026-09-05T12:00:38.786Z",
+      "type": "info",
+      "content": "Update successful!"
+    },
+    {
+      "id": "m1",
+      "timestamp": "2026-09-05T12:12:41.710Z",
+      "type": "user",
+      "content": [{ "text": "Write release notes for version 2" }]
+    },
+    {
+      "id": "m2",
+      "timestamp": "2026-09-05T12:12:50.000Z",
+      "type": "gemini",
+      "content": "Here they are."
+    }
+  ]
+}

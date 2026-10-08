@@ -1,0 +1,26 @@
+node_modules/
+dist/
+.DS_Store
+*.log
+.env
+.env.*
+!.env.example
+
+# local runtime data
+.sedano/
+
+# browser check artefacts
+.playwright-mcp/
+
+# tauri
+apps/desktop/src-tauri/target/
+apps/desktop/src-tauri/gen/
+# compiled server sidecar (54 MB, rebuilt by `bun run sidecar`)
+apps/desktop/src-tauri/binaries/
+.freebuff/
+
+# personal agent/tool state, never part of the project
+.commandcode/
+.claude/
+canva-snap.md
+uploads.md

@@ -1,0 +1,14 @@
+---
+// Runs before paint. Shares Starlight's storage key so the theme carries over to /docs.
+---
+
+<script is:inline>
+  (() => {
+    let stored = null;
+    try {
+      stored = localStorage.getItem('starlight-theme');
+    } catch {}
+    const light = stored ? stored === 'light' : matchMedia('(prefers-color-scheme: light)').matches;
+    document.documentElement.dataset.theme = light ? 'light' : 'dark';
+  })();
+</script>

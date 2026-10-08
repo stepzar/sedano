@@ -1,0 +1,229 @@
+/*
+ * Which machine a tab belongs to, and what its session is doing.
+ *
+ * Two small vocabularies live here because they answer the same question — "can
+ * I read this row without reading it?" — and because both are new surfaces
+ * rather than edits to existing ones: `styles.css` is not touched by any rule
+ * below.
+ *
+ * Colour never carries a meaning on its own. The machine's *name* is on the tab
+ * beside its colour, and every session mark has its state written next to it or
+ * in its tooltip. Somebody who cannot tell amber from moss loses nothing but
+ * speed.
+ */
+
+/* ------------------------------------------------------------------ */
+/* The machine palette                                                 */
+/* ------------------------------------------------------------------ */
+
+/*
+ * One value per theme per colour, because a hex that reads on white disappears
+ * on #191919. These are the same numbers as `MACHINE_COLORS` in
+ * `packages/shared/src/events.ts` — the single source — and
+ * `scripts/machine-color-test.ts` fails if the two ever drift apart or if any
+ * of them stops clearing 3:1 against the surfaces it is drawn on.
+ */
+:root,
+:root[data-theme='light'] {
+  --machine-slate: #4a5a68;
+  --machine-teal: #1f6b63;
+  --machine-indigo: #3f51a8;
+  --machine-violet: #7a3f9e;
+  --machine-amber: #8a5a06;
+  --machine-rose: #a83a58;
+  --machine-moss: #3f6b25;
+  --machine-clay: #9c4a2a;
+}
+
+:root[data-theme='dark'] {
+  --machine-slate: #8fa6b8;
+  --machine-teal: #5fbfb2;
+  --machine-indigo: #8f9ff0;
+  --machine-violet: #c08ae0;
+  --machine-amber: #dba54a;
+  --machine-rose: #ef8fa6;
+  --machine-moss: #8fc06a;
+  --machine-clay: #e0916d;
+}
+
+/*
+ * The mark itself. `--machine` is set inline by whatever draws it, so a single
+ * rule serves every colour and the stylesheet never learns how many there are.
+ */
+.machine-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex: none;
+  display: inline-block;
+  background: var(--machine, var(--machine-slate));
+}
+
+/* On the machine switcher, where it sits before the name. */
+.crumb .machine-dot {
+  margin-right: 1px;
+}
+
+/* In the machine menu, one per row, so the choice is visible before it is made. */
+.menu-item .machine-dot {
+  margin-right: 7px;
+}
+
+/* ------------------------------------------------------------------ */
+/* Tabs                                                                */
+/* ------------------------------------------------------------------ */
+
+/*
+ * A tab says which machine it is on, quietly, in words — the machine name is
+ * the fact; the colour is only what makes it findable at a glance.
+ */
+.tab-machine {
+  font-size: 0.82em;
+  color: var(--fg-faint);
+  white-space: nowrap;
+  max-width: 96px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* A tab's colour belongs to its machine, independent of the selected environment. */
+.tab {
+  background: color-mix(in srgb, var(--machine, var(--machine-slate)) 9%, transparent);
+}
+
+/* The selected tab is a fill and nothing else — no bar under it: one even
+   surface, the same recipe in both themes. Hovering another tab shows a lighter
+   step of the same fill, so hover reads as "this is what selecting does". */
+.tab.active {
+  background: color-mix(in srgb, var(--machine, var(--machine-slate)) 20%, var(--surface-3));
+}
+
+.tab:hover:not(:disabled):not(.active) {
+  background: color-mix(in srgb, var(--machine, var(--machine-slate)) 14%, var(--surface-2));
+}
+
+.tab.active .label {
+  font-weight: 650;
+}
+
+/* In the strip the dot is the only signal a tab carries. A hollow ring in the
+ * machine's hue means there is nothing to look at; the dot fills, in the
+ * state's own colour, when there is: a turn that finished while you were
+ * elsewhere, or an error. Working keeps its turning arc. */
+.tab .sess-state.ready,
+.tab .sess-state.stopped {
+  background: transparent;
+  border: 1.5px solid var(--machine, var(--machine-slate));
+}
+
+/* The selected tab's dot is always filled: it is the one you are on. */
+.tab.active .sess-state.ready,
+.tab.active .sess-state.stopped {
+  background: var(--machine, var(--machine-slate));
+}
+
+.tab .sess-state.ready.unread {
+  background: var(--ok);
+  border-color: var(--ok);
+}
+
+.tab .sess-state.working,
+.tab .sess-state.starting {
+  border-top-color: var(--machine, var(--machine-slate));
+  border-right-color: var(--machine, var(--machine-slate));
+}
+
+.tab .sess-state.error {
+  background: var(--err);
+  border: 0;
+  box-shadow: none;
+}
+
+/* The workspace group in the rail carries the same mark on its host chip. */
+.rail-title.workspace .machine-dot {
+  margin-left: 1px;
+}
+
+/* ------------------------------------------------------------------ */
+/* Session state                                                       */
+/* ------------------------------------------------------------------ */
+
+/*
+ * Five states, five shapes — not five colours.
+ *
+ * Green for finished, motion for working and grey for gone is what was asked
+ * for; `error` is the one that was not, and it is the one that matters most, so
+ * it is the only mark here that is both filled and red. Shape does the work
+ * colour cannot: `ready` is solid, `stopped` is hollow, `error` is ringed.
+ */
+.sess-state {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  flex: none;
+  display: inline-block;
+  box-sizing: border-box;
+  background: var(--fg-faint);
+}
+
+.sess-state.ready {
+  background: var(--ok);
+}
+
+.sess-state.stopped {
+  background: transparent;
+  border: 1.5px solid var(--fg-faint);
+}
+
+.sess-state.error {
+  background: var(--err);
+  box-shadow: 0 0 0 2px var(--err-soft);
+}
+
+/*
+ * Working and starting: a ring that turns.
+ *
+ * `thinking-orbs` is the app's motion vocabulary and it is used for this in the
+ * sidebar, where the row is tall enough for its 20px preset (the package ships
+ * exactly two tuned sizes, 64 and 20, and neither fits a tab). The tab strip is
+ * 31px tall with a 9px mark, so it gets the same *idea* at its own scale: an arc
+ * of the live colour rotating inside a faint track. One reading, two sizes —
+ * not two languages.
+ */
+.sess-state.working,
+.sess-state.starting {
+  background: transparent;
+  border: 1.5px solid var(--line-strong);
+  border-top-color: var(--warn);
+  border-right-color: var(--warn);
+  animation: machine-ring 900ms linear infinite;
+}
+
+/* Starting is the same work at a lower claim: the process is not up yet. */
+.sess-state.starting {
+  opacity: 0.65;
+  animation-duration: 1400ms;
+}
+
+@keyframes machine-ring {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/*
+ * Motion is a preference, and some people get sick from it. The ring stops and
+ * keeps its arc, so the state is still legible when nothing moves.
+ */
+@media (prefers-reduced-motion: reduce) {
+  .sess-state.working,
+  .sess-state.starting {
+    animation: none;
+  }
+}
+
+/* The rail gets a slightly larger target without changing the tab-strip rhythm. */
+.sess-state.sidebar {
+  width: 10px;
+  height: 10px;
+}

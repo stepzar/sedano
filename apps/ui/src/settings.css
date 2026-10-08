@@ -1,0 +1,475 @@
+/* ==================================================================
+   sedano — settings
+   ------------------------------------------------------------------
+   Loaded after `styles.css` (see the import in `Settings.tsx`), so it
+   inherits every token and redefines none of them. Everything here is
+   for the panels that outgrew a label and a control on the right: the
+   machines list, the dictation engines, the font previews.
+
+   The rule the whole file follows: show state, not decoration. A card
+   is a container for a fact — what was found, whether it answered,
+   what is selected — and colour appears only where it means something
+   (warn for missing, err for a failed connection).
+   ================================================================== */
+
+/* ------------------------------------------------------------------ The content font
+   Where the conversation typeface is actually applied.
+
+   It lives here, next to the setting that sets it, and it is deliberately
+   only these three surfaces: the transcript, the composer and the
+   launchpad field — the places that hold prose. Everything that has to
+   keep its columns (code blocks, diffs, tool output, the terminal, a
+   mono chip) names `--font-mono` on the element itself, so it wins over
+   this inheritance and a proportional face chosen for reading can never
+   break an alignment somebody depends on. The terminal preview inside
+   the launchpad is more specific than the rule below for the same
+   reason.
+
+   `--font-content` is set on the document root by `applySettings`; with
+   nothing chosen it is the shipped stack — never the interface face, so
+   the two typeface pickers stay independent. */
+.transcript,
+.composer-inner textarea,
+.launchpad-field textarea {
+  font-family: var(--font-content, var(--font-ui));
+}
+
+/* ------------------------------------------------------------------ The two sizes
+   "Conversation text" sizes everything in the conversation column and
+   "Interface text" everything around it — two settings, no overlap.
+
+   The rows of work inside a turn (tool rows, turn headers, notes, the
+   file list) were written against `--ui-font-size`, so the interface
+   size resized the conversation and the conversation size left half of
+   it alone. Inside the transcript that variable is therefore derived
+   from the conversation size instead, at the ratio the defaults ship
+   with (16 : 17), so every rule there keeps its proportions and follows
+   the conversation setting — and nothing in the transcript reads the
+   interface size any more. The same goes for the few rules there that
+   name the interface face: inside the conversation it is the
+   conversation face. */
+.transcript {
+  --ui-font-size: calc(var(--content-font-size) * 16 / 17);
+  --font-ui: var(--font-content);
+}
+
+/* ------------------------------------------------------------------ The section list
+   The search stays put and only the list of sections scrolls, so a short
+   window (or a phone) can still reach every section. `min-height: 0` is what
+   lets a flex child be shorter than its content and scroll instead of
+   overflowing the dialog. */
+.settings > .settings-nav {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.settings-nav > .settings-search {
+  flex: none;
+}
+
+.settings-nav-list {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.settings-nav-list > .settings-nav-item {
+  flex: none;
+}
+
+.settings > .settings-pane {
+  min-height: 0;
+}
+
+/* A row whose control is too big to sit beside the text: the control
+   drops underneath it and takes the full width. */
+.settings-row.wide {
+  display: block;
+}
+
+.settings-row.wide .settings-control {
+  display: block;
+  margin-top: 10px;
+  color: inherit;
+}
+
+.transfer-template-setting textarea {
+  width: 100%;
+  height: 145px;
+  min-height: 120px;
+  resize: vertical;
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  line-height: 1.5;
+}
+
+/* ------------------------------------------------------------------ Cards */
+.set-card {
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--surface-2);
+  overflow: hidden;
+}
+
+.set-card + .set-card {
+  margin-top: 8px;
+}
+
+.set-card-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 12px;
+  min-height: 40px;
+}
+
+.set-card-head .set-title {
+  font-weight: 500;
+  color: var(--fg);
+}
+
+.set-card-head .set-sub {
+  color: var(--fg-faint);
+  font-size: 0.9em;
+}
+
+.set-card-body {
+  border-top: 1px solid var(--line-soft);
+  padding: 4px 12px 10px;
+  background: var(--surface);
+}
+
+.set-spacer {
+  flex: 1 1 auto;
+}
+
+/* ------------------------------------------------------------------ Item rows */
+/* One detected thing: a harness, an engine, a model file. The name and
+   what is known about it on the left, the control that changes it on
+   the right — the same shape as a settings row, one level down. */
+.set-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.set-item:last-child {
+  border-bottom: none;
+}
+
+.set-item-text {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.set-harness-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: none;
+}
+
+.set-harness-actions .ghost.tiny {
+  white-space: nowrap;
+}
+
+.set-item-name {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--fg);
+}
+
+.set-item-why {
+  color: var(--fg-faint);
+  font-size: 0.9em;
+  line-height: 1.45;
+  margin-top: 1px;
+  overflow-wrap: anywhere;
+}
+
+/* A thing that is not here. It stays in the list — knowing a harness
+   exists and is not installed is the answer to "why is it missing" —
+   but it reads as unavailable rather than as a choice. */
+.set-item.absent .set-item-name {
+  color: var(--fg-faint);
+}
+
+/* ------------------------------------------------------------------ Status dots */
+.set-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex: none;
+  background: var(--fg-faint);
+}
+
+.set-dot.ok {
+  background: var(--ok);
+}
+
+.set-dot.bad {
+  background: var(--err);
+}
+
+.set-dot.warn {
+  background: var(--warn);
+}
+
+/* Never checked. A hollow ring, because "we do not know" is a third
+   state and drawing it as either colour would be inventing an answer. */
+.set-dot.unknown {
+  background: transparent;
+  box-shadow: inset 0 0 0 1.5px var(--fg-faint);
+}
+
+/* ------------------------------------------------------------------ Commands to run */
+/* What the app will not do for you, written out so it can be copied.
+   Installing software is work the user should watch happen in their own
+   terminal — so this is text, deliberately, and not a button. */
+.set-command {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 6px;
+  padding: 7px 9px;
+  border-radius: var(--r-sm);
+  background: var(--sunken);
+}
+
+.set-command code {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  color: var(--fg-2);
+  overflow-wrap: anywhere;
+  user-select: all;
+}
+
+/* ------------------------------------------------------------------ Font previews */
+/* A preview has to show the font doing its actual job, so there are two
+   of them: the interface one draws real chrome, the conversation one
+   draws a paragraph with inline code and a code block — because the
+   content font must live next to monospace without fighting it. */
+.set-preview {
+  margin-top: 8px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--surface-2);
+  padding: 12px 14px;
+  overflow: hidden;
+}
+
+.set-preview-prose {
+  font-family: var(--font-content, var(--font-ui));
+  font-size: var(--content-font-size);
+  line-height: 1.55;
+  color: var(--fg);
+}
+
+.set-preview-prose code {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  padding: 1px 4px;
+  border-radius: var(--r-xs);
+  background: var(--sunken);
+}
+
+.set-preview-prose pre {
+  margin: 8px 0 0;
+  padding: 9px 11px;
+  border-radius: var(--r-sm);
+  background: var(--sunken);
+  overflow-x: auto;
+}
+
+.set-preview-prose pre code {
+  background: none;
+  padding: 0;
+  font-size: var(--mono-font-size);
+  line-height: 1.45;
+  white-space: pre;
+}
+
+/* The interface preview: a tab, a session row and a status line, at the
+   interface size, because that is where this font has to stay legible. */
+.set-preview-chrome {
+  font-family: var(--font-ui);
+  font-size: var(--ui-font-size);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.set-preview-chrome .set-preview-tabs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.set-preview-chrome .set-preview-tab {
+  padding: 4px 10px;
+  border-radius: var(--r-sm);
+  color: var(--fg-mute);
+}
+
+.set-preview-chrome .set-preview-tab.on {
+  background: var(--surface);
+  color: var(--fg);
+  box-shadow: var(--shadow-1);
+}
+
+.set-preview-chrome .set-preview-session {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.set-preview-chrome .set-preview-session b {
+  font-weight: 500;
+  color: var(--fg);
+}
+
+.set-preview-chrome .set-preview-meta,
+.set-preview-chrome .set-preview-status {
+  color: var(--fg-faint);
+  font-size: 0.88em;
+}
+
+/* ------------------------------------------------------------------ The custom-font field */
+.set-font-custom {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.set-font-custom input {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 32px;
+  font-size: 0.95em;
+}
+
+.set-font-custom .set-item-why {
+  margin: 0;
+}
+
+/* ------------------------------------------------------------------ Model files */
+/* A path is an identifier, not prose: one line, truncated, with the whole
+   thing in the tooltip. Wrapped over three lines it buried the file name
+   the row is actually about. Truncated on the right and not with `direction:
+   rtl`, which moves the leading slash to the end and prints a path nobody
+   could paste. */
+.set-path {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.set-size {
+  color: var(--fg-faint);
+  font-size: 0.86em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.set-item-why.update-error {
+  color: var(--err);
+  overflow-wrap: anywhere;
+}
+
+.harness-sync {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.harness-sync-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.harness-sync-auto {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.harness-sync-issues {
+  color: var(--warn);
+  font-size: 0.88em;
+  line-height: 1.5;
+}
+
+.harness-sync-issues > div {
+  margin-top: 5px;
+  overflow-wrap: anywhere;
+}
+
+.usage-readers {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.usage-reader {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.usage-reader-text {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* Protocol messages sedano does not show yet: a short list, key first. */
+.unhandled-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  max-height: 180px;
+  overflow-y: auto;
+  text-align: left;
+}
+
+.unhandled-list li {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 3px 0;
+}
+
+.unhandled-meta {
+  color: var(--fg-mute);
+  font-size: 0.9em;
+}
+
+.voice-progress {
+  height: 4px;
+  margin-top: 6px;
+  border-radius: 2px;
+  background: var(--line-strong);
+  overflow: hidden;
+}
+
+.voice-progress > span {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+  transition: width 0.3s ease;
+}
+
+.voice-last-run {
+  font-variant-numeric: tabular-nums;
+}

@@ -1,0 +1,23 @@
+{
+  "harness": "commandcode",
+  "scenario": "slash-status",
+  "args": [
+    "-p",
+    "--output-format",
+    "json",
+    "--skip-onboarding",
+    "--trust",
+    "--model",
+    "poolside/laguna-s-2.1-free",
+    "--permission-mode",
+    "standard"
+  ],
+  "model": "poolside/laguna-s-2.1-free",
+  "permissionMode": "default",
+  "prompt": "/status",
+  "capturedAt": "2026-09-21T16:15:06.436Z",
+  "outcome": "ok",
+  "note": "",
+  "frames": 908,
+  "durationMs": 35475
+}

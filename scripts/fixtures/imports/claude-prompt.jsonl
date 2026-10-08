@@ -1,0 +1,2 @@
+{"parentUuid":null,"isSidechain":false,"type":"user","message":{"role":"user","content":"Add a dark theme toggle to the settings page"},"uuid":"p1","timestamp":"2026-09-02T09:00:00.000Z","cwd":"__CWD__","sessionId":"22222222-2222-4222-8222-222222222222"}
+{"parentUuid":"p1","isSidechain":false,"type":"assistant","message":{"role":"assistant","model":"claude-opus-4-8","content":[{"type":"text","text":"Done."}]},"uuid":"p2","timestamp":"2026-09-02T09:00:05.000Z","cwd":"__CWD__","sessionId":"22222222-2222-4222-8222-222222222222"}
